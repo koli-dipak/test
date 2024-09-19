@@ -1,0 +1,5 @@
+<apex:page standardController="Opportunity" extensions="BoxCreation" action="{!createOpportunityBox}">
+    <apex:form >
+
+    </apex:form>
+</apex:page>

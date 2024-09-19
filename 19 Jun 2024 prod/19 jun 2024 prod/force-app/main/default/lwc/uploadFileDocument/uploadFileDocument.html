@@ -1,0 +1,92 @@
+<template>
+        <template if:true={isPageLoading}>
+     
+    </template>
+    <slot>
+      <!-- template if:true={showFile} -->
+      <div class={_containerClasses}
+           aria-labelledby="fileUpload"
+           tabindex="0">
+        <div>
+          <label class="slds-form-element__label">
+            <abbr if:true={_propSetMap.required}
+                  class="slds-required"
+                  title={allCustomLabelsUtil.OmniRequired}>*</abbr>
+            <span id="fileUpload">{_propSetMap.label}</span>
+          </label>
+         
+        </div>
+        <div class="slds-grid omni-file-input">
+          <template if:true={scriptHeaderDef.isGuestUser}>
+            <lightning-file-upload label=" "
+                                   name={jsonDef.lwcId}
+                                   accept={acceptedFormats}
+                                   required={_propSetMap.required}
+                                   onuploadfinished={handleUploadFinished}
+                                   single
+                                   
+                                   data-omni-input
+                                   record-id={scriptHeaderDef.sOmniScriptId}
+                                   class="slds-has-dividers_around-space omni-file slds-m-bottom_xx-small slds-size_12-of-12 slds-medium-size_12-of-12">
+            </lightning-file-upload>
+          </template>
+          <template if:false={scriptHeaderDef.isGuestUser}>
+            <lightning-file-upload label=" "
+                                   name={jsonDef.lwcId}
+                                   accept={acceptedFormats}
+                                   onuploadfinished={handleUploadFinished}
+                                   single
+                                   data-omni-input
+                                   class="slds-has-dividers_around-space omni-file slds-m-bottom_xx-small slds-size_12-of-12 slds-medium-size_12-of-12">
+            </lightning-file-upload>
+          </template>
+        </div>
+        <span if:true={_showValidation}
+              class="slds-form-element__help omni-file-required">
+          {errorMessage}
+        </span>
+      </div>
+      <!-- /template -->
+    </slot>
+    <slot name="files">
+      <span id="upload-status"
+            class="slds-assistive-text">{ariaLiveStatusText}</span>
+      <div aria-labelledby="upload-status"
+           aria-live={ariaLiveStatus}></div>
+      <div class="slds-grid">
+        <ul class="slds-has-dividers_around-space omni-file slds-m-bottom_xx-small slds-size_12-of-12 slds-medium-size_12-of-12">
+          <template for:each={_value}
+                    for:item="item"
+                    for:index="index">
+            <li key={item.data}
+                class="slds-item">
+              <div class="slds-grid">
+                <span class="slds-m-bottom_xx-small slds-size_11-of-12 slds-medium-size_11-of-12 slds-truncate">
+                  {item.filename}
+                </span>
+                <span class="remove-file-icon slds-m-bottom_xx-small slds-size_1-of-12 slds-medium-size_1-of-12 slds-text-align_right">
+  
+                  <button class="slds-button slds-button_icon"
+                          title={item.deleteLabel}
+                          onclick={deleteFile}
+                          data-index={index}
+                          data-id={item.data}>
+                          <lightning-icon theme={_theme}
+                            extraclass="slds-button__icon"
+                            iconposition="left"
+                            icon-name='utility:clear'
+                            color="brand"
+                            alternative-text={item.deleteLabel}
+                            size="x-small"
+                            data-index={index}
+                            data-id={item.data}></lightning-icon>
+                    
+                  </button>
+                </span>
+              </div>
+            </li>
+          </template>
+        </ul>
+      </div>
+    </slot>
+  </template>

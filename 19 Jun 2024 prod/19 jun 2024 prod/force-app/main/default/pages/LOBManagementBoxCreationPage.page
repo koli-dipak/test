@@ -1,0 +1,5 @@
+<apex:page standardController="LOB_Management__c" extensions="BoxCreation" action="{!createLOBBox}">
+    <apex:form >
+
+    </apex:form>
+</apex:page>

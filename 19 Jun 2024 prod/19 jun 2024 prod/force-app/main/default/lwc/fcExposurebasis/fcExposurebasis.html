@@ -1,0 +1,57 @@
+<template>
+    <div class="slds-grid slds-wrap  slds-m-bottom_small  slds-m-top_small">
+        <div class="slds-col slds-large-size_6-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+            <span>
+                <label  class="headerTextProperties">EXPOSURE</label>
+             </span>
+        </div>
+        <div class="slds-col slds-large-size_6-of-12 slds-medium-size_1-of-12 slds-size_1-of-12" align="right">
+            <template if:false={isReadOnly}>
+                <span> <lightning-button icon-name="utility:add" variant="brand"  onclick={addRows} label="Exposure"></lightning-button>
+                </span>
+            </template>
+           
+        </div>
+        </div>
+    <!-- <div slot="title">Top Carriers: <lightning-helptext content={TopCarrierSection_HelpText} style="position: relative;
+        top: -4px;"></lightning-helptext></div> -->
+       
+  
+    <table class="slds-table slds-table_bordered" style="border-bottom: 0px;" aria-label="Example default base table of Opportunities">
+        <thead> 
+            <tr class="slds-line-height_reset">
+                <template for:each={columns} for:item="column" for:index="index">
+                    <th class="" scope="col"  style="padding-left: 0px;"   key={column}>
+                        <div  title="Opportunity Name">{column.Label}</div>
+                    </th>
+                </template>
+                <template if:false={isReadOnly}>
+                    <th class="" scope="col" >
+                        <div  title="Action"></div>
+                    </th>
+                </template>
+            </tr>
+        
+        </thead>
+            <template for:each={rows} for:item="row" for:index="rowindex"> 
+                <tr class="slds-line-height_reset" key={row}>
+                    <template for:each={columns} for:item="column" for:index="colindex">
+                        <td class="" scope="col" style="padding-left: 0px;"  key={column}>
+                            <c-override-lightning-input is-read-only={isReadOnly} column-read-only={column.readOnly} row={row} row-index={rowindex} field-name={column.FieldName} label={column.Label} onchangedataupdate={handleDataChange} ></c-override-lightning-input>
+                         </td>
+                    </template>
+                    <template if:false={isReadOnly}>
+                        <td>
+                            <template if:true={rowsDeleteEnable}>
+                                <div align="right"><lightning-button-icon icon-name="utility:delete"  alternative-text="Delete" title="Delete"  data-index={rowindex}  onclick={deleteRows}></lightning-button-icon></div>
+                            </template>
+                        </td>
+                    </template>
+                </tr>
+            </template>
+        
+            
+    </table>
+  
+    
+</template>

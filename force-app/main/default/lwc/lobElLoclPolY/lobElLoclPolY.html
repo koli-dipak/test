@@ -1,0 +1,387 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 09-12-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<!-- <template>
+
+	<lightning-card>
+		<div class="slds-grid slds-wrap slds-p-around_small">
+			<div class="slds-col slds-size_5-of-12 slds-m-bottom_small">
+				<div class="slds-grid slds-wrap">
+					<div class="slds-col slds-size_2-of-3">
+						<h3 class="slds-text-color_weak">Deductible : </h3>
+					</div>
+					<div class="slds-col slds-size_1-of-3">N/A</div>
+				</div>
+			</div>
+			<div class="slds-col slds-size_7-of-12 slds-m-bottom_small">
+				<h3 class="slds-float_right thClrShdBlue">EL Premium</h3>
+			</div>
+
+			<div class="slds-col slds-size_5-of-12 slds-m-bottom_small">
+				<div class="slds-grid slds-wrap">
+					<div class="slds-col slds-size_2-of-3">
+						<h3 class="slds-text-color_weak thblueClr">Exposure base : </h3>
+					</div>
+					<div class="slds-col slds-size_1-of-3">
+						Payroll
+					</div>
+				</div>
+			</div>
+			<div class="slds-col slds-size_7-of-12 slds-m-bottom_small">
+				<div class="slds-grid slds-wrap slds-float_right">
+					<div class="slds-col slds-size_5-of-12 "> </div>
+					<div class="slds-col slds-size_3-of-12 thClrShdBlue">Technical </div>
+					<div class="slds-col slds-size_4-of-12">
+						<lightning-input type="number" label="EL Include" variant="label-hidden" name="ELInclude" value="30000"
+							disabled=true>
+						</lightning-input>
+					</div>
+				</div>
+			</div>
+
+			<div class="slds-col slds-size_5-of-12 slds-m-bottom_small">
+				<div class="slds-grid slds-wrap">
+					<div class="slds-col slds-size_2-of-3">
+						<h3 class="slds-text-color_weak thblueClr">Per : </h3>
+					</div>
+					<div class="slds-col slds-size_1-of-3">
+						$10000
+					</div>
+				</div>
+			</div>
+			<div class="slds-col slds-size_7-of-12 slds-m-bottom_small">
+				<div class="slds-grid slds-wrap slds-float_right">
+					<div class="slds-col slds-size_5-of-12 "> </div>
+					<div class="slds-col slds-size_3-of-12 thClrShdBlue">Minimum </div>
+					<div class="slds-col slds-size_4-of-12">
+						<lightning-input type="number" label="EL Include" variant="label-hidden" name="ELInclude" value="2500">
+						</lightning-input>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="slds-col slds-size_5-of-12 slds-m-bottom_small">
+				<div class="slds-grid slds-wrap">
+					<div class="slds-col slds-size_2-of-3">
+						<h3 class="slds-text-color_weak thblueClr"></h3>
+					</div>
+					<div class="slds-col slds-size_1-of-3">
+					</div>
+				</div>
+			</div>
+			<div class="slds-col slds-size_7-of-12 slds-m-bottom_small">
+				<div class="slds-grid slds-wrap slds-float_right">
+					<div class="slds-col slds-size_5-of-12 "> </div>
+					<div class="slds-col slds-size_3-of-12 thClrShdBlue">Actual </div>
+					<div class="slds-col slds-size_4-of-12">
+						<lightning-input type="number" label="EL Include" variant="label-hidden" name="ELInclude" value="20000">
+						</lightning-input>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</lightning-card>
+		
+</template> -->
+<!-- above commented code is last design change in figma  -->
+
+<template>
+    <lightning-card>
+        <div class="slds-p-around_x-small">
+            <div class="slds-grid slds-wrap">
+				<div class="slds-col slds-size_2-of-12">
+					<div class="slds-form-element slds-is-editing slds-form-element_1-col">
+						<label class="slds-form-element__label thClrShdBlue" >Aggregate Limit</label>
+						<div class="slds-form-element__control" >
+							<lightning-input type="number"  label="Aggregate Limit" variant="label-hidden" name="AggregateLimit"
+							value={policyRecord.AggregateLimit} onchange={aggregateLimitChangeHandler}>
+							</lightning-input>
+						</div>
+					</div>
+				</div>
+				<div class="slds-col slds-size_1-of-12">
+					<div class="slds-form-element  slds-is-editing slds-form-element_1-col">
+						<label class="slds-form-element__label thClrShdBlue" >&nbsp;</label>
+						<div class="slds-form-element__control slds-p-right_x-small">
+							<select class="slds-select "  name = "AggregateCurrency"  onchange={aggregateLimitChangeHandler}>
+								<template for:each={countryRec} for:item="Opt">
+								   <option key={Opt} value={Opt.value} selected={Opt.isSelected}>{Opt.label}</option>
+							   </template>
+						   </select>
+						</div>
+					</div>
+				</div>
+				<div class="slds-col slds-size_3-of-12">
+					<div class="slds-form-element  slds-is-editing slds-form-element_1-col">
+						<label class="slds-form-element__label thClrShdBlue" >Deductible</label>
+						<div class="slds-form-element__control">
+							<lightning-input type="number" class="slds-p-right_x-small" label="Exposure base" variant="label-hidden" name="LocalELDeductible"
+							value={policyRecord.LocalELDeductible}  onchange={changeLoadingHandler}>
+						   </lightning-input>
+						</div>
+					</div>
+				</div>
+				<div class="slds-col slds-size_3-of-12">
+					<div class="slds-form-element slds-is-editing slds-form-element_1-col">
+						<label class="slds-form-element__label thClrShdBlue" >Exposure base</label>
+						<div class="slds-form-element__control" style="padding-right: 8px;">
+							<select class="slds-select "  name = "ExposureBaseData" onchange={changeHandler}>
+								<!-- <option  value="ReVenue" >ReVenue/Sales</option>
+								<option  value="Autos" >Autos</option>
+								<option  value="Payroll" >Payroll</option>
+								<option  value="Trips" >Trips</option> -->
+								<template for:each={exposureBaseOptions} for:item="expOpt">
+									<option key={expOpt} value={expOpt.value} selected={expOpt.isSelected}>{expOpt.label}</option>
+								</template>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="slds-col slds-size_3-of-12">
+					<div class="slds-form-element  slds-is-editing slds-form-element_1-col">
+						<label class="slds-form-element__label thClrShdBlue" >Per</label>
+						<div class="slds-form-element__control">
+							<template if:false={disablePer}>
+								<lightning-input type="number" class="slds-p-right_x-small" label="Exposure base" variant="label-hidden" name="Per"
+								value={policyRecord.Per}  onchange={changeLoadingHandler}>
+								</lightning-input>
+							</template>
+							<template if:true={disablePer}>
+								<lightning-input type="number" disabled class="slds-p-right_x-small" label="Exposure base" variant="label-hidden" name="Per"
+								value={policyRecord.Per}  onchange={changeLoadingHandler}>
+								</lightning-input>
+							</template>
+							<!-- <lightning-input type="number" class="slds-p-right_x-small" label="Exposure base" variant="label-hidden" name="Per"
+							value={policyRecord.Per}  onchange={changeLoadingHandler}>
+							</lightning-input> -->
+						</div>
+					</div>
+				</div>
+				
+				<!-- div class="slds-col slds-size_3-of-12">
+					<div class="slds-form-element  slds-is-editing slds-form-element_1-col">
+						<div class="slds-form-element__control">
+							<h3 class="slds-text-color_weak" style="color: red;">{policyRecord.FOSErrorWariningFlag}</h3>   
+						</div>
+					</div>
+				</div -->
+				<!-- div class="slds-col slds-size_2-of-12">
+					<h3 class="slds-text-color_weak thClrShdBlue">Exposure base:</h3> 
+					
+				</div>
+				<div class="slds-col slds-size_2-of-12" style="padding-right: 2px;">
+					<select class="slds-select "  name = "ELIncluded" onchange={elIncludechangeHandler}>
+							<option  value="ReVenue" >ReVenue/Sales</option>
+							<option  value="Autos" >Autos</option>
+							<option  value="Payroll" >Payroll</option>
+							<option  value="Trips" >Trips</option>
+					</select>
+				</div>
+				<div class="slds-col slds-size_1-of-12">
+					<h3 class="slds-text-color_weak thClrShdBlue">Per:</h3> 
+				</div>
+				<div class="slds-col slds-size_2-of-12">
+					<lightning-input type="number" class="slds-p-right_x-small" label="Exposure base" variant="label-hidden" name="Per"
+					 value={policyRecord.Per}  onchange={changeLoadingHandler}>
+					</lightning-input>
+				</div>
+				<div class="slds-col slds-size_1-of-12">
+					<h3 class="slds-text-color_weak thClrShdBlue">Deductible:</h3>   
+				</div>
+				<div class="slds-col slds-size_2-of-12">
+					<lightning-input type="number" class="slds-p-right_x-small" label="Exposure base" variant="label-hidden" name="LocalPolDect"
+					 value={policyRecord.LocalPolDect}  onchange={changeLoadingHandler}>
+					</lightning-input>
+				</div>
+				<div class="slds-col slds-size_2-of-12">
+					<h3 class="slds-text-color_weak" style="color: red;">{policyRecord.FOSErrorWariningFlag}</h3>   
+				</div -->
+			</div>
+        </div>
+
+		<div class="slds-p-around_x-small">
+			<div class="slds-grid slds-wrap">
+				<div class="slds-col slds-size_12-of-12">
+					<div class="slds-form-element  slds-is-editing slds-form-element_1-col">
+						<div class="slds-form-element__control">
+							<h3 class="slds-text-color_weak" style="color: red;">{policyRecord.FOSErrorWariningFlag}</h3>   
+						</div>
+					</div>
+				</div>
+				<!-- div class="thClrShdBlue slds-col slds-size_3-of-12 " >Aggregate Limit</div>
+				   
+				<div class="slds-col slds-size_3-of-12">
+					<lightning-input type="number" class="slds-p-right_x-small" label="Aggregate Limit" variant="label-hidden" name="AggregateLimit"
+					value={policyRecord.AggregateLimit} onchange={aggregateLimitChangeHandler}>
+					</lightning-input>
+				</div -->
+			</div>
+		</div>
+
+        <div class="slds-p-around_x-small">
+			<div class="slds-grid slds-wrap">
+				<div class="slds-col slds-size_12-of-12">
+					<h3 class="thClrShdBlue">EL Premium </h3>
+				 </div>
+			</div>
+		</div>
+		<div class="slds-p-around_x-small">
+			<div class="slds-grid slds-wrap">
+				<div class="slds-col slds-size_4-of-12">
+					<div class="slds-form-element   slds-is-editing slds-form-element_1-col">
+						<label class="slds-form-element__label thClrShdBlue" >Technical</label>
+						<div class="slds-form-element__control">
+							<lightning-input type="number"  step="0" class="slds-p-right_x-small" label="EL Include" variant="label-hidden" name="ELInclude" value={policyRecord.LocalELTechnicalpremium} 
+								disabled=true>
+							</lightning-input>
+						</div>
+					</div>
+				</div>
+				<div class="slds-col slds-size_4-of-12">
+					<div class="slds-form-element  slds-is-editing slds-form-element_1-col">
+						<label class="slds-form-element__label thClrShdBlue" >Minimum</label>
+						<div class="slds-form-element__control">
+							<lightning-input type="number" class="slds-p-right_x-small" label="EL Include" variant="label-hidden" name="SepELPolMinPre"
+							value={minimumPremium}  disabled >
+							</lightning-input>
+						</div>
+					</div>
+				</div>
+		
+				<div class="slds-col slds-size_4-of-12">
+					<div class="slds-form-element  slds-is-editing slds-form-element_1-col">
+						<label class="slds-form-element__label thClrShdBlue" >Actual</label>
+						<div class="slds-form-element__control">
+							<lightning-input type="number" class="slds-p-right_x-small" label="EL Include" variant="label-hidden" name="LocalELActualPrem" placeholder={policyRecord.displayLocalELTechnicalpremium} 
+							value={policyRecord.LocalELActualPrem}  onchange={actualELChangeLoadingHandler}>
+							</lightning-input>
+							<span style="white-space:pre-wrap;color:red">{errorMessage}</span>  
+						</div>
+					</div>
+				</div>
+				<!-- div class="slds-col slds-size_4-of-12">
+					<div class="slds-grid slds-wrap ">
+						<div class="thClrShdBlue slds-col slds-size_6-of-12 " >Technical:</div>
+							<div class="slds-col slds-size_6-of-12 ">
+							   <lightning-input type="number" class="slds-p-right_x-small" label="EL Include" variant="label-hidden" name="ELInclude" value={policyRecord.AllocatedActualGLLocalPrem} 
+								   disabled=true>
+							   </lightning-input>
+						   </div> 
+					</div>   
+				</div>
+				<div class="slds-col slds-size_4-of-12">
+					<div class="slds-grid slds-wrap">
+						<div class="thClrShdBlue slds-col slds-size_6-of-12 ">Minimum:</div>
+							<div class="slds-col slds-size_6-of-12">
+								<lightning-input type="number" class="slds-p-right_x-small" label="EL Include" variant="label-hidden" name="LocalELActualPrem"
+								value={policyRecord.MinimumPremiumRequired}  onchange={changeLoadingHandler} >
+								</lightning-input>
+						   </div> 
+					</div>   
+				</div>
+				<div class="slds-col slds-size_4-of-12">
+					<div class="slds-grid slds-wrap">
+						<div class="thClrShdBlue slds-col slds-size_6-of-12 " >Actual:</div>
+							<div class="slds-col slds-size_6-of-12 ">
+								<lightning-input type="number" class="slds-p-right_x-small" label="EL Include" variant="label-hidden" name="UWOverrideGLLocalPrem"
+								value={policyRecord.UWOverrideGLLocalPrem}  onchange={actualChangeLoadingHandler}>
+								</lightning-input>
+								
+						   </div> 
+					</div> 
+					<span style="white-space:pre-wrap;color:red">{errorMessage}</span>  
+				</div -->
+
+			</div>
+		</div>
+        <div class="slds-p-around_x-small">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-12 thClrShdBlue" > Note: </div>
+                <div class="slds-col slds-size_11-of-12 ">
+                    <textarea id="textarea-id-01" placeholder="" class="slds-textarea" name="Notes"  onchange={changeHandler} >{policyRecord.Notes}</textarea>
+                </div>
+
+            </div>
+        </div>
+		<template if:true={showExtTable} >
+			<table class="slds-table slds-table_bordered" style="border-bottom: 0px;" aria-label="">
+				 <thead> 
+					 <tr class="slds-line-height_reset">
+						 <th class="" scope="col"  style="padding-left: 0px;"  >
+							 <div  title="Extension Type">Extension Type</div>
+						 </th>
+						 <th class="" scope="col"  style="padding-left: 0px;"  >
+							 <div  title="Occurence Limit">Occurrence Limit</div>
+						 </th>
+						 <th class="" scope="col"  style="padding-left: 0px;"  >
+							 <div  title="Aggregate Limit">Aggregate Limit</div>
+						 </th>
+						 <th class="" scope="col"  style="padding-left: 0px;"  >
+							 <div  title="Deductible">Deductible</div>
+						 </th>
+						 <th class="" scope="col"  style="padding-left: 0px;"  >
+							 <div  title="Premium">Premium</div>
+						 </th>
+						
+						 <template if:false={isReadOnly}>
+							<th class="" scope="col" >
+								<div  title="EditAction"></div>
+							</th>
+							 <th class="" scope="col" >
+								 <div  title="Action"></div>
+							 </th>
+						 </template>
+					 </tr>
+				 
+				 </thead>
+					 <template for:each={policyRecord.extensions} for:item="row" for:index="rowindex"> 
+						 <tr class="slds-line-height_reset" key={row}>
+							 <!-- <td class="" scope="col" style="padding-left: 0px;"  >
+								 <div  title={row.extensionType}>{row.extensionType}</div>
+							 </td> -->
+
+							 <template if:false={row.showOtherExtvalue}>
+								<td class="" scope="col" style="padding-left: 0px;"  >
+									<div  title={row.extensionType}>{row.extensionType}</div>
+								</td>
+							</template>
+							<template if:true={row.showOtherExtvalue}>
+								<td class="" scope="col" style="padding-left: 0px;"  >
+									<div  title={row.extensionType}>{row.Other}</div>
+								</td>
+							</template>
+
+							 <td class="" scope="col" style="padding-left: 0px;"  >
+								 <div  title={row.OccurenceLimit}>{row.OccurenceLimit}</div>
+							 </td>
+							 <td class="" scope="col" style="padding-left: 0px;"  >
+								 <div  title={row.AggregateLimit}>{row.AggregateLimit}</div>
+							 </td>
+							 <td class="" scope="col" style="padding-left: 0px;"  >
+								 <div  title={row.Deductible}>{row.Deductible}</div>
+							 </td>
+							 <td class="" scope="col" style="padding-left: 0px;"  >
+								 <div  title={row.Premium}>{row.Premium}</div>
+							 </td>
+							 <template if:false={isReadOnly}>
+								<td>
+									<div align="right"><lightning-button-icon icon-name="utility:edit"  alternative-text="Edit" title="Edit"  data-index={rowindex}  onclick={EditRows}></lightning-button-icon></div>
+								</td>
+								 <td>
+										 <div align="right"><lightning-button-icon icon-name="utility:delete"  alternative-text="Delete" title="Delete"  data-index={rowindex}  onclick={deleteRows}></lightning-button-icon></div>
+								 </td>
+							 </template>
+						 </tr>
+					 </template>
+					 
+			 </table>
+		 </template>
+    </lightning-card>
+</template>

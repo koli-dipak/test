@@ -1,0 +1,20 @@
+<apex:page standardController="Account" extensions="box.DisplayWidget,AccountBoxController" docType="html-5.0"  action="{!getLoginToken}" showHeader="false" sidebar="false" standardStylesheets="false">
+    <apex:stylesheet value="{!URLFOR($Resource.box__BoxEmbed, 'BoxEmbed/style.css')}"/>
+    <apex:variable var="isClassic" value="{!AND($User.UIThemeDisplayed != 'Theme4d', $User.UIThemeDisplayed != 'Theme4t')}" />
+    <!-- BOX EMBED WIDGET --> 
+	<script>
+    	var folderlink="{!folderShareLink}";
+    console.log(urlPart);
+        var urlPart=folderlink.substring(0,folderlink.indexOf("?"));
+        var queryPart=folderlink.substring(folderlink.indexOf("?"));
+    	var newUrlPart=folderlink.substring(0,folderlink.lastIndexOf("/")+1);
+    	console.log(urlPart);
+    	console.log(queryPart);
+    	console.log(newUrlPart);
+    console.log('{!folderName}');
+    </script>
+     --{!folderShareLink}--
+    {!folderShareLink}
+    <apex:iframe id="classicBoxWidget" src="https://n2g-sandbox.app.box.com/embed/folder/143656324897?inline=1&login_token=W96nMjPQXYTyGYQl4UZJOdd7Jl2JW2Fh&partner_id=219&promoted_app_ids=840%2C1476" rendered="{!AND(displayBoxWidget, isClassic)}" html-allowfullscreen="true" html-webkitallowfullscreen="true" html-msallowfullscreen="true" scrolling="true" /> 
+    <apex:iframe id="lightningBoxWidget" src="https://n2g-sandbox.app.box.com/embed/folder/143656324897?inline=1&login_token=W96nMjPQXYTyGYQl4UZJOdd7Jl2JW2Fh&partner_id=219&promoted_app_ids=840%2C1476" rendered="{!AND(displayBoxWidget, NOT(isClassic))}" html-allowfullscreen="true" html-webkitallowfullscreen="true" html-msallowfullscreen="true" scrolling="true" /> <!-- /BOX EMBED WIDGET --> 
+</apex:page>

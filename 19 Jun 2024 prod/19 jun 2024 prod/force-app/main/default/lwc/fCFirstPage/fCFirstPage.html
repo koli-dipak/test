@@ -1,0 +1,1101 @@
+<!-- @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 09-12-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc -->
+
+  <template>
+    <template if:true={loaded}>
+        <vlocity_ins-spinner variant="brand"
+                alternative-text="Loading..."
+                
+                size="medium">
+        </vlocity_ins-spinner>
+    </template>
+    <template if:false={loaded}></template>
+    <lightning-card>
+        <!-- for dispaly the modal -->
+        <!-- <c-modal-popup></c-modal-popup> -->
+        <c-add-extension-modal  onpass={fetchValue} country={countryValue}></c-add-extension-modal>
+        
+        <!-- <div class="heading premiumCalculation">
+            <label>Premium Calculation</label>
+        </div>
+        <div class="pageBorder"></div> -->
+    </lightning-card>
+
+    <!-- <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-large-size_8-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+          <span><div class="thClrShdBlue">Account Name</div></span>
+        </div>
+        <div class="slds-col slds-large-size_2-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+          <span></span>
+        </div>
+        <div class="slds-col slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+          <span><div class="thClrShdBlue" style="color:green;"><span>Effective Date</span></div></span>
+        </div>
+        <div class="slds-col slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+          <span><div class="thClrShdBlue" style="color:red;">Expiry Date</div></span>
+        </div>
+      </div>
+
+      <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-large-size_8-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+          <span><div>{recordApi.AccountName}</div></span>
+        </div>
+        <div class="slds-col slds-large-size_2-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+          <span></span>
+        </div>
+        <div class="slds-col slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+          <span><div><span>{recordApi.EffectiveDate}</span></div></span>
+        </div>
+        <div class="slds-col slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+          <span><div>{recordApi.ExpiryDate}</div></span>
+        </div>
+      </div> -->
+      
+
+    <lightning-card>
+        <div class="slds-m-left_small">
+            <table >
+                <tr>
+                    <th colspan="2" class="thClrShdBlue">Account Name</th>
+                    <th class="thClrShdBlue" style="color:green; text-align:right"><span>Effective Date</span></th>
+                    <th class="thClrShdBlue" style="color:red; text-align:right ">Expiry Date</th>
+                </tr>
+                <tr>
+                    <td colspan="2">{recordApi.AccountName}</td>
+                    <td style="text-align:right"><span >{recordApi.EffectiveDate}</span></td>
+                    <td  style="text-align:right">{recordApi.ExpiryDate}</td>
+                </tr>
+                <tr >
+                    <td colspan="100"><div style="border-bottom: 1px solid rgba(192, 192, 192, 0.41); width: 100%; margin-bottom: 10px;"></div></td>
+                </tr>
+                <tr>
+                    <th class="thClrShdBlue">Actual Premium </th>
+                    <th class="thClrShdBlue">Exposure Base</th>
+                    <th class="thClrShdBlue"  style="text-align:right">GL Occurence Limit</th>
+                    <th class="thClrShdBlue"  style="text-align:right">GL Deductible</th>
+                </tr>
+        
+                <tr>
+                    <td>{ActualPremium}</td>
+                    <td>{recordApi.ExposureBase}</td>
+                    <td  style="text-align:right">{GLOccurenceLimit}</td>
+                    <td  style="text-align:right">{GLDeductible}</td>
+                    <!-- <td>{recordApi.CommissiontoEnterinGeRRater}</td> -->
+                </tr>
+            </table> 
+        </div>
+        <div class="pageBorder"></div>
+    </lightning-card>
+
+    <lightning-card>
+        <!-- fourthscreen variable is not there so pricing table will not display-->
+        <template if:true={fourthscreen}>
+        <div class="heading slds-m-left_small pricing" style="font-size:large;">
+            <h1><strong>Pricing</strong> </h1>
+        </div>
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_12-of-12 slds-p-around_x-small">
+                <span>
+                    <table  class="slds-table slds-table_bordered slds-border_left slds-border_right slds-table_cell-buffer  slds-max-medium-table_stacked-horizontal slds-no-row-hover">
+                        <!-- class="slds-table slds-table_cell-buffer slds-no-row-hover slds-border_left slds-border_right slds-table_bordered" -->
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                                    <div class="slds-truncate" title="Label">Label</div>
+                                </th>
+                                <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                                    <div class="slds-truncate" title="Total">Total</div>
+                                </th>
+                                <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                                    <div class="slds-truncate" title="Local">Local</div>
+                                </th>
+                                <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                                    <div class="slds-truncate" title="Master">Master</div>
+                                </th>
+                                <!-- acc to N2GFCB178 
+                                    <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                                    <div class="slds-truncate" title="Error">Error/Warning Flag</div>
+                                </th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={pricingInfo} for:item="price">
+                                <tr class="slds-hint-parent slds-text-color_weak" key={price}>
+                                    <th bgcolor="#F4FAFF" data-label="Label" scope="row">
+                                        <div class="slds-truncate" title={price.Label}>
+                                            {price.Label}
+                                        </div>
+                                    </th>
+                                    <td data-label="Total">
+                                        <div class="slds-truncate" title={price.Total}>{price.Total}</div>
+                                    </td>
+                                    <td data-label="Local">
+                                        <div class="slds-truncate" title={price.Local}>{price.Local}</div>
+                                    </td>
+                                    <td data-label="Master">
+                                        <div class="slds-truncate" title={price.Master}>{price.Master}</div>
+                                    </td>
+                                    <!-- acc to N2GFCB178 
+                                        <td data-label="ErrorWarningFlag">
+                                        <div class="slds-truncate" title={price.ErrorWarningFlag}>{price.ErrorWarningFlag}</div>
+                                    </td> -->
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </span>
+            </div>
+        </div>
+        </template>
+        <!-- progress -->
+    
+        <div class="slds-m-top_large slds-grid slds-wrap" style="text-align:center">
+            <div class="slds-size_7-of-12 progressBar">
+                <lightning-progress-indicator current-step={Step} type="path" class="fcFirstPage">
+                    <lightning-progress-step label="Casualty Premium Allocations" value="step-1" >
+                    </lightning-progress-step>
+                    <lightning-progress-step label="Premium Breakdown" value="step-2"  >
+                    </lightning-progress-step>
+                    <lightning-progress-step label="Local Policies" value="step-3"  >
+                    </lightning-progress-step>
+                    <lightning-progress-step label="Premium Overview" value="step-4"  >
+                    </lightning-progress-step>
+                </lightning-progress-indicator>
+            </div>
+        </div>
+        <template if:true={firstStep}>
+            <div class="slds-grid slds-wrap slds-p-around_large">
+                <div class="slds-col slds-size_1-of-12">
+                    <span></span>
+                </div>
+                    
+                <div class="slds-col slds-size_5-of-12">
+                    <span>
+                        
+                            <span>
+                                <label>Program ID</label>
+                                <abbr title="required" class="slds-required">*</abbr>
+                                <lightning-input class="slds-m-bottom_small " type="text" label="UWB Id(Salesforce)/or System Keys" variant="label-hidden" aria-required="true" required value={recordApi.UWBId}  name="UWBId"  disabled style="border: 1px rgb(201, 201, 201) solid; border-radius: 4px;">
+                                </lightning-input>
+    
+                                <label >Min Premium Exposure Threshold</label>
+                                <abbr title="required" class="slds-required">*</abbr>
+                                <!-- value={recordApi.MinPremExpThre} -->
+                                <lightning-input class="slds-m-top_xx-small slds-m-bottom_small " autocomplete="off" type="number" label="Min Premium Exposure Threshold" variant="label-hidden" aria-required="true" required formatter="currency" step="1" value={recordApi.MinPremExpThre} name="MinPremExpThre" onchange={handleChange}>
+                                </lightning-input>
+                                
+                                <label>FOS Minimum Premium</label>
+                                <abbr title="required" class="slds-required">*</abbr>
+                                <!-- value={recordApi.FOSMinPre} -->
+                                <lightning-input class="slds-m-top_xx-small slds-m-bottom_small " autocomplete="off" type="number" label="FOS Minimum Premium " variant="label-hidden" aria-required="true" required formatter="currency"  step="1" value={recordApi.FOSMinPre} name="FOSMinPre" onchange={handleChange}>
+                                </lightning-input>
+
+                                <label>GL Master Minimum</label>
+                                <abbr title="required" class="slds-required">*</abbr>
+                                <!-- value={recordApi.GLMasterMin} -->
+                                <lightning-input class="slds-m-top_xx-small slds-m-bottom_small " autocomplete="off" type="number" label="GL Master Minimum" variant="label-hidden" aria-required="true" required formatter="currency" step="1" value={recordApi.GLMasterMin} name="GLMasterMin" onchange={handleChange}>
+                                </lightning-input>
+    
+                                <label>Master Broker Commission</label>
+                                <abbr title="required" class="slds-required">*</abbr>
+                                <!-- value={recordApi.MastBroComm} -->
+                                <lightning-input class="slds-m-top_xx-small slds-m-bottom_small " autocomplete="off" type="number" formatter="percent" step="0.01" min="0" max="1" label="Master Broker Commission" variant="label-hidden" aria-required="true" required value={recordApi.MstrBrkrComm} name="MstrBrkrComm" onchange={handleChange}>
+                                </lightning-input>
+                            
+                                
+                                <label>Minimum Premium $</label>
+                                <abbr title="required" class="slds-required">*</abbr>
+                                <lightning-input class="slds-m-top_xx-small slds-m-bottom_small " autocomplete="off" type="number" formatter="currency" step="1" label="Minimum Earned Premium" variant="label-hidden" aria-required="true" disabled value={recordApi.MinimumEarnedPremium} name="MinErnPrem" >
+                                </lightning-input>
+                                <span style="white-space:pre-wrap;color:red">{BelowMinPreEarnedError}</span>  
+                            </span>
+                          
+                    </span>
+                </div>
+                
+                <div class="slds-col slds-size_5-of-12 slds-p-left_small">
+                    <span>
+                       
+                        <span>
+                            <label>DIC%</label>
+                            <abbr title="required" class="slds-required">*</abbr> 
+                            <!-- value={recordApi.DIC} -->
+                            <lightning-input class="slds-m-bottom_small " type="number" formatter="percent" autocomplete="off" step="0.01" min="0" max="1" label="DIC%" variant="label-hidden" aria-required="true" required value={recordApi.DIC} name="DIC" onchange={handleChange}></lightning-input>
+    
+                            <label>Minimum Premium for large Exposure</label>
+                            <abbr title="required" class="slds-required">*</abbr>
+                            <!-- value={recordApi.MinPreforLarPre} -->
+                            <lightning-input class="slds-m-top_xx-small slds-m-bottom_small " autocomplete="off" type="number" label="Minimum Premium for large Exposure" variant="label-hidden" aria-required="true" required formatter="currency" step="1" value={recordApi.MinPreforLarPre} name="MinPreforLarPre" onchange={handleChange}>
+                            </lightning-input>
+    
+                            <label>Seperate EL Policy Minimum Premium</label>
+                            <abbr title="required" class="slds-required">*</abbr>
+                            <!-- value={recordApi.SepELPolMinPre} -->
+                            <lightning-input class="slds-m-top_xx-small slds-m-bottom_small " autocomplete="off" type="number" label="Seperate EL Policy Minimum Premium" variant="label-hidden" aria-required="true" required formatter="currency" step="1" value={recordApi.SepELPolMinPre} name="SepELPolMinPre" onchange={handleChange}>
+                            </lightning-input>
+
+    
+                            <label>Local Broker Commission</label>
+                            <abbr title="required" class="slds-required">*</abbr>
+                            <!-- value={recordApi.LocBroComm} -->
+                            <lightning-input class="slds-m-top_xx-small slds-m-bottom_small " autocomplete="off" type="number" formatter="percent" step="0.01" min="0" max="1" label="Local Broker Commission" variant="label-hidden" aria-required="true" required value={recordApi.LclBrkComm} name="LclBrkComm" onchange={handleChange}>
+                            </lightning-input>
+
+                            <label>Minimum Premium %</label>
+                            <abbr title="required" class="slds-required">*</abbr>
+                            <lightning-input class="slds-m-top_xx-small slds-m-bottom_small " autocomplete="off" type="number" formatter="percent" step="0.01" min="0" max="1" label="Local Minimum earned premium" variant="label-hidden" aria-required="true" required value={recordApi.LocMinErnPrem} name="LocMinErnPrem" onchange={handleMinPremPerChange}>
+                            </lightning-input>
+                            
+                        </span>
+                </span> 
+                </div>
+                <div class="slds-col slds-size_1-of-12">
+                    <span></span>
+                </div>
+                <div class="slds-col slds-size_1-of-12">
+                    <span></span>
+                </div>
+                <div class="slds-col slds-size_10-of-12">
+                    <lightning-textarea value={recordApi.transactionComment} name="transactionComment" onchange={handleChange} label="Transaction Comments" ></lightning-textarea>
+
+                </div>
+                <div class="slds-col slds-size_1-of-12">
+                    <span></span>
+                </div>
+                
+<!-- -------------------------------------------------------------------- -->
+                <div class="slds-col slds-size_1-of-12">
+                    <span></span>
+                </div>
+
+                <div class="slds-col slds-size_10-of-12">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_7-of-12">
+                            <lightning-button label="Calculate Price" variant="brand" onclick={calculate}></lightning-button>
+                        </div>
+                        <div class="slds-col slds-size_5-of-12 ">
+                           <div align="right">
+                               <template if:false={hidePrevBtn}>
+                                <lightning-button  variant="Neutral" label="Previous" class="" icon-name="utility:chevronleft" onclick={PreviousPage} icon-position="left">
+                                  </lightning-button>
+                                </template>
+                                 <lightning-button variant="brand" label="Next" onclick={NextPageHandle} icon-name="utility:chevronright" class="slds-m-left_small" icon-position="right"></lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-col slds-size_1-of-12">
+                    <span></span>
+                </div>
+                
+            </div>
+                                     
+</template>
+
+<!-- -------------------------------------------------------------- -->
+<!-- START POPOVER IN NEXT BUTTON -->
+
+<template if:true={isOpen}>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" 
+             aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+    <div class="pop slds-modal__container ">
+        <header class="slds-modal__header">
+            <button class="slds-button slds-button_icon slds-button_icon-small slds-float_right slds-popover__close slds-button_icon-container" title="Close" 
+            onclick={isCloseConfirmPopup}>
+             <lightning-icon icon-name="utility:close"
+              alternative-text="close"
+              variant="container" 
+              size="small" ></lightning-icon>
+          <span class="slds-assistive-text">Close</span>
+      </button>
+            <h2 id="modal-heading-01" class="slds-text-align_left slds-text-heading_medium"><b>Confirmation</b></h2>
+          
+        </header>
+        
+        <div class="slds-modal__content slds-p-around_medium slds-text-color_default" id="modal-content-id-1">
+            <p>You have unsaved change.</p>
+            <p>Do you want to save the Changes?</p>
+        </div>
+        
+        <footer class="slds-modal__footer">
+            <button class="slds-button slds-button_neutral" onclick={isCloseConfirmPopup} title="Cancel">No</button>
+            <button class="slds-button slds-button_brand" onclick={submitChanges} title="OK">Yes</button>
+        </footer>
+    </div>
+</section>
+<div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+
+<!-- END POPIVER IN NEXT BUTTON -->
+<!-- ------------------------------------ -->
+
+
+        <template if:true={secoundStep}>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_12-of-12 slds-p-around_x-small">
+                    <span>
+           
+                <!-- <table class="slds-table slds-table_bordered slds-border_left slds-border_right slds-table_cell-buffer  slds-max-medium-table_stacked-horizontal slds-no-row-hover"> -->
+                <table  class="slds-table slds-table_bordered slds-border_left slds-border_right slds-table_cell-buffer  slds-max-medium-table_stacked-horizontal slds-no-row-hover ">
+                    <!-- class="slds-table slds-table_cell-buffer slds-table_bordered" -->
+                    <thead>
+                        <!-- <tr class="slds-line-height_reset">
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                            <div class="slds-truncate" title="Label">Label</div>
+                            </th>
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                            <div class="slds-truncate" title="Total">Total</div>
+                            </th>
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                            <div class="slds-truncate" title="Local">Local</div>
+                            </th>
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                            <div class="slds-truncate" title="Master">Master</div>
+                            </th>
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                                <div class="slds-truncate" title="Master">UW selected Master Premium</div>
+                            </th>
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                            <div class="slds-truncate" title="Error">Min Prem</div>
+                            </th>
+                        </tr> -->
+
+                        <!-- new req -->
+                        <tr class="slds-line-height_reset">
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                            <div class="slds-truncate" title="Label">Coverage</div>
+                            </th>
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                                <div class="slds-truncate" title="Local">Gross Technical</div>
+                            </th>
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                                <div class="slds-truncate" title="Master">Gross Actual Initial</div>
+                            </th>
+                            <!--  <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                            <div class="slds-truncate" title="Total">Total</div> 
+                            </th> -->
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                                <div class="slds-truncate" title="Master">Exposure</div>
+                            </th>
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                                <div class="slds-truncate" title="Master">Rate</div>
+                            </th>
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                                <div class="slds-truncate" title="Master" style="text-align: center;">Excluded</div>
+                            </th>
+                            <!-- th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                                <div class="slds-truncate" title="Master">Rates</div>
+                            </th -->
+                            <!-- <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                            <div class="slds-truncate" title="Error">Min Prem</div>
+                            </th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={premBreakDown} for:item="data" for:index="Label">
+                            <!-- <tr class="slds-hint-parent slds-text-color_weak" key={data.Label}>
+                                <th bgcolor="#F4FAFF" data-label="Label" scope="row">
+                                    <div class="slds-truncate" title={data.Label}>
+                                        {data.Label}
+                                    </div>
+                                </th>
+                                <td>{data.Total}</td>
+                                <td>{data.Local}</td>
+                                <td>{data.Master}</td>
+                                <template if:true={data.flag} >
+                                    <td ><lightning-input value={data.UWSelectedMasterPremium} placeholder={data.placeHolder} type="number" formatter="currency" name={data.fieldUpdateKey}  class="slds-p-around_none" style="max-width: 200px;" variant="label-hidden" onchange={handlePremiumChange}></lightning-input>
+                                        <span style="white-space:pre-wrap;color:red">{data.ErrorWarningFlag}</span>  
+                                    </td>
+                                </template>
+                                <template if:false={data.flag}>
+                                    <td>{data.UWSelectedMasterPremium}</td>
+                                </template>
+                                <td>{data.MinPrem}</td>
+                            </tr> -->
+                            <!-- new req -->
+                            <tr class="slds-hint-parent slds-text-color_weak" key={data.Label}>
+                                <th bgcolor="#F4FAFF" data-label="Label" scope="row">
+                                    <div class="slds-truncate" title={data.Label}>
+                                        {data.Coverage}
+                                    </div>
+                                </th>
+                                <td>
+                                    <template if:false={data.ApTp}>{data.GrossTechnical}</template>
+                                    <template if:true={data.ApTp}>{data.ApTp}<!--p style="text-align: center;" class="slds-m-left_xx-large">{data.ApTp}</p!--></template>
+                                </td>
+                                
+                                <td>
+                                    <template if:true={data.GrossActualIntialEditField} >
+                                        <lightning-input value={data.UWSelectedGrossActualIntial} autocomplete="off"  type="number" formatter="currency" name={data.fieldUpdateKey}  class="slds-p-around_none" style="max-width: 200px;" variant="label-hidden" onchange={handleGrossActualIntialChange}></lightning-input>
+                                        <div>
+                                            <span style="white-space:pre-wrap;color:red">{data.ErrMsg}</span>  
+                                        </div>
+                                    </template>
+                                    <template if:false={data.GrossActualIntialEditField}>
+                                        <!-- <td><lightning-formatted-number format-style="currency" currency-code="USD" maximum-fraction-digits="0" value={data.UWSelectedGrossActualIntial}></lightning-formatted-number></td> -->
+                                        <template if:false={data.ApTp}><lightning-input value={data.UWSelectedGrossActualIntial} autocomplete="off"  type="number" formatter="currency" name={data.fieldUpdateKey}  class="slds-p-around_none" style="max-width: 200px;" variant="label-hidden" disabled></lightning-input></template>
+                                        <div>
+                                            <span style="white-space:pre-wrap;color:red">{data.ErrMsg}</span>  
+                                        </div>
+                                    </template>
+                                    <!-- new requirement for N2GFCB491 -->
+                                   
+                                </td>
+                                <!-- <td>{data.Total}</td> -->
+                                <td>
+                                    <template if:true={data.flag} >
+                                        <template if:true={data.GrossActualIntialEditField} >
+                                        <lightning-input value={data.Exposure}  type="number"  name={data.fieldUpdateKey}  class="slds-p-around_none" style="max-width: 200px;" variant="label-hidden" onblur={handleExposureChange}></lightning-input>
+                                        </template>
+
+                                        <template if:false={data.GrossActualIntialEditField} >
+                                        <lightning-input value={data.Exposure}  type="number"  name={data.fieldUpdateKey}  class="slds-p-around_none" style="max-width: 200px;" variant="label-hidden" disabled></lightning-input>
+                                        </template>
+                                    </template>
+                                
+                                    <template if:false={data.flag}>
+                                        {data.Exposure}
+                                    </template>
+                                </td>
+                                <td>{data.Rates}</td>
+                                <td> <template if:false={data.isExcludedEnable}>
+                                    <lightning-input data-index={Label} data-key ={data.fieldUpdateKey} type="checkbox" checked={data.checked} style="text-align: center;" onchange={isExcludeEvent}></lightning-input>
+                                </template></td>
+                                <!-- <td>{data.MinPrem}</td> -->
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+                </span></div></div>
+
+                <div class="slds-p-around_x-small" >
+                    <div class="slds-grid slds-wrap">
+                            
+                        <div class="slds-col slds-size_7-of-12">
+                            <lightning-button label="Calculate Price" variant="brand" onclick={calculate}></lightning-button>
+                        </div>
+                        <div class="slds-col slds-size_5-of-12">
+                            
+
+                                <div align="right">
+                                    <lightning-button  variant="Neutral" label="Previous" icon-name="utility:chevronleft" onclick={PreviousPage} icon-position="left">
+                                    </lightning-button>
+                                    <lightning-button variant="brand" label="Next" onclick={NextPageHandle} icon-name="utility:chevronright" class="slds-m-left_small" icon-position="right"></lightning-button>
+                                
+                        
+                                </div>                           
+                        </div>
+                  
+                    </div>
+                    </div>
+        </template>
+        <template if:true={issecondOpen}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" 
+                     aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="pop slds-modal__container ">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-button_icon-small slds-float_right slds-popover__close slds-button_icon-container" title="Close" 
+                    onclick={isCloseConfirmPopup2}>
+                     <lightning-icon icon-name="utility:close"
+                      alternative-text="close"
+                      variant="container" 
+                      size="small" ></lightning-icon>
+                  <span class="slds-assistive-text">Close</span>
+              </button>
+                    <h2 id="modal-heading-02" class="slds-text-align_left slds-text-heading_medium"><b>Confirmation</b></h2>
+                  
+                </header>
+                
+                <div class="slds-modal__content slds-p-around_medium slds-text-color_default" id="modal-content-id-2">
+                    <p>You have unsaved change.</p>
+                    <p>Do you want to save the Changes?</p>
+                </div>
+                
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={isCloseConfirmPopup2} title="Cancel">No</button>
+                    <button class="slds-button slds-button_brand" onclick={submitChangesStep2} title="OK">Yes</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        
+        <template if:true={thirdStep}>
+            <!-- deprecated  on 06-10-2022
+                <div class="slds-m-around_small slds-m-bottom_large slds-float_right">
+                <lightning-button variant="brand" label="Copy"  onclick={cpy}></lightning-button>
+                <lightning-button variant="brand" label="Add Extension" class="slds-m-left_small" onclick={extBtnClck}></lightning-button>
+            </div> -->
+           
+        
+        <!-- update Local Policies Modal -->
+        <div align="right" class="slds-m-top_small">  
+            <button class="slds-button slds-button_brand" onclick={showModal}>Update Local Policies</button>
+        </div>
+          <br>
+            <br>
+          <template if:true={openModal}>  
+            <div class="slds-modal slds-fade-in-open slds-backdrop">
+              <div class="slds-modal__container Custom_modal_style">  
+                <!------HEADER Section-->  
+                <div class="slds-modal__header">  
+                  <lightning-button-icon icon-name="utility:close" alternative-text="Close this window" size="large" variant="bare-inverse" onclick={closeModal} class="slds-modal__close"></lightning-button-icon>
+                  <h2 class="slds-text-heading_small" style="color: rgba(0, 97, 149, 1); text-align: left;">Add Or Modify Local Policies</h2>
+                </div>  
+                <!------Body Section-->  
+                <div class="slds-modal__content slds-var-p-around_medium">
+
+                    <!-- remove this n2g logo according to N2GFCB109 -->
+                    <!-- <div style="padding: 10px;">
+                        <img src={logoN2gUrl} width="100px" height="100px" />
+                      </div> -->
+                  <!-- <div style="padding-bottom: 20px;"><p class="slds-text-heading_small">Update multiple local policies at once</p></div>
+                    <p>Select the type of update you would like to do, you can add an extension to multiple local policies at once or update the minimum and actual premium, across multiple policies.</p>
+                    <template if:true={radioOption}>
+                      <lightning-radio-group name="radioGroup"
+                                            label="Which action you want to perform?"
+                                            options={options}
+                                            value={value}
+                                            type="radio"
+                                            onchange={changeHandler}
+                                            
+                                            
+                                            ></lightning-radio-group>
+                  </template> -->
+                  <slot>
+                      <c-fc-extension country-list={CountryList} country-data = {recordApi.Data} onextdataupdate={handleAddExt} onclosehandle={closeModal} extension-record={extensionRecord} add-ext-section={addExtSection} update-btn-click={updateBtnClick}></c-fc-extension>
+                  </slot>
+                </div>
+                <!------Footer Section-->  
+                <!-- <div class="slds-modal__footer">
+                  <lightning-button label="Next" variant="brand" onclick={showALC}>
+                  </lightning-button>
+                </div>   -->
+              </div>  
+            </div>  
+          </template>  
+          <!-- <template if:true={visibleALC}>
+              <slot>
+              <c-f-c-local-extension ongetclose={closeChild} onopenmodal={showupdatemodal} onnewextensiondata={sendNewExtensionData}></c-f-c-local-extension>
+              </slot>
+          </template> -->
+      
+          <!-- <template if:true={visibleUp}>
+              <slot>
+              <c-f-c-premium table-data={localExtensionData} country-data={recordApi.Data} selected-options={selectedOptions} ongetclose={closeChild} add-data={recordApi.Data} new-extension-data={newLocalExtensionData} onupdatedcountrydatapremium={handleUpdateCountryData} oncountrywithextensions={handleCountrydatawithExt} oninsertedcountrywithextensions={handleCountryWithExt} next-button-flag="true"></c-f-c-premium>
+              </slot>
+          </template> -->
+
+
+
+
+
+
+
+
+
+            <div class="slds-box slds-box_x-small slds-m-around_x-small" style="background-color: rgb(255, 235, 235);">
+                <div><strong>Notes:</strong></div>
+                <div>* All FOS Countries will roll into FOS master country, Spain. When there is FOS, make sure to list Spain on
+                    "Rating - Geographical Exposure" tab even with zero GL exposure amount and select "yes" for spain in
+                    premium allocation tab.</div>
+                <div>* When a separate policy is issued for local EL, make sure to include that country is listed in "Rating
+                    - Geographical Exposure" tab even with zero GL exposure amount.</div>
+            </div>
+    
+            <!-- <div class="slds-m-around_small">
+                <lightning-datatable key-field="id" hide-checkbox-column="true" column-widths-mode="auto" data={data}
+                    columns={columns} onrowaction={handleRowAction}>
+                </lightning-datatable>
+            </div> -->
+    
+            <div class="slds-m-around_x-small">
+                <table
+                    class="slds-table slds-table_bordered slds-border_left slds-border_right slds-table_cell-buffer slds-max-medium-table_stacked-horizontal slds-no-row-hover">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th class="" scope="col">
+                                <!-- <lightning-select class="slds-truncate" value="Country">Country</lightning-select> -->
+                                <div class="slds-truncate" title="country">Country</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="LOB">LOB</div>
+                            </th>
+                            <!-- change as per the N2GFCB162 
+                                <th class="" scope="col">
+                                <div class="slds-truncate" title="Limit">Limit</div>
+                            </th> -->
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="local Policy Required?">Local Policy Required?</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Limit">Occurrence Limit</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="exposure">Exposure</div>
+                            </th>
+                            <!-- <th class="" scope="col">
+                                <div class="slds-truncate" title="local Policy Required?">Local Policy Required?</div>
+                            </th> -->
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Premium">Premium</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Rate">Rate</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={recordApi.Data} for:item="Data" for:index="Country">
+                            <template if:false={Data.LobDicDil}>
+                                <template if:true={Data.isGL}>
+                                    <tr class="slds-hint-parent" key={Data.uniqueKey}>
+                                        <th bgcolor="#F4FAFF" data-label="country" scope="row">
+                                            <div class="slds-truncate" title={Data.Country} style="color: var(--lwc-brandTextLinkActive,rgb(1, 68, 134));text-transform: capitalize;">
+                                                {Data.Country}
+                                            </div>
+                                        </th>
+                                        
+                                        <td data-label="lob">
+                                            <div class="slds-truncate" title={Data.type}>{Data.type}</div>
+                                        </td>
+                                        <td data-label="actual GL Local Premium">
+                                            <div class="slds-truncate" title={Data.LoclPolReq}>{Data.LoclPolReq}</div>
+                                        </td>
+                                        
+                                        <td data-label="limit">
+                                            <div class="slds-truncate" title={Data.Limit}><lightning-formatted-number format-style="currency" currency-code="USD" maximum-fraction-digits="0" value={Data.Limit}></lightning-formatted-number></div>
+                                        </td>
+                                        <td data-label="exposure">
+                                            <div class="slds-truncate" title={Data.Exposure}><lightning-formatted-number format-style="currency" currency-code="USD" maximum-fraction-digits="0" value={Data.Exposure}></lightning-formatted-number></div>
+                                        </td>
+                                        <!-- <td data-label="actual GL Local Premium">
+                                            <div class="slds-truncate" title={Data.LoclPolReq}>{Data.LoclPolReq}</div>
+                                        </td> -->
+                                        <td data-label="actual Total Local Premium">
+                                            <div class="slds-truncate" title={Data.displayPrem}><lightning-formatted-number format-style="currency" currency-code="USD" maximum-fraction-digits="0"	 value={Data.displayPrem}></lightning-formatted-number></div>
+                                        </td>
+                                        <td data-label="local Policy Limit">
+                                            <!-- <span> -->
+                                                <div class="slds-grid slds-wrap">
+                                                    <div class="slds-col slds-large-size_6-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+                                                        <span class="slds-truncate" title={Data.Rate}><lightning-formatted-number format-style="decimal" maximum-fraction-digits="4" minimum-fraction-digits="4"  value={Data.Rate}></lightning-formatted-number></span>
+                                                    </div>
+                                                    <div class="slds-col slds-large-size_6-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+                                                        
+                                                        <span class="slds-truncate  slds-p-right_small" title="click">
+                                                            <lightning-icon icon-name={Data.icnNm} alternative-text={Data.Country} data-type={Data.type} size='x-small'
+                                                            title={currentData} onclick={actionChg}></lightning-icon>
+                                                        <template if:true={Data.FOSErrorWariningFlag}>
+                                                            <span class="slds-truncate  slds-p-right_small" title="click">
+                                                                    <lightning-icon icon-name="utility:warning" variant="error" alternative-text="" size='x-small'
+                                                                    title={Data.FOSErrorWariningFlag} ></lightning-icon>
+                                                            </span>
+                                                        </template>
+                                                        <template if:true={Data.hasMinmumError}>
+                                                            <span class="slds-truncate  slds-p-right_small" title="click">
+                                                                    <lightning-icon icon-name="utility:warning" variant="error" alternative-text="" size='x-small'
+                                                                    title="Local Policy Premium below minimum" ></lightning-icon>
+                                                            </span>
+                                                        </template>
+                                                    </span>
+                                                    </div>
+                                                </div>
+                                                
+                
+                                                <!-- <span class="slds-truncate slds-m-left_xx-large" title="click">
+                                                    <lightning-icon icon-name={icnNm} class={Data.Country}  alternative-text='right' size='x-small'
+                                                        title={currentData} onclick={actionChg}></lightning-icon>
+                                                </span> -->
+
+                                                <!-- <span class="slds-truncate slds-m-left_xx-large slds-p-right_small" title="click">
+                                                        <lightning-icon icon-name={Data.icnNm} alternative-text={Data.Country} size='x-small'
+                                                        title={currentData} onclick={actionChg}></lightning-icon>
+                                                </span> -->
+                                            <!-- </span> -->
+                
+                                        </td>
+                                    </tr>
+                
+                                    <tr class="slds-hint-parent" if:true={Data.show} key={Data.uniqueKey}>
+                                        <td data-label="exposure" colspan="7" style="padding: 0px;">
+                                            <div if:true={Data.lobGLPolY}>                               
+                                                <c-lob-gl-locl-pol-y country-list={CountryList} record-index={Country} record-data={Data} ondataupdate={onLobGLPolYChange} onextensioneditclick ={handleExtEditClick}></c-lob-gl-locl-pol-y>
+                                            </div>
+                                            
+                                            <div if:true={Data.lobELPolY}>
+                                                <c-lob-el-locl-pol-y country-list={CountryList} record-index={Country} minimum-premium={recordApi.SepELPolMinPre} record-data={Data} ondataupdate={onLobELPolYChange} onextensioneditclick ={handleExtEditClick}></c-lob-el-locl-pol-y>
+                                            </div>
+                                            <div if:true={Data.lobGLPolFOS}>
+                                                <c-lob-gl-locl-pol-fos country-list={CountryList} value1={value1}  value3={value3} value4={value4} value5={value5} value6={value6} record-index={Country} record-data={Data} ondataupdate={onLobGLPolFOSChange} onextensioneditclick ={handleExtEditClick}></c-lob-gl-locl-pol-fos>
+                                            </div>
+                                            <!-- <div if:true={Data.lobDicPolDil}>
+                                                <c-lob-dic-locl-pol-dil></c-lob-dic-locl-pol-dil>
+                                            </div> -->
+                                        </td>
+                                    </tr>
+                                </template>
+                            </template>
+                        </template>
+                        <tr  class="slds-hint-parent"><td colspan="100">&nbsp;</td></tr>
+                        <template for:each={recordApi.Data} for:item="Data" for:index="Country">
+                            <template if:false={Data.LobDicDil}>
+                                <template if:true={Data.isEL}>
+                                    <tr class="slds-hint-parent" key={Data.uniqueKey}>
+                                        <th bgcolor="#F4FAFF" data-label="country" scope="row">
+                                            <div class="slds-truncate" title={Data.Country} style="color: var(--lwc-brandTextLinkActive,rgb(1, 68, 134));text-transform: capitalize;">
+                                                {Data.Country}
+                                            </div>
+                                        </th>
+                                        
+                                        <td data-label="lob">
+                                            <div class="slds-truncate" title={Data.type}>{Data.type}</div>
+                                        </td>
+                                        <td data-label="actual GL Local Premium">
+                                            <div class="slds-truncate" title={Data.LoclPolReq}>{Data.LoclPolReq}</div>
+                                        </td>
+                                        
+                                        <td data-label="limit">
+                                            <div class="slds-truncate" title={Data.Limit}><lightning-formatted-number format-style="currency" currency-code="USD" maximum-fraction-digits="0" value={Data.Limit}></lightning-formatted-number></div>
+                                        </td>
+                                        <td data-label="exposure">
+                                            <div class="slds-truncate" title={Data.Exposure}><lightning-formatted-number format-style="currency" currency-code="USD" maximum-fraction-digits="0" value={Data.Exposure}></lightning-formatted-number></div>
+                                        </td>
+                                        <!-- <td data-label="actual GL Local Premium">
+                                            <div class="slds-truncate" title={Data.LoclPolReq}>{Data.LoclPolReq}</div>
+                                        </td> -->
+                                        <td data-label="actual Total Local Premium">
+                                            <div class="slds-truncate" title={Data.displayPrem}><lightning-formatted-number format-style="currency" currency-code="USD" maximum-fraction-digits="0"	 value={Data.displayPrem}></lightning-formatted-number></div>
+                                        </td>
+                                        <td data-label="local Policy Limit">
+                                            <!-- <span> -->
+                                                <div class="slds-grid slds-wrap">
+                                                    <div class="slds-col slds-large-size_6-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+                                                        <span class="slds-truncate" title={Data.Rate}><lightning-formatted-number format-style="decimal" maximum-fraction-digits="4" minimum-fraction-digits="4"  value={Data.Rate}></lightning-formatted-number></span>
+                                                    </div>
+                                                    <div class="slds-col slds-large-size_6-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+                                                        
+                                                        <span class="slds-truncate  slds-p-right_small" title="click">
+                                                            <lightning-icon icon-name={Data.icnNm} alternative-text={Data.Country} data-type={Data.type} size='x-small'
+                                                            title={currentData} onclick={actionChg}></lightning-icon>
+                                                        <template if:true={Data.FOSErrorWariningFlag}>
+                                                            <span class="slds-truncate  slds-p-right_small" title="click">
+                                                                    <lightning-icon icon-name="utility:warning" variant="error" alternative-text="" size='x-small'
+                                                                    title={Data.FOSErrorWariningFlag} ></lightning-icon>
+                                                            </span>
+                                                        </template>
+                                                        <template if:true={Data.hasMinmumError}>
+                                                            <span class="slds-truncate  slds-p-right_small" title="click">
+                                                                    <lightning-icon icon-name="utility:warning" variant="error" alternative-text="" size='x-small'
+                                                                    title="Local Policy Premium below minimum" ></lightning-icon>
+                                                            </span>
+                                                        </template>
+                                                    </span>
+                                                    </div>
+                                                </div>
+                                                
+                
+                                                <!-- <span class="slds-truncate slds-m-left_xx-large" title="click">
+                                                    <lightning-icon icon-name={icnNm} class={Data.Country}  alternative-text='right' size='x-small'
+                                                        title={currentData} onclick={actionChg}></lightning-icon>
+                                                </span> -->
+
+                                                <!-- <span class="slds-truncate slds-m-left_xx-large slds-p-right_small" title="click">
+                                                        <lightning-icon icon-name={Data.icnNm} alternative-text={Data.Country} size='x-small'
+                                                        title={currentData} onclick={actionChg}></lightning-icon>
+                                                </span> -->
+                                            <!-- </span> -->
+                
+                                        </td>
+                                    </tr>
+                
+                                    <tr class="slds-hint-parent" if:true={Data.show} key={Data.uniqueKey}>
+                                        <td data-label="exposure" colspan="7" style="padding: 0px;">
+                                            <div if:true={Data.lobGLPolY}>                               
+                                                <c-lob-gl-locl-pol-y country-list={CountryList} record-index={Country} record-data={Data} ondataupdate={onLobGLPolYChange} onextensioneditclick ={handleExtEditClick}></c-lob-gl-locl-pol-y>
+                                            </div>
+                                            
+                                            <div if:true={Data.lobELPolY}>
+                                                <c-lob-el-locl-pol-y country-list={CountryList} record-index={Country} minimum-premium={recordApi.SepELPolMinPre} record-data={Data} ondataupdate={onLobELPolYChange} onextensioneditclick ={handleExtEditClick}></c-lob-el-locl-pol-y>
+                                            </div>
+                                            <div if:true={Data.lobGLPolFOS}>
+                                                <c-lob-gl-locl-pol-fos country-list={CountryList} value1={value1}  value3={value3} value4={value4} value5={value5} value6={value6} record-index={Country} record-data={Data} ondataupdate={onLobGLPolFOSChange} onextensioneditclick ={handleExtEditClick}></c-lob-gl-locl-pol-fos>
+                                            </div>
+                                            <!-- <div if:true={Data.lobDicPolDil}>
+                                                <c-lob-dic-locl-pol-dil></c-lob-dic-locl-pol-dil>
+                                            </div> -->
+                                        </td>
+                                    </tr>
+                                </template>
+                            </template>
+                        </template>
+    
+                    </tbody>
+                </table>
+
+                <!-- Dic/Dil table acc to N2G-FC270 -->
+                <table
+                class="slds-table slds-table_bordered slds-border_left slds-border_right slds-table_cell-buffer slds-max-medium-table_stacked-horizontal slds-no-row-hover slds-m-top_small">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                            <!-- <lightning-select class="slds-truncate" value="Country">Country</lightning-select> -->
+                            <div class="slds-truncate" title="country">Country</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="LOB">LOB</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="local Policy Required?">Local Policy Required?</div>
+                        </th>
+                      
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Limit">Occurrence Limit</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="exposure">Exposure</div>
+                        </th>
+                        <!-- <th class="" scope="col">
+                            <div class="slds-truncate" title="local Policy Required?">Local Policy Required?</div>
+                        </th> -->
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={recordApi.Data} for:item="Data" for:index="Country">
+                        <template if:true={Data.LobDicDil}>
+                                <tr class="slds-hint-parent" key={Data.uniqueKey}>
+                                    <th bgcolor="#F4FAFF" data-label="country" scope="row">
+                                        <div class="slds-truncate" title={Data.Country} style="color: var(--lwc-brandTextLinkActive,rgb(1, 68, 134));">
+                                            {Data.Country}
+                                        </div>
+                                    </th>
+                                    
+                                    <td data-label="lob">
+                                        <div class="slds-truncate" title={Data.type}>DIC/DIL</div>
+                                    </td>
+                                    <td data-label="actual GL Local Premium">
+                                        <div class="slds-truncate" title={Data.LoclPolReq}>{Data.LoclPolReq}</div>
+                                    </td>
+                                    <td data-label="limit">
+                                        <div class="slds-truncate" title={Data.Limit}><lightning-formatted-number format-style="currency" currency-code="USD" value={Data.Limit} maximum-fraction-digits="0"></lightning-formatted-number></div>
+                                    </td>
+                                    <td data-label="exposure">
+                                        <div class="slds-truncate" title={Data.Exposure}><lightning-formatted-number format-style="currency" currency-code="USD" value={Data.Exposure} maximum-fraction-digits="0"></lightning-formatted-number></div>
+                                    </td>
+                                    <!-- <td data-label="actual GL Local Premium">
+                                        <div class="slds-truncate" title={Data.LoclPolReq}>{Data.LoclPolReq}</div>
+                                    </td> -->
+                                </tr>
+
+                                
+                            </template>
+                    </template>
+
+                </tbody>
+            </table>
+            </div>
+
+            <div class="slds-m-around_x-small" >
+            <div class="slds-grid slds-wrap">
+                    
+                <div class="slds-col slds-size_7-of-12">
+                    <lightning-button label="Calculate Price" variant="brand" onclick={calculate}></lightning-button>
+                </div>
+                <div class="slds-col slds-size_5-of-12">
+                    
+                        <div align="right">
+                                <lightning-button  variant="Neutral" label="Previous"  icon-name="utility:chevronleft" onclick={PreviousPage} icon-position="left">
+                                </lightning-button>
+                            <lightning-button variant="brand" label="Next" onclick={NextPageHandle} icon-name="utility:chevronright" class="slds-m-left_small" icon-position="right"></lightning-button>
+                        
+                            
+                        </div>
+                    
+                </div>
+          
+            </div>
+            </div>
+        </template>
+        <!-- 26-12-2022 -->
+        <template if:true={isthirdOpen}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" 
+                     aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="pop slds-modal__container ">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-button_icon-small slds-float_right slds-popover__close slds-button_icon-container" title="Close" 
+                    onclick={isCloseConfirmPopup3}>
+                     <lightning-icon icon-name="utility:close"
+                      alternative-text="close"
+                      variant="container" 
+                      size="small" ></lightning-icon>
+                  <span class="slds-assistive-text">Close</span>
+              </button>
+                    <h2 id="modal-heading-03" class="slds-text-align_left slds-text-heading_medium"><b>Confirmation</b></h2>
+                  
+                </header>
+                
+                <div class="slds-modal__content slds-p-around_medium slds-text-color_default" id="modal-content-id-3">
+                    <p>You have unsaved change.</p>
+                    <p>Do you want to save the Changes?</p>
+                </div>
+                
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={isCloseConfirmPopup3} title="Cancel">No</button>
+                    <button class="slds-button slds-button_brand" onclick={submitChangesStep3} title="OK">Yes</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+        <template if:true={fourthStep}>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_12-of-12 slds-p-around_x-small">
+                    <span>
+           
+                <!-- <table class="slds-table slds-table_bordered slds-border_left slds-border_right slds-table_cell-buffer  slds-max-medium-table_stacked-horizontal slds-no-row-hover"> -->
+                <table  class="slds-table slds-table_bordered slds-border_left slds-border_right slds-table_cell-buffer  slds-max-medium-table_stacked-horizontal slds-no-row-hover ">
+                    <!-- class="slds-table slds-table_cell-buffer slds-table_bordered" -->
+                    <thead>
+
+                        <!-- new req -->
+                        <tr class="slds-line-height_reset">
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                            <div class="slds-truncate" title="Label">Coverage</div>
+                            </th>
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                                <div class="slds-truncate" title="Local">Gross Technical</div>
+                            </th>
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                                <div class="slds-truncate" title="Master">Gross Actual Final</div>
+                            </th>
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                                <div class="slds-truncate" title="Local">Local</div>
+                            </th>
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                                <div class="slds-truncate slds-m-left_small" title="Master">Master</div>
+                            </th>
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                                <div class="slds-truncate" title="Master">Exposure</div>
+                            </th>
+                            <th class="color" scope="col" style="background: rgb(244, 250, 255);">
+                                <div class="slds-truncate" title="Master">Rate</div>
+                            </th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={premBreakDownOverview} for:item="data" for:index="Label">
+                            <!-- new req -->
+                            <tr class="slds-hint-parent slds-text-color_weak" key={data.Label}>
+                                <th bgcolor="#F4FAFF" data-label="Label" scope="row">
+                                    <div class="slds-truncate" title={data.Label}>
+                                        {data.Coverage}
+                                    </div>
+                                </th>
+                                <td>
+                                    <template if:false={data.ApTp}>{data.GrossTechnical}</template>
+                                    <template if:true={data.ApTp}>{data.ApTp}<!--p style="text-align: center;" class="slds-m-left_xx-large">{data.ApTp}</p!--></template>
+                                </td>
+
+                                
+
+                                <td>
+                                    <!-- <template if:false={data.GrossActualIntialEditField}> -->
+                                        <template if:false={data.ApTp}><lightning-formatted-number format-style="currency" currency-code="USD" maximum-fraction-digits="0" value={data.UWSelectedGrossActualFinal}></lightning-formatted-number></template>    
+                                        <div>
+                                            <span style="white-space:pre-wrap;color:red">{data.UWSelectedGrossActualFinalErrorMsg}</span>
+                                        </div>
+                                    <!-- </template> -->
+                                </td>
+                                <td>
+                                    <lightning-formatted-number format-style="currency" currency-code="USD" maximum-fraction-digits="0" value={data.Local}></lightning-formatted-number>
+                                    <div>
+                                        <span style="white-space:pre-wrap;color:red">{data.LclErrorMsg}</span>  
+                                    </div>
+                                </td>
+                                <td>
+                                        <template if:true={data.flag}>
+                                            <template if:true={data.GrossActualIntialEditField}>
+                                                <lightning-input value={data.Master}  type="number" formatter="currency" name={data.fieldUpdateKey}  class="slds-p-around_none slds-m-left_small" style="width: 150px; max-width: 150px;" variant="label-hidden" onchange={handleMasterValueChange}></lightning-input>
+                                            </template>
+                                            <template if:false={data.GrossActualIntialEditField}>
+                                                <lightning-input value={data.Master}  type="number" formatter="currency" name={data.fieldUpdateKey}  class="slds-p-around_none slds-m-left_small" style="width: 150px; max-width: 150px;" variant="label-hidden" disabled></lightning-input>
+                                            </template>
+                                            <span style="white-space:pre-wrap;color:red">{data.ErrorWarningFlag}</span>  
+                                        </template>
+                                        <template if:false={data.flag}>
+                                        <div>
+                                            <lightning-formatted-number format-style="currency" currency-code="USD" maximum-fraction-digits="0" value={data.Master} class="slds-m-left_small"></lightning-formatted-number>
+                                        </div>
+                                            <span style="white-space:pre-wrap;color:red">{data.ErrorMsg}</span>  
+
+                                        </template>
+                                </td>
+                               
+                                <!-- <td><lightning-formatted-number format-style="currency" currency-code="USD" maximum-fraction-digits="0" value={data.Exposure}></lightning-formatted-number></td> -->
+                                <td>{data.Exposure}</td>
+                              
+                                <td>{data.Rates}</td>
+                                <!-- <td>{data.MinPrem}</td> -->
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+                </span></div></div>
+
+                <div class="slds-p-around_x-small" >
+                    <div class="slds-grid slds-wrap">
+                            
+                        <div class="slds-col slds-size_7-of-12">
+                            <lightning-button label="Calculate Price" variant="brand" onclick={calculate}></lightning-button>
+                        </div>
+                        <div class="slds-col slds-size_5-of-12">
+                            
+
+                                <div align="right">
+                                    <lightning-button  variant="Neutral" label="Previous" icon-name="utility:chevronleft" onclick={PreviousPage} icon-position="left">
+                                    </lightning-button>
+                                    <lightning-button variant="brand" label="Next" onclick={NextPageHandle} icon-name="utility:chevronright" class="slds-m-left_small" icon-position="right"></lightning-button>
+                                
+                        
+                                </div>                           
+                        </div>
+                  
+                    </div>
+                    </div>
+        </template>
+        <!-- form -->
+
+       
+
+
+        <!-- <div class="">
+            <ul class="slds-list_horizontal"></ul>
+            <lightning-button variant="brand" label="Calculate Price" title="Calculate Price" onclick={handleClick}
+                class="slds-m-left_x-small"></lightning-button>
+            <ul class="slds-list_horizontal"></ul>
+            <div style="float: right;">
+                <lightning-button variant="Neutral" title="btn" icon-name="utility:chevronleft" icon-position="left"
+                    label="Previous"></lightning-button>
+                <lightning-button variant="brand" title="btn" icon-name="utility:chevronright" icon-position="right"
+                    label="Next"></lightning-button>
+            </div>
+        </div> -->
+
+        <!-- <div class="backgroundInverse">
+            <template if:true={loaded}>
+                <lightning-spinner alternative-text="Loading"></lightning-spinner>
+            </template>
+            <template if:false={loaded}>
+                
+            </template>
+        </div> -->
+
+    </lightning-card>
+</template>

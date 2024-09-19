@@ -1,0 +1,36 @@
+.dummy{
+	color : black;
+}
+/* Custom styles for the modal */
+.custom-modal {
+    max-width: 400px; /* Adjust the width as needed */
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.custom-modal-content {
+    padding: 0;
+}
+.instruction-cell {
+    max-width: 600px; /* Adjust as per your requirement */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.center-align {
+    text-align: center;
+    vertical-align: middle;
+}
+.top-align-row {
+    vertical-align: top;
+}
+
+.left-align-cell {
+    text-align: left;
+}
+
+
+
+/* Additional styling can be added as needed */

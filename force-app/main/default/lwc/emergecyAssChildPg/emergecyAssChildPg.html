@@ -1,0 +1,344 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 07-19-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  <div class="slds-m-left_small ">
+  <c-fc-exposurebasis   is-read-only={isReadOnly} columns={exposurecolumn} coverage={recordApi} onchangedataupdate={handleExposure}></c-fc-exposurebasis>
+   
+  <div class="pageBorder"></div>
+  
+    <!-- new design -->
+  <label class="headerTextProperties ">COVERAGES</label>
+    
+
+  <div class=" slds-m-bottom_medium slds-m-top_medium ">
+      <fieldset class="slds-form-element slds-form-element_compound">
+          <div class="slds-form-element__control">
+              <div class="slds-form-element__row">
+                  <div class="slds-size_1-of-3">
+                     <lightning-input name="MedicalEvacuation" value={recordApi.MedicalEvacuation} onblur={handleChange} readonly={isReadOnly} label="Medical Evacuation"  formatter="currency" type="number" step="1"></lightning-input>
+                          
+                      <div class="slds-form-element ">
+                          <label class="slds-form-element__label slds-text-color_default">{recordApi.MedicalEvacuationSuffix}</label>
+                      </div>
+                  </div>
+                  <div class="slds-size_1-of-3">
+                    <lightning-input name="MedicalRepatriation" value={recordApi.MedicalRepatriation} onblur={handleChange} readonly={isReadOnly} type="text" label="Medical Repatriation"  ></lightning-input>
+                    
+                      <div class="slds-form-element ">
+                           <label class="slds-form-element__label slds-text-color_default">{recordApi.MedicalRepatriationSuffix}</label>
+                      </div>
+                  </div>
+                  <div class="slds-size_1-of-3">
+                    <lightning-input name="NonMedicalRepatriation" value={recordApi.NonMedicalRepatriation} onblur={handleChange} readonly={isReadOnly} type="text" label="Non-medical Repatriation" ></lightning-input>
+                          
+                    <div class="slds-form-element ">
+                          <label class="slds-form-element__label slds-text-color_default">{recordApi.NonMedicalRepatriationSuffix}</label>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </fieldset>
+  </div>
+  
+  <div class=" slds-m-bottom_medium ">
+      <fieldset class="slds-form-element slds-form-element_compound">
+          <div class="slds-form-element__control">
+              <div class="slds-form-element__row">
+                  <div class="slds-size_1-of-3">
+                    <lightning-input name="ReturnOfRemains" value={recordApi.ReturnOfRemains} onblur={handleChange} readonly={isReadOnly} label="Return of Remains" formatter="currency" type="number" step="1" ></lightning-input>
+                          
+                      <div class="slds-form-element ">
+                           <label class="slds-form-element__label slds-text-color_default">{recordApi.ReturnOfRemainsSuffix}</label>
+                      </div>
+                  </div>
+                  <div class="slds-size_1-of-3">
+                    <lightning-input  name="HospitalVisit" value={recordApi.HospitalVisit} onblur={handleChange} readonly={isReadOnly} label="Hospital Visit" formatter="currency" type="number" step="1" ></lightning-input>
+                         
+                      <div class="slds-form-element ">
+                       <!-- <label class="slds-form-element__label slds-text-color_default">Lost or Damaged Baggage</label> -->
+                           <label class="slds-form-element__label slds-text-color_default">{recordApi.HospitalVisitSuffix}</label>
+                      </div>
+                  </div>
+                  <div class="slds-size_1-of-3">
+                    <lightning-input onblur={handleChange} name="ReturnToChild" value={recordApi.ReturnToChild} readonly={isReadOnly} label="Return of Child" formatter="currency" type="number" step="1"></lightning-input>
+                           
+                      <div class="slds-form-element ">
+                       <!-- <label class="slds-form-element__label slds-text-color_default">jewellery,Watches and Electronics</label> -->
+                           <label class="slds-form-element__label slds-text-color_default">{recordApi.ReturnOfChildSuffix}</label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </fieldset>
+      </div>
+  
+    <div class=" slds-m-bottom_medium ">
+        <fieldset class="slds-form-element slds-form-element_compound">
+            <div class="slds-form-element__control">
+                <div class="slds-form-element__row">
+                    <div class="slds-size_1-of-3">
+                      <lightning-input onblur={handleChange} name="ReturnOfCompanion" value={recordApi.ReturnOfCompanion} readonly={isReadOnly} label="Return of Companion"  formatter="currency" type="number" step="1"></lightning-input></span>
+                             
+                        <div class="slds-form-element ">
+                             <label class="slds-form-element__label slds-text-color_default">{recordApi.ReturnOfCompanionSuffix}</label>
+                        </div>
+                    </div>
+                    <div class="slds-size_1-of-3">
+                      <lightning-input onblur={handleChange} name="AggregateLimitOfLiability" value={recordApi.AggregateLimitOfLiability} readonly={isReadOnly}  label="Aggregate Limit of Liability"  formatter="currency" type="number" step="1" ></lightning-input>
+                            
+                        <div class="slds-form-element ">
+                             <label class="slds-form-element__label slds-text-color_default">{recordApi.AggregateLimitOfLiabilitySuffix}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        </div>
+  <div class="pageBorder"></div>
+  
+
+    <!-- new design   -->
+
+  <label class="headerTextProperties ">ENDORSEMENT COVERAGES</label>
+  <div class="first slds-text-title_caps slds-m-bottom_medium slds-m-top_medium  slds-text-color_default" style="font-size: 12px; line-height: 18px;">IDENTITY PROTECTION</div>
+  <!-- 31-01-2023 -->
+  <div class=" slds-m-bottom_medium ">
+    <fieldset class="slds-form-element slds-form-element_compound">
+        <div class="slds-form-element__control">
+            <div class="slds-form-element__row">
+                <div class="slds-size_1-of-3">
+                    <lightning-input onblur={handleChange} name="LostDocumentIDTheftExpenses" value={recordApi.LostDocumentIDTheftExpenses} readonly={isReadOnly} label="Lost Document and ID Theft Expenses" formatter="currency" type="number" step="1"></lightning-input>
+                      
+                    <div class="slds-form-element ">
+                         <label class="slds-form-element__label slds-text-color_default">{recordApi.LostDocumentIDTheftExpensesSuffix}</label>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-3">
+                  <lightning-input onblur={handleChange} name="IdentificationTheftServices" value={recordApi.IdentificationTheftServices} readonly={isReadOnly} label="Identification Theft Services" formatter="currency" type="number" step="1"></lightning-input>
+                       
+                    <div class="slds-form-element ">
+                         <label class="slds-form-element__label slds-text-color_default">{recordApi.IdentificationTheftServicesSuffix}</label>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-3">
+                  <lightning-input onblur={handleChange} name="PolicyPeriodAggregateLimit" value={recordApi.PolicyPeriodAggregateLimit} readonly={isReadOnly} label="Policy Period Aggregate Limit" formatter="currency" type="number" step="1"></lightning-input>
+                          
+                  <div class="slds-form-element ">
+                      <label class="slds-form-element__label slds-text-color_default">{recordApi.PolicyPeriodAggregateLimitSuffix}</label>
+                  </div>
+                </div>
+                <!--div class="slds-size_1-of-3">
+                  <lightning-input onblur={handleChange} name="AttorneyFees" value={recordApi.AttorneyFees} readonly={isReadOnly} label="Attorney Fees" formatter="currency" type="number" step="1"></lightning-input>
+                    
+                  <div class="slds-form-element ">
+                       <label class="slds-form-element__label slds-text-color_default">{recordApi.AttorneyFeesSuffix}</label>
+                  </div>
+              </div-->
+            </div>
+        </div>
+    </fieldset>
+    </div>
+
+  <!--div class=" slds-m-bottom_medium ">
+    <fieldset class="slds-form-element slds-form-element_compound">
+        <div class="slds-form-element__control">
+            <div class="slds-form-element__row">
+                <div class="slds-size_1-of-3">
+                  <lightning-input onblur={handleChange} name="LostEarnings" value={recordApi.LostEarnings} readonly={isReadOnly} label="Lost Earnings" formatter="currency" type="number" step="1"></lightning-input>
+                       
+                    <div class="slds-form-element ">
+                         <label class="slds-form-element__label slds-text-color_default">{recordApi.LostEarningsSuffix}</label>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-3">
+                  <lightning-input onblur={handleChange} name="CostsOfTravel" value={recordApi.CostsOfTravel} readonly={isReadOnly} label="Costs of Travel" formatter="currency" type="number" step="1"></lightning-input>
+                        
+                    <div class="slds-form-element ">
+                         <label class="slds-form-element__label slds-text-color_default">{recordApi.CostsOfTravelsuffix}</label>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-3">
+                  <lightning-input onblur={handleChange} name="PolicyPeriodAggregateLimit" value={recordApi.PolicyPeriodAggregateLimit} readonly={isReadOnly} label="Policy Period Aggregate Limit" formatter="currency" type="number" step="1"></lightning-input>
+                        
+                    <div class="slds-form-element ">
+                         <label class="slds-form-element__label slds-text-color_default">{recordApi.PolicyPeriodAggregateLimitSuffix}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+  </div -->
+
+  <div class=" slds-m-bottom_medium ">
+      <fieldset class="slds-form-element slds-form-element_compound">
+          <div class="slds-form-element__control">
+              <div class="slds-form-element__row">
+                  <div class="slds-size_1-of-3">
+                    <lightning-input onblur={handleChange} name="Deductible" value={recordApi.Deductible} readonly={isReadOnly} label="Deductible" formatter="currency" type="number" step="1"></lightning-input>
+                          
+                      <div class="slds-form-element ">
+                           <label class="slds-form-element__label slds-text-color_default">{recordApi.DeductibleSuffix}</label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </fieldset>
+      </div>
+
+    <!-- //////////// -->
+
+   
+  <div class="first slds-text-title_caps slds-m-bottom_medium slds-text-color_default" style="font-size: 12px; line-height: 18px;">SECURITY EVACUATION</div>
+    <div class=" slds-m-bottom_medium ">
+    <fieldset class="slds-form-element slds-form-element_compound">
+        <div class="slds-form-element__control">
+            <div class="slds-form-element__row">
+                <div class="slds-size_1-of-3">
+                  <lightning-input onblur={handleChange} name="Transportation" value={recordApi.Transportation} readonly={isReadOnly} label="Transportation" formatter="currency" type="number" step="1"></lightning-input>
+                       
+                    <div class="slds-form-element ">
+                          <label class="slds-form-element__label slds-text-color_default">{recordApi.TransportationSuffix}</label>
+                      </div>
+                </div>
+                <div class="slds-size_1-of-3">
+                  <lightning-input onblur={handleChange} name="PersonalEffects" value={recordApi.PersonalEffects} readonly={isReadOnly} label="Personal Effects" formatter="currency" type="number" step="1"></lightning-input>
+                        
+                    <div class="slds-form-element ">
+                          <label class="slds-form-element__label slds-text-color_default">{recordApi.PersonalEffectsSuffix}</label>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-3">
+                  <lightning-input onblur={handleChange} name="AggregateLimitOfInsurance" value={recordApi.AggregateLimitOfInsurance} readonly={isReadOnly} label="Aggregate Limit of Insurance" formatter="currency" type="number" step="1"></lightning-input>
+                        
+                    <div class="slds-form-element ">
+                          <!-- <label class="slds-form-element__label slds-text-color_default">{recordApi.CostsOfTravelsuffix}</label> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="first slds-text-title_caps slds-m-bottom_medium slds-text-color_default" style="font-size: 12px; line-height: 18px;">KIDNAP,RANSOM AND EXTORTION</div>
+
+    <div class=" slds-m-bottom_medium ">
+      <fieldset class="slds-form-element slds-form-element_compound">
+          <div class="slds-form-element__control">
+              <div class="slds-form-element__row">
+                  <div class="slds-size_1-of-3">
+                    <lightning-input onblur={handleChange} name="KidnapRansomAndExtortionDirectLoss" value={recordApi.KidnapRansomAndExtortionDirectLoss} readonly={isReadOnly} label="Direct Loss" formatter="currency" type="number" step="1"></lightning-input>
+                           
+                      <div class="slds-form-element ">
+                            <label class="slds-form-element__label slds-text-color_default">{recordApi.KidnapRansomExtortionDrctLossSuffix}</label>
+                      </div>
+                  </div>
+                  <div class="slds-size_1-of-3">
+                    <lightning-input onblur={handleChange} name="KidnapRansomAndExtortionExpensesIncurred" value={recordApi.KidnapRansomAndExtortionExpensesIncurred} readonly={isReadOnly} label="Expenses Incurred" formatter="currency" type="number" step="1"></lightning-input>
+                          
+                      <div class="slds-form-element ">
+                           <label class="slds-form-element__label slds-text-color_default">{recordApi.KidnapRansomExtortionExpincrdSuffix}</label>
+                      </div>
+                  </div>
+                  <div class="slds-size_1-of-3">
+                    <lightning-input onblur={handleChange} name="DetentionOrHijack" value={recordApi.DetentionOrHijack} readonly={isReadOnly} label="Detention or Hijack" formatter="currency" type="number" step="1"></lightning-input>
+                         
+                      <div class="slds-form-element ">
+                           <label class="slds-form-element__label slds-text-color_default">{recordApi.DetentionOrHijackSuffix}</label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </fieldset>
+  </div>
+  
+  <div class=" slds-m-bottom_medium ">
+      <fieldset class="slds-form-element slds-form-element_compound">
+          <div class="slds-form-element__control">
+              <div class="slds-form-element__row">
+                  <div class="slds-size_1-of-3">
+                    <lightning-input onblur={handleChange} name="InTransitCustody" value={recordApi.InTransitCustody} readonly={isReadOnly} label="In-Transit,Custody" formatter="currency" type="number" step="1"></lightning-input>
+                         
+                      <div class="slds-form-element ">
+                           <label class="slds-form-element__label slds-text-color_default">{recordApi.InTransitCustodySuffix}</label>
+                      </div>
+                  </div>
+                  <div class="slds-size_1-of-3">
+                    <lightning-input onblur={handleChange} name="DeathOrDismemberment" value={recordApi.DeathOrDismemberment} readonly={isReadOnly} label="Death or Dismemberment" formatter="currency" type="number" step="1"></lightning-input>
+                         
+                      <div class="slds-form-element ">
+                           <label class="slds-form-element__label slds-text-color_default">{recordApi.DeathOrDismembermentSuffix}</label>
+                      </div>
+                  </div>
+                  <div class="slds-size_1-of-3">
+                    <lightning-input onblur={handleChange} name="CrisisResponseFirm" value={recordApi.CrisisResponseFirm} readonly={isReadOnly} label="Crisis Response Firm" formatter="currency" type="number" step="1"></lightning-input>
+                          
+                      <div class="slds-form-element ">
+                           <label class="slds-form-element__label slds-text-color_default">{recordApi.CrisisResponseFirmSuffix}</label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </fieldset>
+      </div>
+  
+    <div class=" slds-m-bottom_medium ">
+        <fieldset class="slds-form-element slds-form-element_compound">
+            <div class="slds-form-element__control">
+                <div class="slds-form-element__row">
+                    <div class="slds-size_1-of-3">
+                      <lightning-input onblur={handleChange} name="LegalCosts" value={recordApi.LegalCosts} readonly={isReadOnly} label="Legal Costs" formatter="currency" type="number" step="1"></lightning-input>
+                          
+                        <div class="slds-form-element ">
+                             <label class="slds-form-element__label slds-text-color_default">{recordApi.LegalCostsSuffix}</label>
+                        </div>
+                    </div>
+                    <div class="slds-size_1-of-3">
+                      <lightning-input name="AnnualAggregate" value={recordApi.AnnualAggregate} onblur={handleChange} readonly={isReadOnly} label="Annual Aggregate" formatter="currency" type="number" step="1"></lightning-input>
+                             
+                        <div class="slds-form-element ">
+                             <!-- <label class="slds-form-element__label slds-text-color_default">{recordApi.AggregateLimitOfLiabilitySuffix}</label> -->
+                        </div>
+                    </div>
+                    <div class="slds-size_1-of-3">
+                      <lightning-input onblur={handleChange} name="RetentionAmount" value={recordApi.RetentionAmount} readonly={isReadOnly} label="Retention Amount" formatter="currency" type="number" step="1"></lightning-input>
+                          
+                      <div class="slds-form-element ">
+                           <!-- <label class="slds-form-element__label slds-text-color_default">{recordApi.AggregateLimitOfLiabilitySuffix}</label> -->
+                       </div>
+                  </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class=" slds-m-bottom_medium ">
+      <fieldset class="slds-form-element slds-form-element_compound">
+          <div class="slds-form-element__control">
+              <div class="slds-form-element__row">
+                  <div class="slds-size_1-of-3">
+                    <lightning-input onblur={handleChange} name="CrisisResponseFirmSecurityEvacKRE" value={recordApi.CrisisResponseFirmSecurityEvacKRE} readonly={isReadOnly} label="Crisis Response Firm (Security Evac and KRE)" type="text"></lightning-input>
+                        
+                      <!-- <div class="slds-form-element ">
+                           <label class="slds-form-element__label slds-text-color_default">{recordApi.CrisisResponseFirmSecurityEvacKRESuffix}</label>
+                      </div> -->
+                  </div>
+              </div>
+          </div>
+      </fieldset>
+  </div>
+
+   
+  </div>
+  
+  <div class="pageBorder"></div>
+    <div class="slds-grid slds-wrap ">
+        <div class="slds-col slds-size_12-of-12">
+            <c-add-form get-current-lob = {currentLOB} all-coverages={recordTypeData} current-coverage-id={currentCoverageID} is-read-only={isReadOnly} onchangedataupdate={EAChangeData}></c-add-form>
+        </div>
+    </div>
+</div>
+</template>

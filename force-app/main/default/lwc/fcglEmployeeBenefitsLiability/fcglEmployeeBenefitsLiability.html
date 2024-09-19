@@ -1,0 +1,203 @@
+<template>
+
+    <div class="slds-m-left_small ">
+    <c-fc-exposurebasis   is-read-only={isReadOnly} columns={exposurecolumn} coverage={recordApi} onchangedataupdate={handleExposure}></c-fc-exposurebasis>
+   
+    <div class="pageBorder"></div>
+    
+    <label  class="headerTextProperties">COVERAGES</label>
+   
+        <div class=" slds-m-bottom_medium slds-m-top_medium">
+            <fieldset class="slds-form-element slds-form-element_compound">
+                <div class="slds-form-element__control">
+                    <div class=" slds-form-element__row">
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                                <label class="slds-form-element__label">Master Program Aggregate</label>
+                                <div class="slds-form-element__control">
+                                    <input name="MasterProgramAggregate" onblur={handleChange} readonly={isReadOnly} type="text" id="input-001" value={recordApi.MasterProgramAggregate} class="slds-input" />
+                                    <label class="slds-form-element__label slds-text-color_default">{recordApi.MasterProgramAggregateSuffix}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label">General Aggregate</label>
+                                <div class="slds-form-element__control">
+                                    <input name="GeneralAggregate" value={recordApi.GeneralAggregate} onblur={handleChange} readonly={isReadOnly} type="text" id="input-002" class="slds-input" />
+                                    <label class="slds-form-element__label slds-text-color_default">{recordApi.GeneralAggregateSuffix}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label">General Liability</label>
+                                <div class="slds-form-element__control">
+                                    <input name="GeneralLiability" value={recordApi.GeneralLiability} onblur={handleChange} readonly={isReadOnly} type="text" id="input-003"  class="slds-input" />
+                                    <label class="slds-form-element__label slds-text-color_default">{recordApi.SuffixToGLAmount}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class=" slds-m-bottom_medium">
+            <fieldset class="slds-form-element slds-form-element_compound">
+                <div class="slds-form-element__control">
+                    <div class=" slds-form-element__row">
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                                <label class="slds-form-element__label">Products-Completed Operations</label>
+                                <div class="slds-form-element__control">
+                                    <input name="ProductsCompletedOperations" value={recordApi.ProductsCompletedOperations} onblur={handleChange} readonly={isReadOnly} type="text" id="input-004" class="slds-input" />
+                                    <label class="slds-form-element__label slds-text-color_default">{recordApi.ProductsCompletedOperationsSuffix}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label">Personal and Advertising Injury</label>
+                                <div class="slds-form-element__control">
+                                    <input name="PersonalandAdvertisingInjury" value={recordApi.PersonalandAdvertisingInjury} onblur={handleChange} readonly={isReadOnly} type="text" id="input-005" class="slds-input" />
+                                    <label class="slds-form-element__label slds-text-color_default">{recordApi.PersonalandAdvertisingInjurySuffix}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label">Damage to Premises Rented to You</label>
+                                <div class="slds-form-element__control">
+                                    <input name="DamagetoPremisesRentedtoYou" value={recordApi.DamagetoPremisesRentedtoYou} onblur={handleChange} readonly={isReadOnly} type="text" id="input-006" class="slds-input" />
+                                    <label class="slds-form-element__label slds-text-color_default">{recordApi.DamagetoPremisesRentedtoYouSuffix}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="slds-m-bottom_medium">
+            <fieldset class="slds-form-element slds-form-element_compound">
+                <div class="slds-form-element__control">
+                    <div class="slds-form-element__row">
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label">Medical Payments</label>
+                                <div class="slds-form-element__control">
+                                    <input name="MedicalPayments" value={recordApi.MedicalPayments} onblur={handleChange} readonly={isReadOnly} type="text" id="input-007"  class="slds-input" />
+                                    <label class="slds-form-element__label slds-text-color_default">{recordApi.MedicalPaymentsSuffix}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- add for N2GFCB496 -->
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label">Trigger:</label>
+                                <div class="slds-form-element__control">
+                                    <input name="Trigger" value={recordApi.Trigger} onblur={handleChange} readonly={isReadOnly} type="text" id="input-008" class="slds-input" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    
+   
+    <div class="pageBorder"></div>
+
+    <label class="headerTextProperties ">ENDORSEMENT COVERAGES</label>
+    
+        <div class="first slds-text-title_caps slds-m-bottom_medium slds-m-top_medium  slds-text-color_default" style="font-size: 12px; line-height: 18px;">EMPLOYEE BENEFITS LIABILITY(CLAIMS MADE)</div>
+
+        <!-- remove below code for N2GFCB496 -->
+        <!-- <div class="slds-m-bottom_medium">
+            <fieldset class="slds-form-element slds-form-element_compound">
+                <div class="slds-form-element__control">
+                    <div class="slds-form-element__row">
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label">Trigger:</label>
+                                <div class="slds-form-element__control">
+                                    <input name="Trigger" value={recordApi.Trigger} onblur={handleChange} readonly={isReadOnly} type="text" id="input-008" class="slds-input" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                       
+                </div>
+            </fieldset>
+        </div> -->
+        <div class=" slds-m-bottom_medium">
+            <fieldset class="slds-form-element slds-form-element_compound">
+                <div class="slds-form-element__control">
+                    <div class=" slds-form-element__row">
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                                <label class="slds-form-element__label">Each Claim Each Employee</label>
+                                <div class="slds-form-element__control">
+                                    <input name="EachClaimEachEmployee" value={recordApi.EachClaimEachEmployee} onblur={handleChange} readonly={isReadOnly} type="text" id="input-009" class="slds-input" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label">All Claims All Employee</label>
+                                <div class="slds-form-element__control">
+                                    <input name="AllClaimsAllEmployee" value={recordApi.AllClaimsAllEmployee} onblur={handleChange} readonly={isReadOnly} type="text" id="input-010" class="slds-input" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label">Deductible: (Each Claim Each Employee)</label>
+                                <div class="slds-form-element__control">
+                                    <input name="Deductibles" value={recordApi.Deductibles} onblur={handleChange} readonly={isReadOnly} type="text" id="input-011" class="slds-input" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="first slds-text-title_caps slds-m-bottom_medium slds-text-color_default" style="font-size: 12px; line-height: 18px;">RETROACTIVE DATE</div>
+
+        <div class="slds-m-bottom_medium">
+            <div class="slds-size_1-of-3">
+                <lightning-input type="date" label="Date" name="RetroactiveDate" value={recordApi.RetroactiveDate} onblur={handleChange} readonly={isReadOnly}  id="input-012" date-style="short" ></lightning-input>
+            </div>
+            <!-- <fieldset class="slds-form-element slds-form-element_compound"> -->
+                <!-- <div class="slds-form-element__control"> -->
+                    <!-- <div class="slds-form-element__row"> -->
+                        <!-- <div class="slds-size_1-of-3"> -->
+                            <!-- <div class="slds-form-element"> -->
+                                <!-- <label class="slds-form-element__label">Date</label> -->
+                                <!-- <div class="slds-form-element__control"> -->
+                                    <!-- <input name="RetroactiveDate" value={recordApi.RetroactiveDate} onblur={handleChange} readonly={isReadOnly} type="date" id="input-012"  class="slds-input" /> -->
+                                    <!-- <p><lightning-formatted-date-time value={recordApi.RetroactiveDate} onblur={handleChange} readonly={isReadOnly}></lightning-formatted-date-time></p> -->
+                                <!-- </div> -->
+                            <!-- </div> -->
+                        <!-- </div> -->
+                    <!-- </div> -->
+                       
+                <!-- </div> -->
+            <!-- </fieldset> -->
+        </div>
+    
+
+   
+    <div class="pageBorder"></div>
+
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_12-of-12">
+                <c-add-form get-current-lob ={currentLOB} all-coverages={recordTypeData} current-coverage-id={currentCoverageID} is-read-only={isReadOnly} onchangedataupdate={GLChangeData}></c-add-form>
+            </div>
+        </div>
+    </div>
+</template>

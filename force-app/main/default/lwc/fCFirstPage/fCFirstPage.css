@@ -1,0 +1,116 @@
+.thClrShdBlue {
+
+    /* position: absolute; */
+    /* width: 93px; */
+    height: 18px;
+    /* left: 22px; */
+    /* top: 141px; */
+
+    /* font-family: 'Roboto'; */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    /* identical to box height, or 138% */
+
+
+    color: #005CA7;
+
+}
+
+.backgroundInverse {
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    height: 90px;
+}
+
+.pop {
+    width: 15px;
+    margin-left: 40%;
+    margin-bottom: 10px;
+    position: fixed;
+
+}
+
+.premiumCalculation {
+    /* position: absolute; */
+    /* width: 207.37px; */
+    height: 34.28px;
+    left: 327.89px;
+    top: 24.71px;
+
+    /* font-family: 'Roboto'; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+    /* or 100% */
+
+    text-align: center;
+
+    color: #005CA7;
+}
+
+.pricing {
+    /* position: absolute; */
+    width: 51px;
+    height: 20px;
+    left: 20px;
+
+    /* font-family: 'Roboto'; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #005CA7;
+}
+
+.progressBar {
+    /* position: absolute; */
+    width: 70%;
+    height: 32px;
+    margin-left: auto;
+    margin-right: auto
+        /* top: 407px; */
+}
+
+/* .inputStyle{
+    width: 343px;
+    height: 52px;
+} */
+.pageBorder {
+    width: 100%;
+    height: 0px;
+    left: 10px;
+    top: 62.42px;
+    margin-top: 12px;
+    border-bottom: 1px solid #C0C0C0;
+}
+
+.slds-path__nav .slds-is-complete {
+    background: rgb(1, 68, 134) !important;
+}
+
+.Custom_modal_style {
+    max-width: 90rem !important;
+    width: 80% !important;
+}
+.td {
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 767px) {
+    .slds-col {
+        width: 100%;
+    }
+    .slds-grid {
+        flex-wrap: wrap;
+    }
+    .slds-wrap {
+        width: 100%;
+    }
+    .slds-p-around_x-small {
+        padding: 0.5rem;
+    }
+}

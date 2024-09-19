@@ -1,0 +1,246 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 08-04-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  <!-- <lightning-card>
+    <div class="heading" style="color:rgb(0, 92, 167); font-size:large; text-align:center">
+      <h1><strong>Coverage and Forms</strong> </h1>
+    </div>
+
+  </lightning-card> 
+
+  <lightning-card>
+    <table class="slds-m-left_small">
+        <tr>
+            <th class="thClrShdBlue">Account Name</th>
+            <th style="color:green;"><span style="margin-left:50%">Effective Date</span></th>
+            <th style="color:red;">Expiry Date</th>
+        </tr>
+        <tr>
+            <td>{recordApi.AccountName}</td>
+            <td><span style="margin-left:50%">{recordApi.EffectiveDate}</span></td>
+            <td>{recordApi.ExpiryDate}</td>
+        </tr>
+    </table><br />
+  
+    <table class="slds-m-left_small">
+        <tr>
+            <th class="thClrShdBlue">Actual Premium </th>
+            <th class="thClrShdBlue">Exposure Base</th>
+            <th class="thClrShdBlue">GL Occurence Limit</th>
+            <th class="thClrShdBlue">GL Deductible</th>
+        </tr>
+   
+        <tr>
+            <td>{ActualPremium}</td>
+            <td>{recordApi.ExposureBase}</td>
+            <td>{GLOccurenceLimit}</td>
+            <td>{GLDeductible}</td>
+             <td>{recordApi.CommissiontoEnterinGeRRater}</td> 
+        </tr>
+    </table>
+  </lightning-card>
+   -->
+
+   <lightning-card>
+    <div class="slds-m-left_small">
+        <table >
+            <tr>
+                <th colspan="2" class="thClrShdBlue">Account Name</th>
+                <th class="thClrShdBlue" style="color:green; text-align:right"><span>Effective Date</span></th>
+                <th class="thClrShdBlue" style="color:red; text-align:right ">Expiry Date</th>
+            </tr>
+            <tr>
+                <td colspan="2">{recordApi.AccountName}</td>
+                <td style="text-align:right"><span >{recordApi.EffectiveDate}</span></td>
+                <td  style="text-align:right">{recordApi.ExpiryDate}</td>
+            </tr>
+            <tr >
+                <td colspan="100"><div style="border-bottom: 1px solid rgba(192, 192, 192, 0.41); width: 100%; margin-bottom: 10px;"></div></td>
+            </tr>
+            <tr>
+                <th class="thClrShdBlue">Actual Premium </th>
+                <th class="thClrShdBlue">Exposure Base</th>
+                <th class="thClrShdBlue"  style="text-align:right">GL Occurence Limit</th>
+                <th class="thClrShdBlue"  style="text-align:right">GL Deductible</th>
+            </tr>
+    
+            <tr>
+                <td>{ActualPremium}</td>
+                <td>{recordApi.ExposureBase}</td>
+                <td  style="text-align:right">{GLOccurenceLimit}</td>
+                <td  style="text-align:right">{GLDeductible}</td>
+                <!-- <td>{recordApi.CommissiontoEnterinGeRRater}</td> -->
+            </tr>
+        </table> 
+    </div>
+    <div class="pageBorder"></div>
+</lightning-card>
+  
+  <!-- <lightning-card>
+    <table class="slds-m-left_small">
+        <tr>
+            <th class="thClrShdBlue">Account Name</th>
+            <th style="color:green;">Effective Date</th>
+            <th style="color:red;">Expiry Date</th>
+        </tr>
+        <tr>
+            <td>{recordApi.AccountName}</td>
+            <td>{recordApi.EffectiveDate}</td>
+            <td>{recordApi.ExpiryDate}</td>
+        </tr>
+    </table> <br />
+    
+    <table class="slds-m-left_small">
+        <tr>
+            <th class = "thClrShdBlue">Actual Premium </th>
+            <th class = "thClrShdBlue">Total Exposure Amount</th>
+            <th class = "thClrShdBlue">GL Occurence Limit</th>
+            <th class = "thClrShdBlue">GL Deductible</th>
+            <th class = "thClrShdBlue">Commission to Enter in GeR Rater</th>
+        </tr>
+        <tr>
+            <td>{recordApi.ActualPremium}</td>
+            <td>{recordApi.TotalExposureAmount}</td>
+            <td>{recordApi.GLOccurenceLimit}</td>
+            <td>{recordApi.GLDeductible}</td>
+            <td>{recordApi.CommissiontoEnterinGeRRater}</td>
+
+        </tr>
+    </table>
+</lightning-card> -->
+  <lightning-card>
+      <div class="slds-grid slds-wrap">
+          <div class="slds-col slds-size_12-of-12 slds-m-bottom_small">
+              <div class="topBtn" align="right">
+                  <lightning-button variant="brand" label="Expand all" class="slds-m-right_small" onclick={expnd}>
+                  </lightning-button>
+                  <lightning-button variant="brand" label="Collapse all" onclick={collapse} ></lightning-button>
+              </div>
+          </div> 
+      </div>
+
+      <div class="dropDownCls">
+     
+        <div class="accordian" data-id="divblock7" onclick={commonForm_handleClick}>
+         
+            <div class="slds-m-left_small dropdownHeading">Common Policy Forms</div>  
+           <div class="slds-float_right slds-p-around_none slds-m-right_small" >
+             <lightning-icon  icon-name={icCommonForms}  size='xx-small' ></lightning-icon>
+           </div>
+     
+       </div>
+       <div if:true={showCommonForms}>
+            <div class="slds-m-left_small slds-m-bottom_small slds-m-top_small">
+                <c-add-form is-read-only={isReadOnly} get-current-lob="Common" common-forms={recordApi.commonForms}
+                onchangedataupdate={ChangeFormData}></c-add-form>
+            </div>
+       </div>
+
+        <template if:true={coverageFCGLEmpBenifit}>
+            <div class="accordian" data-id="divblock6" onclick={FCGLEmpBenifit_handleClick}>
+         
+                <div class="slds-m-left_small dropdownHeading">Foreign Commercial General Liability And Employee Benefits Liability</div>  
+               <div class="slds-float_right slds-p-around_none slds-m-right_small" >
+                 <lightning-icon  icon-name={icFCGLEmpBenifit}  size='xx-small' ></lightning-icon>
+               </div>
+         
+           </div>
+           <div if:true={showFCGLEmpBenifit}>
+               <c-fcgl-employee-benefits-liability record-type-data ={recordApi.coverages} excel-response={excelResponse} onchangedataupdate={onGLChange}></c-fcgl-employee-benefits-liability>
+           </div>
+        </template>
+        <template if:true={coverageFCAutoLib}>
+            <div class="accordian" data-id="divblock5" onclick={FCAutoLib_handleClick}>
+         
+                <div class="slds-m-left_small dropdownHeading">Foreign Auto Liability Difference In Conditions/Excess Liability</div>  
+               <div class="slds-float_right slds-p-around_none slds-m-right_small" >
+                 <lightning-icon  icon-name={icFCAutoLib}  size='xx-small' ></lightning-icon>
+               </div>
+         
+           </div>
+           <div if:true={showFCAutoLib}>
+               <c-fc-au-liability-difference-in-conditions-ex-liability record-type-data ={recordApi.coverages} excel-response={excelResponse} onchangedataupdate={onAUTOChange}></c-fc-au-liability-difference-in-conditions-ex-liability>
+           </div>
+        </template>
+  
+<template if:true={coverageDataWrkCom}>
+    <div class="accordian" data-id="divblock" onclick={handleClick1}>
+     
+        <div class="slds-m-left_small dropdownHeading">Foreign Voluntary Workers Compensation And Employers Liability</div>  
+       <div class="slds-float_right slds-p-around_none slds-m-right_small" >
+         <lightning-icon  icon-name={icnm}  size='xx-small' ></lightning-icon>
+       </div>
+ 
+   </div>
+   <div if:true={show}>
+       <c-page16-child1 record-type-data ={recordApi.coverages} excel-response={excelResponse} onchangedataupdate={onFVWCChange}></c-page16-child1>
+   </div>
+</template>
+ 
+<template if:true={coverageDataEmAss}>
+    <div class="accordian" data-id="divblock2" onclick={handleClick2}>
+     
+        <div class="slds-m-left_small dropdownHeading">Emergency Assistance</div>  
+       <div class="slds-float_right slds-p-around_none slds-m-right_small" >
+       <lightning-icon  icon-name={icNmEmAs}  size='xx-small' ></lightning-icon>
+       </div>
+   </div>
+   <div if:true={showEmAs}>
+        <c-emergecy-ass-child-pg record-type-data ={recordApi.coverages} excel-response={excelResponse} onchangedataupdate={onEAChange}></c-emergecy-ass-child-pg>
+    </div>
+</template>
+
+
+ 
+
+<template if:true={coverageBTA}>
+    <div class="accordian" data-id="divblock4" onclick={handleClick4}>
+     
+        <div class="slds-m-left_small dropdownHeading"> Travel Accident And Excess Out Of Country Medical Expense</div>  
+       <div class="slds-float_right slds-p-around_none slds-m-right_small" >
+       <lightning-icon  icon-name={icNmLclAdmtPoly}  size='xx-small' ></lightning-icon>
+       </div>
+   </div>
+   <div if:true={showLclAdmtPoly}>
+    <!-- <c-local-ad-pol></c-local-ad-pol> -->
+    <c-travel-accident-and-exc-out-of-country-med-exp record-type-data ={recordApi.coverages} excel-response={excelResponse} onchangedataupdate={onBTAChange}></c-travel-accident-and-exc-out-of-country-med-exp>
+  </div>
+</template>
+<template if:true={coverageDataTrpAss}>
+    <div class="accordian" data-id="divblock3" onclick={handleClick3}>
+     
+        <div class="slds-m-left_small dropdownHeading">Trip Assistance</div>  
+        <div class="slds-float_right slds-p-around_none slds-m-right_small" >
+       <lightning-icon  icon-name={icNmTrpAs}  size='xx-small' ></lightning-icon>
+        </div>
+        </div>
+      <div if:true={showTrpAs}>
+          <c-trip-ass-child-pg record-type-data ={recordApi.coverages} excel-response={excelResponse} onchangedataupdate={onTRIPChange}></c-trip-ass-child-pg>
+      </div>
+</template>
+
+</div>
+
+<div class="slds-grid slds-wrap">
+<div class="slds-col slds-size_12-of-12 slds-m-bottom_small slds-m-top_medium">
+    <div class="topBtn slds-float_right">
+        <lightning-button  variant="Neutral" label="Previous" class="slds-m-right_small" icon-name="utility:chevronleft" onclick={PreviousPage} icon-position="left"></lightning-button>
+        <lightning-button variant="brand" label="Next" onclick={NextPageHandle} icon-name="utility:chevronright" class="slds-m-right_small" icon-position="right"></lightning-button>
+    </div>
+</div> 
+</div>
+<!-- <div>
+<lightning-button variant="Neutral" title="btn" icon-name="utility:chevronleft" icon-position="left"
+    label="Previous"></lightning-button>
+<lightning-button variant="brand" title="btn" icon-name="utility:chevronright" icon-position="right"
+    label="Next"></lightning-button>
+</div> -->
+
+</lightning-card>
+
+</template>

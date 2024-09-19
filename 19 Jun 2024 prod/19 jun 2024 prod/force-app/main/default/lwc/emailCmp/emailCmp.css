@@ -1,0 +1,12 @@
+.form {
+    background: white;
+}
+
+.popover {
+    left: -145px;
+    bottom: 52px;
+}
+
+.slds-form-element_horizontal.slds-form-element_1-col .slds-form-element__control {
+    padding-left: 25px !important;
+}

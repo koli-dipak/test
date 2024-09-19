@@ -1,0 +1,40 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 08-29-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <div class="slds-form-element">
+            
+        <div class="slds-form-element__control">
+            <button class="slds-button slds-button_icon 
+                    slds-button_icon-small slds-input__button_decrement"
+                    title="Decrement counter">
+                <lightning-icon icon-name="utility:ban" 
+                                alternative-text="" 
+                                size="xx-small" 
+                                title="" 
+                                onclick={setDecrementCounter}>
+                </lightning-icon>
+              <span class="slds-assistive-text">Decrement counter</span>
+            </button>
+            <input type="number" id="default1" placeholder={qtyval} value={qtyval} style="padding:0px"
+              class="slds-input slds-input_counter" disabled onblur={selectedValue}/>
+            <button class="slds-button slds-button_icon 
+                           slds-button_icon-small 
+                           slds-input__button_increment"
+                    title="Increment counter">
+                <lightning-icon icon-name="utility:new" 
+                                alternative-text="" 
+                                size="xx-small" 
+                                title="" 
+                                onclick={setIncrementCounter}>
+                </lightning-icon>
+              <span class="slds-assistive-text">Increment counter</span>
+            </button>
+        </div>
+
+    </div>
+</template>

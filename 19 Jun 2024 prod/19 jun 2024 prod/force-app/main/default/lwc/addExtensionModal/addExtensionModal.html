@@ -1,0 +1,98 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 07-26-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+
+<template>
+    <template if:true={showAddExtoModal}>
+    <!-- <c-f-c-first-page></c-f-c-first-page> -->
+       
+        <section
+          role="dialog"
+          tabindex="-1"
+          aria-labelledby="modal-heading-01"
+          aria-modal="true"
+          aria-describedby="modal-content-id-1"
+          class="slds-modal slds-fade-in-open"
+        >
+          <div class="slds-modal__container">
+            <!-- Header Start -->
+           
+            <header class="slds-modal__header">
+              <h2 class="slds-text-heading_medium slds-hyphenate header-string" style="color: rgb(0, 92, 167); font-weight:600; text-align: left">
+                <span>
+                  Add Extension
+                  <lightning-button-icon
+                   class="slds-float_right slds-button--icon-bare"
+                  title="Close"
+                  icon-name="utility:close"
+                  
+                  onclick={handleDialogClose} 
+                ></lightning-button-icon>
+                </span>
+              </h2>
+             
+            </header>
+            <!-- Header End -->
+            <div
+              class="slds-modal__content slds-p-around_medium"
+              id="modal-content-id-1">
+              <div class="slds-grid slds-wrap slds-p-around_small">
+                <div class="slds-col slds-size_6-of-12">
+                  <span class="slds-m-right_small">
+                    <lightning-combobox class="slds-m-right_small" name="Extension Type" label="Extension Type" value={value1} placeholder="Extension Type" options={Extensions} onchange={handleChange1}>
+                    </lightning-combobox>
+                  </span>
+                </div>
+                <div class="slds-col slds-size_6-of-12">
+                  <span>
+                    <lightning-combobox name="Select Country" label="Select Country" value={value2} placeholder='' options={Country} onchange={handleChange2}>
+                    </lightning-combobox>
+                  </span>
+                </div>
+
+                <div class="slds-col slds-size_6-of-12">
+                    <span>
+                      <lightning-combobox class="slds-m-right_small" name="Occurrence Limit" label="Occurrence Limit" value={value3} placeholder='' options={OccurrenceLmt} onchange={handleChange3}>
+                      </lightning-combobox>
+                    </span>
+                  </div>
+                  <div class="slds-col slds-size_6-of-12">
+                    <span>
+                      <lightning-combobox name="Aggregate Limit" label="Aggregate Limit" value={value4} placeholder='' options={AggregateLmt} onchange={handleChange4}>
+                      </lightning-combobox>
+                    </span>
+                  </div>
+
+                  <div class="slds-col slds-size_6-of-12">
+                    <span>
+                      <lightning-input class="slds-m-right_small" name="Deductible" label="Deductible" formatter="currency" value={recordApi.value5} placeholder='' onchange={handleChange5}>
+                      </lightning-input>
+                    </span>
+                  </div>
+                  <div class="slds-col slds-size_6-of-12">
+                    <span>
+                      <lightning-input name="Premium" label="Premium" formatter="currency" value={recordApi.value6} placeholder=''  onchange={handleChange6}>
+                      </lightning-input>
+                    </span>
+                  </div>
+                </div>
+            <!-- <div if:true={extForm}>
+              <slot>
+                <c-extensions-body-data></c-extensions-body-data>
+              </slot>
+            </div> -->
+              
+            </div>
+            <div class="slds-modal__footer">
+              <lightning-button variant="neutral" label="Close" onclick={MdlClose}></lightning-button>
+              <lightning-button variant="brand" class="slds-m-left_small" label={FooterBtnTitle} onclick={addFormInCov}></lightning-button>
+            </div>
+          </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+      </template>
+    </template>

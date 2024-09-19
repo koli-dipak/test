@@ -1,0 +1,83 @@
+<!-- <template>
+    <lightning-card title="Location Records ">
+        <lightning-input type="search" onchange={searchHandler} label="Search Location"
+            value={searchKey}></lightning-input>
+
+        <div>
+            <lightning-datatable key-field="Id" data={location} columns={columns}
+                hide-checkbox-column></lightning-datatable>
+        </div>
+
+        </br>
+        <template if:true={selectedAccount}>
+            <div>
+                <p>Selected Location: {selectedAccount.Name}</p>
+            </div>
+        </template>
+        <div>
+            <lightning-button label="Add" variant="brand" onclick={showModalBox}></lightning-button>
+        </div>
+    </lightning-card>
+</template> -->
+
+<!-- <template>
+    <lightning-card title="Location Records">
+        <lightning-input type="search" onchange={handleSearch} label="Search Location" value={searchKey}></lightning-input>
+        
+        <template if:false={isLoading}>
+            <template if:true={locationOptions.length}>
+                <lightning-dual-listbox label="Select Locations" source-label="Available Locations"
+                    selected-label="Selected Locations" options={locationOptions} value={selectedLocationIds}
+                    onchange={handleSelection}></lightning-dual-listbox>
+            </template>
+            <template if:false={locationOptions.length}>
+                <p>No locations found.</p>
+            </template>
+        </template>
+        <template if:true={isLoading}>
+            <p>Loading locations...</p>
+        </template>
+        <div>
+            <lightning-datatable key-field="Id" data={selectedLocations} columns={columns} hide-checkbox-column></lightning-datatable>
+        </div>
+    </lightning-card>
+</template> -->
+
+<!-- <template>
+    <lightning-card title="Location Records"> -->
+        <!-- <lightning-input type="search" onchange={handleSearch} label="Search Location" value={searchKey}></lightning-input> -->
+        <!-- <lightning-input type="search" data-source="searchInputField" onclick={toggleResult} -->
+                            <!-- onchange={handleKeyChange} is-loading={isSearchLoading} value={searchKey}
+                            variant="label-hidden" placeholder={placeholder}></lightning-input> -->
+        <!-- <div if:true={showTable}> -->
+            <!-- <lightning-datatable key-field="Id" data={selectedLocations} columns={columns}></lightning-datatable>
+        </div>
+        <div>
+            <lightning-button label="Add" variant="brand" onclick={handleButtonClick}></lightning-button>
+        </div>
+    </lightning-card>
+</template> -->
+<template>
+
+    <!-- <button align="right" class="slds-button slds-button_icon"
+                                        title="Refresh" onclick={handleRefreshDatatable}>
+                                        <lightning-icon icon-name='utility:refresh' alternative-text='refresh' size='xx-small' title='refresh'></lightning-icon>
+
+                                    </button> -->
+   <template if:true={isSpinner}>
+    <div class="spinner" >
+        <lightning-spinner alternative-text="Loading" size="xx-small"></lightning-spinner>
+    </div>
+   </template>
+    <template if:true={junctionData}>
+        <lightning-datatable
+        key-field="Id"
+        data={junctionData}
+        columns={columns}
+        hide-checkbox-column=false 
+        onrowaction={handleRowAction}>
+        <!-- onrowselection={handleRowSelection} -->
+    </lightning-datatable>
+    </template>
+    
+</template>

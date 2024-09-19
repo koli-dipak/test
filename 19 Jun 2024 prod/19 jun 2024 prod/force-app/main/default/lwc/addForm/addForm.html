@@ -1,0 +1,111 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 08-29-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  
+    <template if:false={isReadOnly}>
+    <c-modal-popup coverage-id={currentCoverageId} onselectedformdataadd={hanldeFormDataChange} get-current-lob ={getCurrentLob}></c-modal-popup>
+    <div class="slds-grid slds-wrap slds-m-bottom_small">
+      <div class="slds-col slds-size_8-of-12 headerTextProperties slds-m-bottom_medium">
+        <template if:true={isCommon}>
+          COMMON POLICY FORMS & ENDORSEMENTS
+        </template> 
+        <template if:false={isCommon}>
+          POLICY FORMS & ENDORSEMENTS
+        </template>
+        
+      </div>
+      <div class="slds-col slds-size_4-of-12">
+        <div align="right">
+        <lightning-button variant="brand"  title={title} icon-name="utility:add" icon-position="left" label="Add Forms"
+          onclick={handleShowModal} ></lightning-button>
+        </div>
+      </div>
+    </div>  
+       <template for:each={selectedFormData} for:item="Data" for:index="FromName" >
+      <div class="slds-grid slds-wrap slds-m-bottom_small" key={Data.FromName}>
+        <div class="slds-col slds-large-size_7-of-12 slds-medium-size_5-of-12 slds-size_12-of-12">
+          <span>{Data.FromName}</span>
+        </div>
+        <div class="slds-col slds-large-size_3-of-12 slds-medium-size_5-of-12 slds-size_12-of-12">
+          <span data-id={Data.DocumentLink}
+          onclick={previewHandler} class="filePreview">{Data.FromNo}</span>
+        </div>
+        <div class="slds-col slds-large-size_2-of-12 slds-medium-size_2-of-12 slds-size_12-of-12">
+          <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_6-of-12 " align="right">
+              <lightning-button-icon icon-name="utility:edit"  alternative-text="Edit" title="Editable" onclick={EditClick}></lightning-button-icon>
+            </div>
+           
+            <div class="slds-col slds-size_6-of-12" align="right" if:true={dlt}>
+              <template if:true={Data.Mandatory}>
+                <lightning-button-icon icon-name="utility:delete" disabled="" alternative-text="Delete" title="Deleted" data-dtlid={Data.FromId}></lightning-button-icon>
+              </template>
+              <template if:false={Data.Mandatory}>
+                <lightning-button-icon icon-name="utility:delete"  alternative-text="Delete" title="Deleted" data-dtlid={Data.FromId} onclick={DltClick}></lightning-button-icon>
+              </template>
+            </div>
+          </div>
+        </div>
+      </div>
+      </template>
+     
+
+      <!-- <template for:each={FromNameAndNo} for:item="Data" for:index="FromName">
+      <div class="slds-grid slds-wrap" key={Data.FromName}>
+      <div class="slds-col slds-size_9-of-12 slds-m-top_medium">
+      <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_12-of-12">
+          <span> {Data.FromName}</span>
+        </div>
+      </div>
+      </div>
+
+      <div class="slds-col slds-size_3-of-12 slds-m-top_medium">
+        <div class="slds-grid slds-wrap">
+          <div class="slds-col slds-size_8-of-12">
+            {Data.FromNo}
+          </div>
+
+          <div class="slds-col slds-size_1-of-12" if:true={dlt}>
+            <lightning-button-icon icon-name="utility:edit"  alternative-text="Edit" title="Editable" onclick={EditClick}></lightning-button-icon>
+          </div>
+
+          <div class="slds-col slds-size_2-of-12 slds-m-left_small" if:true={dlt}>
+            <lightning-button-icon icon-name="utility:delete"  alternative-text="Delete" title="Deletable" onclick={DltClick}></lightning-button-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    </template> -->
+    <!-- <lightning-button variant="brand" class="slds-float_right" title="addFrm" icon-name="utility:add" icon-position="left" label="show data"
+          onclick={showdata}></lightning-button> -->
+      </template>
+
+      <template if:true={isReadOnly}>
+        <div class="slds-col slds-size_8-of-12 headerTextProperties slds-m-bottom_medium">
+          <template if:true={isCommon}>
+            COMMON POLICY FORMS & ENDORSEMENTS
+          </template> 
+          <template if:false={isCommon}>
+            POLICY FORMS & ENDORSEMENTS
+          </template>
+        </div>
+      
+        <template for:each={selectedFormData} for:item="Data" for:index="FromName" >
+          <div class="slds-grid slds-wrap slds-m-bottom_small" key={Data.FromName}>
+            <div class="slds-col slds-large-size_8-of-12 slds-medium-size_5-of-12 slds-size_12-of-12">
+              <span>{Data.FromName}</span>
+            </div>
+            <div class="slds-col slds-large-size_4-of-12 slds-medium-size_5-of-12 slds-size_12-of-12">
+              <span data-id={Data.DocumentLink}
+              onclick={previewHandler} class="filePreview">{Data.FromNo}</span>
+            </div>
+          </div>
+          </template>
+      </template>
+</template>

@@ -1,0 +1,5 @@
+<apex:page standardController="LOB_Management__c" extensions="SendToInstec" action="{!sendToInstecLOB}">
+    <apex:form >
+
+    </apex:form>
+</apex:page>

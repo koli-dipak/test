@@ -1,0 +1,39 @@
+<template>
+    <div class=" slds-m-bottom_small">
+        <!-- <img src={imgsrc} alt="N2G" width="87px" height="30px" /> -->
+        <!-- <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_medium slds-p-vertical_x-small"> -->
+        <!-- <p>Please ensure to include the SOV or an additional documentation required, if you have already included this into the relevant box folder you can skip this step.</p> -->
+        <lightning-file-upload label="Attach File" name="fileUploader" accept={acceptedFormats}
+            class="file-selector-large" file-field-name="Guest_Record_fileupload__c"
+            file-field-value={uniqueRandomNumber} onuploadfinished={handleUploadFinished}
+            multiple></lightning-file-upload>
+
+        <!-- </div> -->
+        <div class="slds-grid slds-wrap slds-large-size_4-of-4 slds-no-space ">
+            <div class="slds-grid slds-wrap slds-large-size_4-of-4 slds-no-space">
+                <template for:each={requestedDocuments} for:item="document" for:index="index">
+                    <div key={document.Id}
+                        class="RequestedDoc slds-col slds-size_1-of-1 slds-medium-size_1-of-4 slds-large-size_1-of-4 slds-p-horizontal_medium slds-p-vertical_x-small">
+                        <div class="slds-file slds-file_card slds-has-title">
+                            <figure>
+                                <span class="slds-file__crop" style="background-color: rgb(1, 74, 153);"> </span>
+                                <figcaption class="slds-file__title slds-file__title_card">
+                                    <div class="slds-media slds-media_small slds-media_center">
+                                        <div class="slds-media__body"> <span
+                                                class="slds-file__text slds-truncate">{document.filename}</span> </div>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                            <div class="slds-file__actions-menu">
+                                <div><lightning-icon icon-name="utility:close" alternative-text="Utility close"
+                                        title="close" size="x-small" onclick={removeFile}
+                                        data-index={index}></lightning-icon></div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+</template>

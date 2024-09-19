@@ -1,0 +1,33 @@
+.tglBtnClrChng{
+    color: rgb(0, 92, 167);
+}
+.drpRghtClrChng2 {
+    color: rgb(97, 97, 97);
+}
+.thClrShdBlue {
+
+    /* position: absolute; */
+    /* width: 93px; */
+    height: 18px;
+    /* left: 22px; */
+    /* top: 141px; */
+
+    /* font-family: 'Roboto'; */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    /* identical to box height, or 138% */
+
+
+    color: #005CA7;
+
+}
+.pageBorder {
+    width: 100%;
+    height: 0px;
+    left: 10px;
+    top: 62.42px;
+    margin-top: 12px;
+    border-bottom: 1px solid #C0C0C0;
+}

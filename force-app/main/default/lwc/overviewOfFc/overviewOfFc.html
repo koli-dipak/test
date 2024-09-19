@@ -1,0 +1,607 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 08-04-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <!-- <lightning-card>
+        <div class="heading thClrShdBlue" style="font-size:large; text-align:center">
+            <h1><strong>Overview of Foreign Casualty</strong> </h1>
+        </div>
+    </lightning-card>
+
+    <lightning-card>
+      <table class="slds-m-left_small">
+          <tr>
+              <th class="thClrShdBlue">Account Name</th>
+              <th style="color:green;"><span style="margin-left:50%">Effective Date</span></th>
+              <th style="color:red;">Expiry Date</th>
+          </tr>
+          <tr>
+              <td>{recordApi.AccountName}</td>
+              <td><span style="margin-left:50%">{recordApi.EffectiveDate}</span></td>
+              <td>{recordApi.ExpiryDate}</td>
+          </tr>
+      </table><br />
+    
+      <table class="slds-m-left_small">
+          <tr>
+              <th class="thClrShdBlue">Actual Premium </th>
+              <th class="thClrShdBlue">Exposure Base</th>
+              <th class="thClrShdBlue">GL Occurence Limit</th>
+              <th class="thClrShdBlue">GL Deductible</th>
+          </tr>
+     
+          <tr>
+            <td>{ActualPremium}</td>
+            <td>{recordApi.ExposureBase}</td>
+            <td>{GLOccurenceLimit}</td>
+            <td>{GLDeductible}</td>
+               <td>{recordApi.CommissiontoEnterinGeRRater}</td>
+          </tr>
+      </table>
+    </lightning-card> -->
+
+    <lightning-card>
+      <!-- <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-large-size_7-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+          <span><div class="thClrShdBlue">Account Name</div></span>
+          <span><div>{recordApi.AccountName}</div></span>
+        </div>
+        <div class="slds-col slds-large-size_2-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+          <span><div class="thClrShdBlue" style="color:green;"><span style="margin-left:10%">Effective Date</span></div></span>
+          <span><div><span style="margin-left:10%">{recordApi.EffectiveDate}</span></div></span>
+        </div>
+        <div class="slds-col slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+          <span></span>
+        </div>
+        <div class="slds-col slds-large-size_2-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+          <span><div class="thClrShdBlue" style="color:red;  position: absolute; right: 0px;">Expiry Date</div></span>
+          <span><div style=" position: absolute; right: 0px;">{recordApi.ExpiryDate}</div></span>
+        </div>
+      </div> -->
+      <div class="slds-m-left_small">
+        <table >
+            <tr>
+                <th colspan="2" class="thClrShdBlue">Account Name</th>
+                <th class="thClrShdBlue" style="color:green; text-align:right"><span>Effective Date</span></th>
+                <th class="thClrShdBlue" style="color:red; text-align:right ">Expiry Date</th>
+            </tr>
+            <tr>
+                <td colspan="2">{recordApi.AccountName}</td>
+                <td style="text-align:right"><span >{recordApi.EffectiveDate}</span></td>
+                <td  style="text-align:right">{recordApi.ExpiryDate}</td>
+            </tr>
+            <tr >
+                <td colspan="100"><div style="border-bottom: 1px solid rgba(192, 192, 192, 0.41); width: 100%; margin-bottom: 10px;"></div></td>
+            </tr>
+            <tr>
+                <th class="thClrShdBlue">Actual Premium </th>
+                <th class="thClrShdBlue">Exposure Base</th>
+                <th class="thClrShdBlue"  style="text-align:right">GL Occurence Limit</th>
+                <th class="thClrShdBlue"  style="text-align:right">GL Deductible</th>
+            </tr>
+    
+            <tr>
+                <td>{ActualPremium}</td>
+                <td>{recordApi.ExposureBase}</td>
+                <td  style="text-align:right">{GLOccurenceLimit}</td>
+                <td  style="text-align:right">{GLDeductible}</td>
+                <!-- <td>{recordApi.CommissiontoEnterinGeRRater}</td> -->
+            </tr>
+        </table> 
+    </div>
+      <div class="pageBorder"></div>
+  </lightning-card>
+
+    <!-- <lightning-card>
+        <table class="slds-m-left_small">
+            <tr>
+                <th class="thClrShdBlue">Account Name</th>
+
+
+
+
+                <th style="color:green;">Effective Date</th>
+                <th style="color:red;">Expiry Date</th>
+            </tr>
+            <tr>
+                <td>{values.AccountName}</td>
+                <td>03/01/2022</td>
+                <td>02/28/2023</td>
+            </tr>
+        </table> <br />
+
+        <table class="slds-m-left_small">
+            <tr>
+                <th class="thClrShdBlue">Actual Premium </th>
+                <th class="thClrShdBlue">Total Exposure Amount</th>
+                <th class="thClrShdBlue">GL Occurence Limit</th>
+                <th class="thClrShdBlue">GL Deductible</th>
+                <th class="thClrShdBlue">Commission to Enter in GeR Rater</th>
+            </tr>
+            <tr>
+                <td>$360,220.00</td>
+                <td>$122,927,4000</td>
+                <td>$2,000,000</td>
+                <td>$1,000,000</td>
+                <td>23.2%</td>
+
+            </tr>
+        </table>
+    </lightning-card> -->
+
+    <lightning-card>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_2-of-3">
+            <span>
+            <div class="heading slds-m-left_small thClrShdBlue" style="font-size:large;">
+                <h1><strong>Selected Coverages</strong> </h1>
+            </div>
+            </span>
+            </div>
+            <div class="slds-col slds-size_1-of-3" align="right">
+            <template if:false={isApplicationSubmited}>
+              <span><lightning-button label="Edit" variant="brand"  onclick={handleEditCovClick}></lightning-button></span>
+            </template>
+            </div>
+        </div>
+        
+        <template for:each={recordApi.cov} for:item="selectedCoverages">
+        
+          <div class="slds-form-element slds-m-left_small customeCheck" key={selectedCoverages.label}>
+            <template if:true={selectedCoverages.show}>
+              <div class="slds-form-element__control">
+                <div class="slds-checkbox">
+                  <input type="checkbox" name="options" value={selectedCoverages.label} disabled="" checked={selectedCoverages.show} class="textInput"/>
+                  <label class="slds-checkbox__label" for="checkbox-unique-id-81">
+                    <span class="slds-checkbox_faux"></span>
+                    <span class="slds-form-element__label">{selectedCoverages.label}</span>
+                  </label>
+                </div>
+              </div>
+            </template>
+            </div>
+        </template>     
+              
+              <!-- <div class="slds-form-element slds-m-left_small">
+                <div class="slds-form-element__control">
+                  <div class="slds-checkbox">
+                    <input type="checkbox" name="options" id="checkbox-unique-id-82" value="checkbox-unique-id-81" disabled="" checked="" class="textInput"/>
+                    <label class="slds-checkbox__label" for="checkbox-unique-id-82">
+                      <span class="slds-checkbox_faux"></span>
+                      <span class="slds-form-element__label">Emergency Assistance</span>
+                    </label>
+                  </div>
+                </div>
+              </div> -->
+
+              <!-- <div class="slds-form-element slds-m-left_small">
+                <div class="slds-form-element__control">
+                  <div class="slds-checkbox">
+                    <input type="checkbox" name="options" id="checkbox-unique-id-83" value="checkbox-unique-id-81" disabled="" checked="" class="textInput"/>
+                    <label class="slds-checkbox__label" for="checkbox-unique-id-83">
+                      <span class="slds-checkbox_faux"></span>
+                      <span class="slds-form-element__label">Trip Assistance</span>
+                    </label>
+                  </div>
+                </div>
+              </div> -->
+    </lightning-card>
+    
+    <lightning-card>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_2-of-3">
+            <span>
+            <div class="heading slds-m-left_small thClrShdBlue" style="font-size:large;">
+                <h1><strong>Premium</strong> </h1>
+            </div>
+            </span>
+            </div>
+            <div class="slds-col slds-size_1-of-3" align="right">
+              <template if:false={isApplicationSubmited}>
+              
+              <span><lightning-button label="Edit" variant="brand"  onclick={handleEditPreClick}></lightning-button></span>
+            </template> 
+          </div>
+        </div>
+
+        <div class="slds-p-around_small">
+        <div class="slds-m-vertical_small">
+            <strong>Master Policy</strong>
+        </div>
+        <div class="slds-grid slds-gutters">
+          <div class="slds-col slds-size_2-of-5">
+        <table>
+            <tr>
+                <td class="thClrShdBlue">Premium</td>
+                <td class="thClrShdBlue"><span style="margin-left: 11%">Commission</span></td>
+                
+                
+            </tr>
+            <tr>
+                <td>{PremiumDetails.MasterPremium}</td>
+                <td><span style="margin-left: 11%">{PremiumDetails.MasterComm}</span></td>
+             
+            </tr>
+        </table>
+        </div>
+        </div>
+
+        <div class="slds-m-vertical_small">
+            <strong>Master Policy Premium Breakdown</strong>
+        </div>
+        <table>
+            <tr>
+                <td class="thClrShdBlue">General Liability</td>
+                <td class="thClrShdBlue">Auto Liability</td>
+                <td class="thClrShdBlue">FVWC/Employer's Liability</td>
+                <td class="thClrShdBlue">Business Travel Accident</td>
+                <!-- <th class="thClrShdBlue">Total</th> -->
+            </tr>
+            <tr>
+                <td>{PremiumDetails.GL}</td>
+                <td>{PremiumDetails.Auto}</td>
+                <td>{PremiumDetails.FVWC}</td>
+                <td>{PremiumDetails.BTA}</td>
+                <!-- <td>{PremiumDetails.Total}</td> -->
+
+            </tr>
+            
+        </table>
+         
+        <div class="slds-m-vertical_small">
+            <strong>Local Policy</strong>
+        </div>
+
+        <div class="slds-grid slds-gutters">
+          <div class="slds-col slds-size_2-of-5">
+        <table>
+            <tr>
+                <td class="thClrShdBlue">Premium</td>
+                <td class="thClrShdBlue"><span style="margin-left: 11%">Commission</span></td>
+            </tr>
+            <tr>
+                <td>{PremiumDetails.LocalPremium}</td>
+                <td><span style="margin-left: 11%">{PremiumDetails.LocalComm}</span></td>
+            </tr>
+        </table>
+        </div>
+        </div>
+
+
+        <div class="slds-m-vertical_small">
+            <strong>Total Program</strong>
+        </div>
+        <table>
+            <tr>
+              <!-- <td class="thClrShdBlue">Premium</td>
+              <td class="thClrShdBlue">Minimum Earned Premium</td>
+              <td class="thClrShdBlue">Premium Audit</td>
+              <td class="thClrShdBlue">Business Travel Accident</td>
+              <th class="thClrShdBlue">Total</th> -->
+              
+                <td class="thClrShdBlue">Premium</td>
+                <td class="thClrShdBlue">Minimum Earned Premium</td>
+                <td class="thClrShdBlue">Premium Audit</td>
+            
+            </tr>
+            <tr>
+                <td>{PremiumDetails.TotalPremium} </td>
+                <td>{PremiumDetails.MinimumEarned}</td>
+                <td>{PremiumDetails.PremiumAudit}</td>
+            </tr>
+        </table>
+        </div>
+    </lightning-card>
+
+    <!-- lightning-card>
+        <div class="slds-grid slds-gutters slds-m-bottom_small">
+            <div class="slds-col slds-size_1-of-3">
+            <span>
+            <div class="heading slds-m-left_small thClrShdBlue" style="font-size:large;">
+                <h1><strong>Coverages Details</strong> </h1>
+            </div>
+            </span>
+            </div>
+            <div class="slds-col slds-size_2-of-3 ">
+                <span><lightning-button label="Expand All" variant="brand" class="slds-float_right slds-m-right_medium"></lightning-button></span>
+                <span><lightning-button label="Collapse All" variant="brand" class="slds-float_right slds-m-right_medium"></lightning-button></span>
+                <span><lightning-button label="Edit" variant="brand" class="slds-float_right slds-m-right_medium"></lightning-button></span>
+            </div>
+        </div>
+
+        <div class="accordian" data-id="divblock" onclick={handleClick1}>
+       
+            <h3 style="color:rgb(0, 92, 167);" data-id="divblock" class="slds-m-left_small">Foreign Voluntary Workers'Compensation And Employers Liablity</h3>  
+           <div class="slds-float_right slds-p-around_none slds-m-right_small" >
+             <lightning-icon  icon-name={icnm}  size='xx-small' ></lightning-icon>
+           </div>
+   
+       </div>
+       <div if:true={show}>
+          <c-fvwc-read-only-child></c-fvwc-read-only-child>
+       </div>
+
+       <div class="accordian" data-id="divblock2" onclick={handleClick2}>
+       
+        <h3 style="color:rgb(0, 92, 167);" data-id="divblock" class="slds-m-left_small">Emergency Assistance </h3>  
+       <div class="slds-float_right slds-p-around_none slds-m-right_small" >
+         <lightning-icon  icon-name={icNmEmAs}  size='xx-small' ></lightning-icon>
+       </div>
+
+   </div>
+   <div if:true={showEmAs}>
+    <c-emergency-asst-read-only-child></c-emergency-asst-read-only-child>
+   </div>
+
+   <div class="accordian" data-id="divblock3" onclick={handleClick3}>
+       
+    <h3 style="color:rgb(0, 92, 167);" data-id="divblock" class="slds-m-left_small"> Trip Assistance </h3>  
+   <div class="slds-float_right slds-p-around_none slds-m-right_small" >
+     <lightning-icon  icon-name={icNmTrpAs}  size='xx-small' ></lightning-icon>
+   </div>
+
+</div>
+<div if:true={showTrpAs}>
+  <c-tripasst-read-only-child></c-tripasst-read-only-child>
+</div>
+
+<div class="slds-grid slds-gutters">
+    <div class="slds-col">
+      <span></span>
+    </div>
+    <div class="slds-col">
+      <span><lightning-button label="Commit" variant="brand" class="slds-p-around_medium slds-align_absolute-center" onclick={handelCommit}></lightning-button></span>
+    </div>
+    <div class="slds-col">
+      <span></span>
+    </div>
+  </div>
+    </lightning-card -->
+    
+    <lightning-card>
+      <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_7-of-12 slds-m-bottom_small">
+            <div style=" font-size: 20px;  color: #005CA7;  height: 18px;  font-style: normal;  line-height: 18px;">Coverage Details</div>
+        </div>
+          <div class="slds-col slds-size_5-of-12 slds-m-bottom_small">
+              <div class="topBtn" align="right">
+                  <lightning-button variant="brand" label="Expand all"  onclick={expnd}>
+                  </lightning-button>
+                  <lightning-button variant="brand" label="Collapse all" onclick={collapse} class="slds-m-left_small"></lightning-button>
+                  <template if:false={isApplicationSubmited}>
+                    <lightning-button variant="brand" label="Edit" onclick={EditClick} class="slds-m-left_small"></lightning-button>
+                  </template>
+              </div>
+          </div> 
+      </div>
+      <div class="accordian" data-id="divblock7" onclick={commonForm_handleClick}>
+         
+          <h3 style="color:rgb(0, 92, 167);" class="slds-m-left_small"> <strong>Common Policy Forms </strong> </h3>  
+           
+          <div class="slds-float_right slds-p-around_none slds-m-right_small" >
+            <lightning-icon  icon-name={icCommonForms}  size='xx-small' ></lightning-icon>
+          </div>
+    
+      </div>
+      <div if:true={showCommonForms}>
+            <div class="slds-m-left_small slds-m-bottom_small slds-m-top_small">
+                <c-add-form is-read-only="true" get-current-lob="Common" common-forms={recordApi.commonForms}
+                onchangedataupdate={ChangeFormData}></c-add-form>
+            </div>
+      </div>
+      <template if:true={coverageFCGLEmpBenifit}>
+        <div class="accordian" data-id="divblock6" onclick={FCGLEmpBenifit_handleClick}>
+     
+            <h3 style="color:rgb(0, 92, 167);" class="slds-m-left_small"> <strong>Foreign Commercial General Liability And Employee Benefits Liability </strong> </h3>  
+           <div class="slds-float_right slds-p-around_none slds-m-right_small" >
+             <lightning-icon  icon-name={icFCGLEmpBenifit}  size='xx-small' ></lightning-icon>
+           </div>
+     
+       </div>
+       <div if:true={showFCGLEmpBenifit}>
+           <c-fcgl-employee-benefits-liability is-read-only="true"  record-type-data ={recordApi.coverages} excel-response={excelResponse} onchangedataupdate={onGLChange}></c-fcgl-employee-benefits-liability>
+       </div>
+    </template>
+         <template if:true={coverageFCAutoLib}>
+            <div class="accordian" data-id="divblock5" onclick={FCAutoLib_handleClick}>
+         
+                <h3 style="color:rgb(0, 92, 167);" class="slds-m-left_small"> <strong>Foreign Auto Liability Difference In Conditions/Excess Liability </strong> </h3>  
+               <div class="slds-float_right slds-p-around_none slds-m-right_small" >
+                 <lightning-icon  icon-name={icFCAutoLib}  size='xx-small' ></lightning-icon>
+               </div>
+         
+           </div>
+           <div if:true={showFCAutoLib}>
+               <c-fc-au-liability-difference-in-conditions-ex-liability is-read-only="true"  record-type-data ={recordApi.coverages} excel-response={excelResponse} onchangedataupdate={onAUTOChange}></c-fc-au-liability-difference-in-conditions-ex-liability>
+           </div>
+        </template>
+
+     
+  
+<template if:true={coverageDataWrkCom}>
+    <div class="accordian" data-id="divblock" onclick={handleClick1}>
+     
+        <h3 style="color:rgb(0, 92, 167);" data-id="divblock" class="slds-m-left_small"> <strong>Foreign Voluntary Workers Compensation And Employers Liability </strong> </h3>  
+       <div class="slds-float_right slds-p-around_none slds-m-right_small" >
+         <lightning-icon  icon-name={icnm}  size='xx-small' ></lightning-icon>
+       </div>
+ 
+   </div>
+   <div if:true={show}>
+       <c-page16-child1 is-read-only="true"  record-type-data ={recordApi.coverages} excel-response={excelResponse} onchangedataupdate={onFVWCChange}></c-page16-child1>
+   </div>
+</template>
+ 
+<template if:true={coverageDataEmAss}>
+    <div class="accordian" data-id="divblock2" onclick={handleClick2}>
+     
+        <h3 style="color:rgb(0, 92, 167);" class="slds-m-left_small"> <strong>Emergency Assistance </strong> </h3>  
+       <div class="slds-float_right slds-p-around_none slds-m-right_small" >
+       <lightning-icon  icon-name={icNmEmAs}  size='xx-small' ></lightning-icon>
+       </div>
+   </div>
+   <div if:true={showEmAs}>
+        <c-emergecy-ass-child-pg is-read-only="true"  record-type-data ={recordApi.coverages} excel-response={excelResponse} onchangedataupdate={onEAChange}></c-emergecy-ass-child-pg>
+    </div>
+</template>
+<template if:true={coverageBTA}>
+  <div class="accordian" data-id="divblock4" onclick={handleClick4}>
+   
+      <h3 style="color:rgb(0, 92, 167);" class="slds-m-left_small"> <strong>Travel Accident And Excess Out Of Country Medical Expense </strong> </h3>  
+     <div class="slds-float_right slds-p-around_none slds-m-right_small" >
+     <lightning-icon  icon-name={icNmLclAdmtPoly}  size='xx-small' ></lightning-icon>
+     </div>
+ </div>
+ <div if:true={showLclAdmtPoly}>
+  <!-- <c-local-ad-pol></c-local-ad-pol> -->
+  <c-travel-accident-and-exc-out-of-country-med-exp is-read-only="true" record-type-data ={recordApi.coverages} excel-response={excelResponse} onchangedataupdate={onBTAChange}></c-travel-accident-and-exc-out-of-country-med-exp>
+</div>
+</template>
+<template if:true={coverageDataTrpAss}>
+    <div class="accordian" data-id="divblock3" onclick={handleClick3}>
+     
+        <h3 style="color:rgb(0, 92, 167);" class="slds-m-left_small"> <strong>Trip Assistance </strong> </h3>  
+        <div class="slds-float_right slds-p-around_none slds-m-right_small" >
+       <lightning-icon  icon-name={icNmTrpAs}  size='xx-small' ></lightning-icon>
+        </div>
+        </div>
+      <div if:true={showTrpAs}>
+          <c-trip-ass-child-pg is-read-only="true" record-type-data ={recordApi.coverages} excel-response={excelResponse} onchangedataupdate={onTRIPChange}></c-trip-ass-child-pg>
+      </div>
+</template>
+ 
+<div class="accordian" data-id="divblock8" onclick={localPolicy_handleClick}>
+         
+  <h3 style="color:rgb(0, 92, 167);" class="slds-m-left_small"> <strong>Local Admitted Policies </strong> </h3>  
+   
+  <div class="slds-float_right slds-p-around_none slds-m-right_small" >
+    <lightning-icon  icon-name={icLocalPolicy}  size='xx-small' ></lightning-icon>
+  </div>
+
+</div>
+
+<div if:true={showLocalPolicy}>
+  <p class="slds-p-around_small slds-m-bottom_medium" style="font-style: normal; font-weight: 400; font-size: 13px; line-height: 20px; text-transform: capitalize; color: #000000;">The following countries will have local admitted policies.<br>
+    Local policy terms and conditions are "good local standards" unless otherwise indicated all local premiums will be
+    invoiced in the country of issuance.</p>
+    <div class="slds-m-left_small slds-m-bottom_small slds-m-top_small">
+      <table
+          class="slds-table slds-table_bordered slds-border_left slds-border_right slds-table_cell-buffer slds-max-medium-table_stacked-horizontal slds-no-row-hover slds-m-top_small">
+          <thead>
+              <tr class="slds-line-height_reset">
+                  <th class="" scope="col">
+                      <!-- <lightning-select class="slds-truncate" value="Country">Country</lightning-select> -->
+                      <div class="slds-truncate" title="country">Country</div>
+                  </th>
+                  <th class="" scope="col">
+                      <div class="slds-truncate" title="Coverage">Coverage</div>
+                  </th>
+                
+                  <th class="" scope="col">
+                      <div class="slds-truncate" title="Limit">Occurrence Limit</div>
+                  </th>
+                  <th class="" scope="col">
+                      <div class="slds-truncate" title="exposure">Aggregate Limit</div>
+                  </th>
+                  <th class="" scope="col">
+                      <div class="slds-truncate" title="Gross Premium">Gross Premium</div>
+                  </th>
+                
+              </tr>
+          </thead>
+          <tbody>
+              <template for:each={recordApi.Data} for:item="Data" for:index="Country">
+                <tr class="slds-hint-parent" key={Data.uniqueKey}>
+                    <th bgcolor="#F4FAFF" data-label="country" scope="row">
+                        <div class="slds-truncate" title={Data.Country} style="color: var(--lwc-brandTextLinkActive,rgb(1, 68, 134));">
+                           {Data.Country}
+                        </div>
+                    </th>
+                    
+                    <td data-label="lob">
+                        <div class="slds-truncate" title={Data.type}>{Data.type}</div>
+                    </td>
+                    
+                    <td data-label="limit">
+                        <div class="slds-truncate" title={Data.Limit}><lightning-formatted-number format-style="currency" currency-code="USD" value={Data.Limit} maximum-fraction-digits="0"></lightning-formatted-number></div>
+                    </td>
+                    <td data-label="Aggregate limit">
+                        <div class="slds-truncate" title={Data.AggregateLimit}><lightning-formatted-number format-style="currency" currency-code="USD" value={Data.AggregateLimit} maximum-fraction-digits="0"></lightning-formatted-number></div>
+                    </td>
+                    <td data-label="Premium">
+                        <div class="slds-truncate" title={Data.displayPrem}><lightning-formatted-number format-style="currency" currency-code="USD" value={Data.displayPrem} maximum-fraction-digits="0"></lightning-formatted-number></div>
+                    </td>
+                </tr>
+
+            
+            </template>
+          
+
+          </tbody>
+      </table>
+    </div>
+    <ul class="slds-list_dotted slds-m-top_large">
+      <li class="slds-m-bottom_medium slds-m-left_small slds-m-top_medium" style="font-style: normal; font-weight: 400; font-size: 13px; line-height: 20px; text-transform: capitalize; color: #000000;">UK requires for the Employers’ Liability Tracing Office information (ELTO) to be completed 10 days prior
+        to inception of the policy.</li>
+    </ul>
+    
+    <div class="slds-p-around_small">
+      <p style="font-style: normal; font-weight: 400; font-size: 10px; line-height: 20px; text-transform: capitalize; color: #000000;">Local policy terms and conditions are "good local standards" unless otherwise indicated. All local premiums will
+        be invoiced in the country of issuance. Central premium collection may be available upon request and will be
+        subject to an additional charge of $100 per country. All local admitted coverage is subject to taxes and fees
+        prescribed by the issuing country. Limits and premiums may be converted to local currencies using the exchange
+        rate published in Oanda.com on the day of binding if all required implementation information has been provided
+        before the inception date. Otherwise, the inception date will apply.</p>
+    </div>
+</div>
+
+
+ 
+
+
+<!-- <div>
+<lightning-button variant="Neutral" title="btn" icon-name="utility:chevronleft" icon-position="left"
+    label="Previous"></lightning-button>
+<lightning-button variant="brand" title="btn" icon-name="utility:chevronright" icon-position="right"
+    label="Next"></lightning-button>
+</div> -->
+<div class="slds-grid slds-gutters">
+  <div class="slds-col slds-size_4-of-12">
+    <!-- <span><lightning-button label="Save for Later" variant="brand" class="slds-p-around_medium slds-align_absolute-center"></lightning-button></span> -->
+    <!-- template if:false={isApplicationSubmited}>
+        <span><button class="slds-button slds-button_brand slds-m-top_large" type="button" style="width: 100%;">Save for Later</button></span>
+    </template -->
+  </div>
+  <div class="slds-col slds-size_4-of-12">
+    <!-- <span style="width: 100%;"><lightning-button label="Clone" variant="brand" class="slds-p-around_medium slds-align_absolute-center"></lightning-button></span> -->
+    <!-- span><button class="slds-button slds-button_brand slds-m-top_large" type="button" style="width: 100%;" onclick={showModal}>Clone</button></span -->
+  </div>
+  <div class="slds-col slds-size_4-of-12">
+    <!-- <span style="width: 100%;"><lightning-button label="Commit" variant="brand" class="slds-p-around_medium slds-align_absolute-center" onclick={handelCommit}></lightning-button></span> -->
+    <template if:false={isApplicationSubmited}>
+      <span><button class="slds-button slds-button_brand slds-m-top_large" type="button" style="width: 100%;" onclick={handelCommit}>Commit</button></span>
+    </template>
+  </div>
+ 
+</div>
+
+<template if:true={openModal}>  
+  <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-65" class="slds-modal slds-fade-in-open">
+ 
+    <div class="slds-modal__container" style="width: 80%;  max-width: 70rem;">  
+     
+      <!------Body Section-->  
+      <div class="slds-modal__content slds-var-p-around_medium">
+          <c-clone-selection record-id={applicationId} record-api-data={recordApi} onmodalclose={handleEvent}></c-clone-selection>
+      </div>
+
+    </div> 
+  </section>
+  <div class="slds-backdrop slds-backdrop_open" role="presentation"></div> 
+</template>  
+</lightning-card>  
+  </template>

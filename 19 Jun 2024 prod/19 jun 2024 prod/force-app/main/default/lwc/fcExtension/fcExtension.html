@@ -1,0 +1,446 @@
+<template>
+    <!-- Select Option Section -->
+
+    <template if:true={openSelecteOptionMenu}>  
+        
+            
+            <!------Body Section-->  
+            <div class=" slds-var-p-around_medium">
+              <div style="padding-bottom: 20px;"><p class="slds-text-heading_small">Update multiple local policies at once</p></div>
+                <p>Select the type of update you would like to do, you can add an extension to multiple local policies at once or update the minimum and actual premium, across multiple policies.</p>
+                
+                  <lightning-radio-group name="radioGroup"
+                                        label="Which action you want to perform?"
+                                        options={options}
+                                        value={value}
+                                        type="radio"
+                                        onchange={changeHandler}></lightning-radio-group>
+              
+            </div>
+           
+              <div align="right"><lightning-button label="Next" variant="brand" onclick={handleNextClick}></lightning-button></div>
+         
+     
+      </template>  
+
+
+
+    <!-- Add Extension Section -->
+    <template if:true={AddExt}>
+       
+
+    <div class="slds-m-around_x-small">
+        <table
+            class="slds-table slds-table_bordered slds-border_left slds-border_right slds-table_cell-buffer slds-max-medium-table_stacked-horizontal slds-no-row-hover">
+            <thead >
+                <tr class="slds-line-height_reset" bgcolor="#F4FAFF">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="country">Select</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="country">Country</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="LOB">LOB</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Limit">Occurrence Limit</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="exposure">Exposure</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="local Policy Required?">Local Policy Required?</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Premium">Min Premium</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Rate">Rate</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={country} for:item="Data" for:index="Country">
+                    <template if:false={Data.LobDicDil}>
+                <tr class="slds-hint-parent" key={Data.uniqueKey}>
+                    <td>
+                        <lightning-input type="checkbox" data-index={Country} data-country={Data.Country}  onchange={handleSelectCountry}> </lightning-input>
+                    </td>
+                    <td data-label="country" scope="row">
+                        <div title={Data.Country}>
+                            {Data.Country}
+                        </div>
+                    </td>
+                    
+                    <td data-label="lob">
+                        <div class="slds-truncate" title={Data.type}>{Data.type}</div>
+                    </td>
+                    
+                    <td data-label="limit">
+                        <div class="slds-truncate" title={Data.Limit}><lightning-formatted-number format-style="currency" currency-code="USD" maximum-fraction-digits="0" value={Data.Limit}></lightning-formatted-number></div>
+                    </td>
+                    <td data-label="exposure">
+                        <div class="slds-truncate" title={Data.Exposure}><lightning-formatted-number format-style="currency" currency-code="USD" maximum-fraction-digits="0" value={Data.Exposure}></lightning-formatted-number></div>
+                    </td>
+                    <td data-label="actual GL Local Premium">
+                        <div class="slds-truncate" title={Data.LoclPolReq}>{Data.LoclPolReq}</div>
+                    </td>
+                    <td data-label="actual Total Local Premium">
+                        <div class="slds-truncate" title={Data.MinimumPremiumRequired}><lightning-formatted-number format-style="currency" currency-code="USD" maximum-fraction-digits="0"	 value={Data.displayPrem}></lightning-formatted-number></div>
+                    </td>
+                    <td data-label="local Policy Limit">
+                        <div class="slds-truncate" title={Data.Rate}><lightning-formatted-number format-style="decimal" maximum-fraction-digits="4" minimum-fraction-digits="4"  value={Data.Rate}></lightning-formatted-number></div>
+                    </td>
+                </tr>
+            </template>
+</template>
+
+            </tbody>
+        </table>
+        </div>
+
+        <div align="right"><lightning-button label="Next" variant="brand" onclick={handleAddExtNextClick} disabled={isBtnDisable}></lightning-button></div>
+
+</template>
+
+    <!-- Add Value to Extension Section -->
+
+    <template if:true={showExtToInsertData}>
+    
+        <div class="slds-wrap slds-var-p-around_medium">
+         
+            <div  class="slds-p-around_medium" style="height: 310px;">
+            <div class="slds-grid slds-gutters">
+              <div class="slds-col">
+                <div class="slds-p-around_medium">
+                  <lightning-combobox
+                  onchange={handlePicklist}
+                  name="LclExt_extensionType"
+                  label="Extension Type"
+                  value={selectedExtension}
+                  placeholder= "Extension Type"
+                  options={extensionType}
+                  required
+                  class="validate"
+                  >
+                  </lightning-combobox>
+              </div>
+              </div>
+              <div class="slds-col">
+                <div class="slds-p-around_medium">
+                  <lightning-input
+                  name="OccurenceLimit"
+                  label="Occurrence Limit"
+                  value={Occurence_Limit}
+                  placeholder='Per Schedule'
+                  required
+                  onchange={handleOccurenceLim}
+                  class="validate"
+                  >
+                  </lightning-input>
+                </div>
+              </div>
+              <div class="slds-col">
+                <div class="slds-p-around_medium">
+                  <lightning-input
+                  name="AggregateLimit"
+                  label="Aggregate Limit"
+                  value={Aggregate_Limit}
+                  placeholder='Per Schedule'
+                  required
+                  onchange={handleAggregateLim}
+                  class="validate"
+                  >
+                  </lightning-input>
+                  
+                </div>
+              </div>
+              
+            </div>
+
+            <div class="slds-grid slds-gutters">
+                <!-- N2GFCB322 -->
+                <template if:true={isOtherExtType}>
+                    <div class="slds-col">
+                        <div class="slds-p-around_medium">
+                            <label>Other</label>
+                            <abbr title="required" class="slds-required">*</abbr>
+                            <lightning-input class="slds-m-top_xx-small slds-m-bottom_small validate" type="text" label="Other" variant="label-hidden" aria-required="true" value={Other} required name="LclExt_extensionType" onblur={handleOther}>
+                            </lightning-input>
+                        </div>
+                    </div>
+                </template>
+
+              <div class="slds-col">
+                <div class="slds-p-around_medium">
+                  <label>Deductible</label>
+                  <abbr title="required" class="slds-required">*</abbr>
+                  <lightning-input class="slds-m-top_xx-small slds-m-bottom_small validate" type="text" label="Deductible" variant="label-hidden" aria-required="true" value={Deductible} required name="LclExt_Deductible"  onchange={handleDeductible}>
+                  </lightning-input>
+              </div>
+              </div>
+              <div class="slds-col">
+                <div class="slds-p-around_medium">
+                  <label>Premium</label>
+                  <abbr title="required" class="slds-required">*</abbr>
+                  <lightning-input class="slds-m-top_xx-small slds-m-bottom_small validate" type="text" label="Premium" variant="label-hidden" aria-required="true" formatter="currency" step="1" value={Premium} required name="LclExt_Premium" onchange={handlePremium}  data-id="ExtField">
+                  </lightning-input>
+                </div>
+              </div>
+              
+            </div>
+           
+          </div>
+      </div>
+
+      <div align="right"><lightning-button label="Insert Record" variant="brand" onclick={handleInsertAddExtNextClick}></lightning-button></div>
+
+        </template>
+
+        <!-- ////////////////////////////////////////////////////////////// -->
+        <template if:true={addExtSection}>
+    
+            <div class="slds-wrap slds-var-p-around_medium">
+             
+                <div  class="slds-p-around_medium" style="height: 310px;">
+                <div class="slds-grid slds-gutters">
+                  <div class="slds-col">
+                    <div class="slds-p-around_medium">
+                      <lightning-combobox
+                      onchange={handlePicklist}
+                      name="LclExt_extensionType"
+                      label="Extension Type"
+                      value={selectedExtension}
+                      placeholder= "Extension Type"
+                      options={extensionType}
+                      required
+                      class="validate"
+                      >
+                      </lightning-combobox>
+                  </div>
+                  <!-- value={extensionRecord.extensionType} old code commented in this lightning-combobox  -->
+                  </div>
+                  <div class="slds-col">
+                    <div class="slds-p-around_medium">
+                      <lightning-input
+                      name="OccurenceLimit"
+                      label="Occurrence Limit"
+                      value={extensionRecord.OccurenceLimit}
+                      placeholder='Per Schedule'
+                      required
+                      onchange={handleOccurenceLim}
+                      class="validate"
+                      >
+                      </lightning-input>
+                    </div>
+                  </div>
+                  <div class="slds-col">
+                    <div class="slds-p-around_medium">
+                      <lightning-input
+                      name="AggregateLimit"
+                      label="Aggregate Limit"
+                      value={extensionRecord.AggregateLimit}
+                      placeholder='Per Schedule'
+                      required
+                      onchange={handleAggregateLim}
+                      class="validate"
+                      >
+                      </lightning-input>
+                    </div>
+                  </div>
+                  
+                </div>
+    
+                <div class="slds-grid slds-gutters">
+                    <!-- N2GFCB322 -->
+                    <template if:true={isOtherExtType}>
+                        <div class="slds-col">
+                            <div class="slds-p-around_medium">
+                                <label>Other</label>
+                                <abbr title="required" class="slds-required">*</abbr>
+                                <lightning-input class="slds-m-top_xx-small slds-m-bottom_small validate" type="text" label="Other" variant="label-hidden" aria-required="true" value={extensionRecord.Other} required name="LclExt_extensionType" onblur={handleOther}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </template>
+
+                  <div class="slds-col">
+                    <div class="slds-p-around_medium">
+                      <label>Deductible</label>
+                      <abbr title="required" class="slds-required">*</abbr>
+                      <lightning-input class="slds-m-top_xx-small slds-m-bottom_small validate" type="text" label="Deductible" variant="label-hidden" aria-required="true" value={extensionRecord.Deductible} required name="LclExt_Deductible"  onchange={handleDeductible}>
+                      </lightning-input>
+                  </div>
+                  </div>
+                  <div class="slds-col">
+                    <div class="slds-p-around_medium">
+                      <label>Premium</label>
+                      <abbr title="required" class="slds-required">*</abbr>
+                      <lightning-input class="slds-m-top_xx-small slds-m-bottom_small validate" type="text" label="Premium" variant="label-hidden" aria-required="true" formatter="currency" step="1" value={extensionRecord.Premium} required name="LclExt_Premium" onchange={handlePremium} data-id="noData">
+                      </lightning-input>
+                    </div>
+                  </div>
+                  <div class="slds-col">
+                    </div>
+                </div>
+               
+              </div>
+          </div>
+    
+          <div align="right"><lightning-button label="Insert Record" variant="brand" onclick={handleInsertEditExtNextClick}></lightning-button></div>
+    
+            </template>
+
+        <!-- ////////////////////////////////////////////////////////////// -->
+
+
+        <!-- Data Updated Successfully -->
+        <template if:true={updateSuccess}>
+            <div class="slds-grid slds-wrap successmsg">
+                <div class="slds-col slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-12" align="right">
+                <span ><lightning-icon align="right" icon-name='action:update_status' alternative-text='update_status' size='large' title='update_status'></lightning-icon></span>
+                <!-- <span>
+                    <div class="gauge">
+                        <div class="progress">
+                            <div class="bar"></div>
+                            <div class="needle"></div>
+                        </div>
+                    </div>
+                </span> -->
+                </div>
+                <div class="slds-col slds-large-size_3-of-12 slds-medium-size_1-of-12 slds-size_1-of-12" align="right">
+                <span><div style="font-size: 20px; font-weight: 400; color: rgb(78, 165, 78);" align="right"><h3>Your Data Updated Successfully</h3></div></span>
+                </div>
+                <div class="slds-col slds-large-size_4-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+                <span></span>
+                </div>
+                <div class="slds-col slds-large-size_4-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+                <span></span>
+                </div>
+            </div>
+            <div align="right"><lightning-button label="Close" variant="brand" onclick={handleCloseClick}></lightning-button></div>
+        </template>
+
+
+    <!-- Update Extension Section -->
+    <template if:true={UpdateExt}>
+        
+<div class="slds-m-around_x-small">
+    <table
+        class="slds-table slds-table_bordered slds-border_left slds-border_right slds-table_cell-buffer slds-max-medium-table_stacked-horizontal slds-no-row-hover">
+        <thead >
+            <tr class="slds-line-height_reset" bgcolor="#F4FAFF">
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="country">Country</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="LOB">LOB</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Limit">Occurrence Limit</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Aggregate Limit">Aggregate Limit</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="exposure">Exposure</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Premium">Min Premium</div>
+                </th>
+                <th class="" scope="col">
+                    <div class="slds-truncate" title="Actual Premium">Actual Premium</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <template for:each={country} for:item="Data" for:index="Country">
+                <template if:false={Data.LobDicDil}>
+            <tr class="slds-hint-parent" key={Data.uniqueKey}>
+                <td data-label="country" scope="row">
+                    <div title={Data.Country}>
+                        {Data.Country}
+                    </div>
+                </td>
+                
+                <td data-label="lob">
+                    <div class="slds-truncate" title={Data.type}>{Data.type}</div>
+                </td>
+                
+                <td data-label="limit">
+                    <div class="slds-truncate" title={Data.Limit}><lightning-formatted-number format-style="currency" currency-code="USD" maximum-fraction-digits="0" value={Data.Limit}></lightning-formatted-number></div>
+                </td>
+                <td data-label="aggregate limit" >
+                    <div class="slds-grid slds-wrap" title={Data.AggregateLimit}>
+                        <div class="slds-col slds-size_9-of-12">
+                            <lightning-input class="hideborderandradius" type="number"  variant="label-hidden"  maximum-fraction-digits="0" value={Data.AggregateLimit} data-index={Country} name="AggregateLimit" onchange={changeHandleUpdate}></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_3-of-12">
+                            <lightning-combobox
+                            name="AggregateCurrency"
+                            value={Data.AggregateCurrency}
+                            options={countryRec}
+                            data-index={Country} 
+                            variant="label-hidden"
+                            onchange={changeHandleUpdate} ></lightning-combobox>
+                        </div>
+                        
+                    </div>
+                </td>
+                <td data-label="exposure">
+                    <div class="slds-truncate" title={Data.Exposure}><lightning-formatted-number format-style="currency" currency-code="USD" maximum-fraction-digits="0" value={Data.Exposure}></lightning-formatted-number></div>
+                </td>
+                <td data-label="actual Total Local Premium">
+                    <div class="slds-truncate" title={Data.displayMinPrem}><lightning-formatted-number format-style="currency" currency-code="USD" maximum-fraction-digits="0"	 value={Data.displayMinPrem}></lightning-formatted-number></div>
+                </td>
+                <td data-label="local Policy Limit">
+                    <!-- <template if:true={isGLLob}> -->
+                        <div class="slds-truncate" title={Data.UWOverrideGLLocalPrem}><lightning-input class="hideborderandradius" type="number"   variant="label-hidden"  maximum-fraction-digits="0"  value={Data.UWOverrideGLLocalPrem} data-index={Country} name="UWOverrideGLLocalPrem" onchange={changeHandleUpdate} placeholder={Data.displayPrem}></lightning-input></div>
+                    <!-- </template> -->
+                    <!-- <template if:true={isELLob}>
+                        <div class="slds-truncate" title={Data.UWOverrideGLLocalPrem}><lightning-input class="hideborderandradius" type="number"   variant="label-hidden"  maximum-fraction-digits="0"  value={Data.LocalELActualPrem} data-index={Country} name="LocalELActualPrem" onchange={changeHandleUpdate} placeholder={Data.displayPrem}></lightning-input></div>
+                    </template> -->
+                        <span style="white-space:pre-wrap;color:red">{Data.errorMessage}</span>  
+                  
+                </td>
+            </tr>
+        </template>
+</template>
+
+        </tbody>
+    </table>
+    </div>
+
+    <div align="right"><lightning-button label="Update Records" variant="brand" onclick={handleUpdateExtClick} disabled={isUpdateBtnDisable}></lightning-button></div>
+
+    </template>
+
+    <!-- Data Updated Successfully -->
+    <template if:true={updateSuccessUpdatePage}>
+        <div class="slds-grid slds-wrap successmsg">
+            <div class="slds-col slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-12" align="right">
+            <span ><lightning-icon align="right" icon-name='action:update_status' alternative-text='update_status' size='large' title='update_status'></lightning-icon></span> 
+            <!-- span>
+                <div class="gauge">
+                    <div class="progress">
+                        <div class="bar"></div -->
+                        <!-- <div class="needle"></div> -->
+                    <!--/div>
+                </div>
+            </span> -->
+            </div>
+            <div class="slds-col slds-large-size_3-of-12 slds-medium-size_1-of-12 slds-size_1-of-12" align="right">
+            <span><div style="font-size: 20px; font-weight: 400; color: rgb(78, 165, 78);" align="right"><h3>Your Data Updated Successfully</h3></div></span>
+            </div>
+            <div class="slds-col slds-large-size_4-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+            <span></span>
+            </div>
+            <div class="slds-col slds-large-size_4-of-12 slds-medium-size_1-of-12 slds-size_1-of-12">
+            <span></span>
+            </div>
+        </div>
+        <div align="right"><lightning-button label="Close" variant="brand" onclick={handleCloseClick}></lightning-button></div>
+    </template>
+
+</template>

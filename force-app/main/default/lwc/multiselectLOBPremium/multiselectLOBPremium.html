@@ -1,0 +1,151 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 08-31-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <!-- <lightning-card title="Opportunity">
+        <div class="slds-box">
+            <lightning-datatable data={LOBList} columns={cols} key-field="Id">
+            </lightning-datatable>
+        </div>
+    </lightning-card> -->
+
+    <template if:true={isUpdatePremium}>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+            aria-labelledby="element-with-table-label other-element-with-table-label">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate">LOB Name</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate">Stage</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate">Estimated Premium</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate">Probability(%)</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={LOBList} for:item="LOB">
+                    <tr class="slds-hint-parent" key={LOB.Id}>
+                        <td scope="row">
+                            {LOB.RecordType.Name} <!--| {LOB.Name} -->
+                        </td>
+                        <td scope="row">
+                            {LOB.LOB_Stage__c}
+                        </td>
+                        <td>
+                            <lightning-input type="number" formatter="currency" label="Target Premium" data-id={LOB.Id}
+                                variant="label-hidden" value={LOB.Estimated_LOB_Premium__c} onchange={handleChange}>
+                            </lightning-input>
+                        </td>
+                        <td>
+                            <lightning-input type="number" label="Probability" data-id={LOB.Id}
+                                step="1" min="0" max="100" name="Probability__c" variant="label-hidden"
+                                value={LOB.Probability__c} onchange={handleProbabilityChange}>
+                            </lightning-input>
+                        </td>
+                    </tr>
+                </template>
+
+            </tbody>
+        </table>
+    </template>
+
+    <template if:true={isUpdateEffectiveDate}>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+            aria-labelledby="element-with-table-label other-element-with-table-label">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate">LOB Name</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate">Stage</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate">Effective Date</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={LOBList} for:item="LOB">
+                    <tr class="slds-hint-parent" key={LOB.Id}>
+                        <td scope="row">
+                            {LOB.RecordType.Name} <!--| {LOB.Name}-->
+                        </td>
+                        <td scope="row">
+                            {LOB.LOB_Stage__c}
+                        </td>
+                        <td>
+                            <lightning-input type="date" label="Effective Date" data-id={LOB.Id} variant="label-hidden"
+                                value={LOB.LOB_Effective_Date__c} onchange={handleChange}>
+                            </lightning-input>
+                        </td>
+                    </tr>
+                </template>
+
+            </tbody>
+        </table>
+    </template>
+
+    <!-- Lookup cmp for underwriter Start-->
+    <template if:true={isUpdateUnderWriter}>
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+            aria-labelledby="element-with-table-label other-element-with-table-label">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" >LOB Name</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" >LOB Underwriter</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" >LOB Underwriter Instructions</div>
+                    </th> 
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={LOBList} for:item="LOB">
+                    <tr class="slds-hint-parent" key={LOB.Id}>
+                        <td scope="row">
+                            {LOB.RecordType.Name}
+                        </td>
+                        <td>
+                            <c-custom-lookup-cmp icon-name="standard:user"
+                            s-object-api-name="user"
+                            onlookupupdate={lookupRecord}
+                            default-record-id={LOB.Underwriter__c}
+                            data-id={LOB.Id}
+                            placeholder="type here..."></c-custom-lookup-cmp>
+                        </td>
+                         <td scope="row">
+                            <lightning-input type="text" data-id={LOB.Id} variant="label-hidden" value={LOB.LOB_Underwriter_Instructions__c} onchange={handleUnderwriterNoteChange}>
+                            </lightning-input>
+                        </td>
+                    </tr>
+                </template>
+
+            </tbody>
+        </table>
+    </template>
+
+    <!--Lookup cmp for underwriter End -->
+
+    <div class="slds-align_absolute-center slds-p-around_medium">
+        <lightning-button variant="brand" label="Update Records" title="Update Records" onclick={handleClick}>
+        </lightning-button>
+    </div>
+
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </template>
+</template>

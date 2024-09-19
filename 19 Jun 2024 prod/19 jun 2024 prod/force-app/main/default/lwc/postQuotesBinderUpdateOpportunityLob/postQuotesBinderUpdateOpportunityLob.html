@@ -1,0 +1,114 @@
+<template>
+    <img src={imgsrc} alt="N2G" width="110px" />
+    <div class="header">
+        <p>Update the Opportunity Line of Business details.</p>
+    </div>
+    <div class="instruction">
+        <p>
+            On this screen, you can update the details for a client's opportunity. Use the provided fields to update the
+            stage of the line of business and the estimated premium value.</p>
+        <p style="margin-top: 2px;">Before confirming the changes, make sure to verify that the Line of Business stage
+            and estimated premium
+            are correctly represented.</p>
+        <p style="margin-top: 5px; margin-bottom: 8px">Click the "Update" button to save the changes.</p>
+        </p>
+    </div>
+    <div class="opportunityName">
+        {oppName}
+    </div>
+    <div class="tablebody">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+            aria-labelledby="element-with-table-label other-element-with-table-label">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate">LOB Name</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate">Stage</div>
+                    </th>
+                    <!-- <th style="width: 3rem;" scope="col">
+                        <div class="slds-truncate">Probability %</div>
+                    </th> -->
+                    <th class="" scope="col">
+                        <div class="slds-truncate">Estimated Premium</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={lobRecords} for:item="LOB" for:index="LobRecordTypeName">
+                    <tr class="slds-hint-parent" key={LOB.LobRecordTypeName}>
+                        <td scope="row">
+                            {LOB.LobRecordTypeName}
+                        </td>
+                        <td scope="row">
+                            <div>
+                                <lightning-combobox data-index={LobRecordTypeName} data-key={LOB.LobRecordTypeName}
+                                    name="LobStage" variant="label-hidden" label="Status" value={LOB.LobStage}
+                                    options={statusOptions} onchange={handleChange}
+                                    disabled={LOB.isDisablePicklist}></lightning-combobox>
+                            </div>
+                        </td>
+                        <!-- <td scope="row">
+                            <lightning-input autocomplete="off" data-index={LobRecordTypeName}
+                                data-key={LOB.LobRecordTypeName} variant="label-hidden" type="number" step="1" min="0"
+                                max="100" value={LOB.Probability} name="Probability" onchange={handleChange}
+                                class="ProbabilityInputWidth"></lightning-input>
+                        </td> -->
+                        <td>
+                            <lightning-input autocomplete="off" data-index={LobRecordTypeName}
+                                data-key={LOB.LobRecordTypeName} type="number" step="0.01" formatter="currency"
+                                name="LobPremium" variant="label-hidden" value={LOB.LobPremium} onchange={handleChange}>
+                            </lightning-input>
+                        </td>
+                    </tr>
+                    <template if:true={LOB.stageIsLostOrDeclined}>
+                        <tr class="slds-hint-parent" key={LOB.LobRecordTypeName}>
+                            <td scope="row" style="border-top: 0px;">
+                            </td>
+                            <!-- <td>
+                                //<input type="checkbox" label="Indication provided" name="Indicationprovided" onchange={handleCheckValueChange} checked={OwnedPrivatePassengerAutosLiability} />
+                                <input type="checkbox"  name="Indicationprovided" /><label>Indication provided</label>
+                            </td> -->
+                            <td scope="row" style="vertical-align: top;padding-top: 10px;border-top: 0px;">
+                                <div>
+                                    <!-- <lightning-combobox data-index={LobRecordTypeName}  name="LobReasonCode" variant="label-hidden" label="ReasonCode" value={LOB.LobReasonCode} options={reasonCodeOptions} onchange={reasonHandleChange} data-id="noData" required></lightning-combobox> -->
+                                    <lightning-combobox data-index={LobRecordTypeName} name="LobReasonCode"
+                                        variant="label-hidden" label="ReasonCode" value={LOB.LobReasonCode}
+                                        options={LOB.reasonCodeOptions} onchange={reasonHandleChange} data-id="noData"
+                                        required></lightning-combobox>
+                                </div>
+                                <div if:true={LOB.Indicationprovided} style=" display: flex;align-items: center;margin-top: 10px;">
+                                    <input type="checkbox" data-index={LobRecordTypeName} name="IndicationProvidedIsCheck" style="margin-right: 5px;" onclick={handleIndicationChange} checked={LOB.IndicationProvidedIsCheck}>
+                                    <label>Indication provided</label>
+                                </div>
+                            </td>
+                            <td colspan="3" scope="row" style="padding-top: 10px;border-top: 0px;">
+                                <lightning-textarea data-index={LobRecordTypeName} name="reasonDescrption"
+                                    value={LOB.reasonDescrption} label="Reaseon Full Descrption" variant="label-hidden"
+                                    placeholder="Reason full descrption" data-id="noData" onchange={reasonHandleChange}
+                                    required></lightning-textarea>
+                            </td>
+                        </tr>
+                    </template>
+                    <template if:true={LOB.stageIsLostOrDeclinedorNotsubmitted}>
+                        <tr key={LOB.LobRecordTypeName}>
+                            <td scope="row" style="border-top: 0px;">
+                            </td>
+                            <td scope="row" colspan="3" style="border-top: 0px; white-space: normal;">
+                                <p>{LOB.helpText}</p>
+                            </td>
+                        </tr>
+                    </template>
+
+
+                </template>
+            </tbody>
+        </table>
+        <div class="buttons">
+            <lightning-button label="Cancel" onclick={cancelBtn} style="margin-right: 10px;"></lightning-button>
+            <lightning-button variant="brand" label="Update" onclick={updateRecords}></lightning-button>
+        </div>
+
+    </div>
+</template>

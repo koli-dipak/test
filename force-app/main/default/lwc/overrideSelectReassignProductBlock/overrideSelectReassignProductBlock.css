@@ -1,0 +1,13 @@
+.dummyClass{color:black;}
+.slds-border_bottom.slds-border_top.slds-border_left.slds-border_right.slds-grid.slds-p-vertical_xx-small {
+    background: #c00900;
+    padding: 8px 0;
+    }
+strong.slds-text-title_caps.slds-text-heading--label.slds-p-vertical_x-small {
+    font-size: 14px;
+    line-height: var(--lwc-lineHeightHeading,1.25);
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .0625rem;
+}

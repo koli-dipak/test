@@ -1,0 +1,667 @@
+<template>
+	<!-- spinner -->
+	<template if:true={spinnerStatus}>
+		<lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+	</template>
+	<div class="slds-clearfix">
+		<div class="slds-float_left">
+		  
+		</div>
+		<div class="slds-float_right">
+			<!--div style="display: flex;">
+				<template for:each={filterButtons} for:item="filterButton">
+					<lightning-button key={filterButton.key} label={filterButton.label} name={filterButton.name} title={filterButton.label} onclick={filterHandleClick} class={filterButton.class}></lightning-button>
+				</template>
+			</div-->
+			<div class="slds-m-right_small">
+				<lightning-button-menu alternative-text="Show menu" onselect={filterHandleClick} label="Global Filter" class="globalfilter">
+						<template for:each={filterButtons} for:item="filterButton" >
+							<lightning-menu-item key={filterButton.key} label={filterButton.label} value={filterButton.name} title={filterButton.label}></lightning-menu-item>
+						</template>
+				</lightning-button-menu>
+			</div>
+		</div>
+	</div>
+	<br/>
+	<!-- Product card attributeDataList -->
+	<template if:true={hasQuoteLineData}>
+		<template for:each={attributeDataList} for:item="attributeData" for:index="parentindex">
+			<div key={attributeData.UniqueValue}>
+				<!-- This Modal will only be visible if showModal[AddSubjectivitesPopup] is set to true -->
+				<template if:true={attributeData.showAddSubSectionPopup}>
+					<section aria-modal="true" class="slds-modal slds-fade-in-open">
+						<div class="slds-modal__container ">
+							<header class="slds-modal__header">
+								<h2 class="slds-text-heading_medium slds-hyphenate">{attributeData.addSubSectionPopupWrp.popupHeader}</h2>
+								<lightning-icon class="slds-modal__close" icon-name="utility:close" size="small" data-prodwrpindex={parentindex} onclick={handleOnAddSubjectivitesCloseClick}></lightning-icon>
+							</header>
+							<div class="slds-modal__content">
+								<div class="slds-p-around_small">
+									<div class="slds-section__title slds-m-top_medium">
+										<h3 class="slds-text-title_bold nds-text-title_bold">{attributeData.addSubSectionPopupWrp.sectionName}</h3>
+									</div>
+									<div class="slds-grid slds-wrap">
+										<template for:each={attributeData.addSubSectionPopupWrp.attributeRecList} for:item="attributeRecWrp" >
+											<div class="slds-col slds-size_6-of-12 slds-p-horizontal--small slds-m-bottom--small"
+												key={attributeRecWrp.attributeRec.Id}>
+												<template if:true={attributeRecWrp.attributeRec.vlocity_ins__IsConfigurable__c}> 
+													<template if:false={attributeRecWrp.isPicklist}>
+														<template if:true={attributeRecWrp.isNumber}>
+															<lightning-input
+															class="reqInpFld"
+															type={attributeRecWrp.attributeRec.vlocity_ins__ValueDataType__c}
+															label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}
+															name={attributeRecWrp.key}
+															onchange={onAddSubsectionFieldOnChange}
+															onkeypress={AddSubsectionFieldOnKeypress}
+															step=".01"
+															></lightning-input>
+														</template>
+														<template if:false={attributeRecWrp.isNumber}>
+															<template if:true={attributeRecWrp.isPercent}>
+																<lightning-input
+																class="reqInpFld"
+																type="Number"
+																formatter={attributeRecWrp.attributeRec.vlocity_ins__ValueDataType__c}
+																label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}
+																name={attributeRecWrp.key}
+																onchange={onAddSubsectionFieldOnChange}
+																onkeypress={AddSubsectionFieldOnKeypress}
+																step=".01"
+																></lightning-input>
+															</template>
+															<template if:false={attributeRecWrp.isPercent}>
+																<lightning-input
+																class="reqInpFld"
+																type={attributeRecWrp.attributeRec.vlocity_ins__ValueDataType__c}
+																label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}
+																name={attributeRecWrp.key}
+																onchange={onAddSubsectionFieldOnChange}
+																onkeypress={AddSubsectionFieldOnKeypress}
+																></lightning-input>
+															</template>
+														</template>
+														
+													</template>
+													<template if:true={attributeRecWrp.isPicklist}>
+														<lightning-combobox
+														label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c} 
+														options={attributeRecWrp.pickValues} 
+														name={attributeRecWrp.key}
+														onchange={onAddSubsectionFieldOnChange}> </lightning-combobox> 
+													</template>
+												</template>
+												<template if:false={attributeRecWrp.attributeRec.vlocity_ins__IsConfigurable__c}> 
+													<template if:false={attributeRecWrp.isPicklist}>
+														<template if:true={attributeRecWrp.isNumber}>
+															<lightning-input name={attributeRecWrp.key}
+															class="reqInpFld"
+															type={attributeRecWrp.attributeRec.vlocity_ins__ValueDataType__c}
+															step=".01"
+															label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}
+															onchange={onAddSubsectionFieldOnChange}	
+															onkeypress={AddSubsectionFieldOnKeypress}></lightning-input>
+														</template>
+														<template if:false={attributeRecWrp.isNumber}>
+															<template if:true={attributeRecWrp.isPercent}>
+																<lightning-input name={attributeRecWrp.key}
+																class="reqInpFld"
+																type="Number"
+																formatter={attributeRecWrp.attributeRec.vlocity_ins__ValueDataType__c}
+																label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}
+																onchange={onAddSubsectionFieldOnChange}	
+																onkeypress={AddSubsectionFieldOnKeypress}></lightning-input>
+															</template>
+															<template if:false={attributeRecWrp.isPercent}>
+																<lightning-input name={attributeRecWrp.key}
+																class="reqInpFld"
+																type={attributeRecWrp.attributeRec.vlocity_ins__ValueDataType__c}
+																
+																label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}
+																onchange={onAddSubsectionFieldOnChange}	
+																onkeypress={AddSubsectionFieldOnKeypress}></lightning-input>
+															</template>
+														</template>
+														
+													</template>
+													<template if:true={attributeRecWrp.isPicklist}>
+															<lightning-combobox name={attributeRecWrp.key}
+															label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c} 
+															options={attributeRecWrp.pickValues} 
+															
+															onchange={onAddSubsectionFieldOnChange}> </lightning-combobox> 
+														</template>
+												</template>
+											</div>
+										</template>
+									</div>
+								</div>
+							</div>
+							<footer class="slds-modal__footer">
+								<lightning-button variant="brand" label="Cancel" onclick={handleOnAddSubsectionCloseClick} name={parentindex} class="slds-p-around_x-small"></lightning-button>
+								<lightning-button variant="brand" label="Save" onclick={handleOnAddSubsectionSubmitClick} name={parentindex} class="slds-p-around_x-small"></lightning-button>
+							</footer>
+						</div>
+					</section>
+					<div class="slds-backdrop slds-backdrop_open"></div>
+				</template>
+				<!-- This Modal will only be visible if showModal[AddUnderlyingPoliciesPopup] is set to true -->
+				
+				<!-- Product card -->
+				<lightning-card>
+					<section class="slds-p-around_x-large prsectionbg">
+						<div class="slds-clearfix ratingbox" data-prodwrpindex={attributeData.parentindex}>
+							<div class="slds-float_left">
+								<div style="display: flex;">
+									<div class="arrowdownsvg">
+										<lightning-icon icon-name="standard:account" alternative-text="Approved"
+											title="Approved" size="large" ></lightning-icon>
+									</div>
+									<div>
+										<h4 class="slds-m-left_large producttitle">
+											{attributeData.productName}
+											<!--p>{attributeData.totalNumberOfCoverages} Policy-level Coverages</p-->
+											<p>{attributeData.tranComment}</p>
+										</h4>
+									</div>
+								</div>
+							</div>
+							<div class="slds-float_right">
+								<div style="text-align: end;display: flex;" >
+									<div class="slds-m-horizontal_x-large totalNum">
+										<h4>Total:&nbsp;<lightning-formatted-number value={attributeData.TotalEstimatedPremium} format-style="currency" currency-code="USD" currency-display-as="symbol"></lightning-formatted-number></h4>
+										<p>{attributeData.QuoteNo}-V{attributeData.QuoteSeq}</p>
+										<template if:true={attributeData.quoteLineRec.Policy_Number__c}> 
+											<p>Policy Number {attributeData.quoteLineRec.Policy_Number__c}</p>
+										</template>
+										<p>{attributeData.quoteLineRec.Stage__c}</p>
+										<!--p>{attributeData.status}</p-->
+										<!--div class="ratenowbtn">Rate Now</div-->
+										<!--lightning-button label="Rate Now" slot="actions" class="ratenow">Rate Now</lightning-button-->
+									</div>
+									<div>
+										<lightning-button-menu alternative-text="Show menu" data-index={attributeData.quoteLineindex} data-quotelineid={attributeData.quoteLineRec.Id} onclick={handleMenuClick} onselect={handleOnMenubuttonClick}>
+											<template if:true={attributeData.hasAddSubsectionRelatedDataButtons}>
+												<template for:each={attributeData.AddSubsectionRelatedDataButtons} for:item="addButtonWrp" >
+													<lightning-menu-item key={addButtonWrp.key} value={addButtonWrp.buttonName} label={addButtonWrp.buttonLabel}></lightning-menu-item>
+												</template>
+											</template>
+											<template if:false={attributeData.hasAddSubsectionRelatedDataButtons}>
+												<lightning-menu-item value='No Action Available' label='No Action Available' disabled="true"></lightning-menu-item>
+											</template>
+										</lightning-button-menu>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- showmore details label section -->
+						<div class="slds-clearfix coveragebox" data-prodwrpindex={attributeData.parentindex} onclick={ShowMoreDetailsInfoSec}>
+							<div class="slds-grid slds-wrap">
+								<div class="slds-col slds-size_4-of-12"></div>
+								<div class="slds-col slds-size_5-of-12">
+									<template if:true={attributeData.ShowMoreDetails}>
+											<span>
+												<div class="slds-grid slds-wrap slds-align_absolute-center" style="margin: 0 80px;">
+													<div class="slds-col slds-size_2-of-12">
+														<lightning-icon icon-name="utility:chevronup" alternative-text="Approved"
+													title="Approved" size="x-small"></lightning-icon>
+													</div>
+													<div class="slds-col slds-size_10-of-12">
+														Hide 
+													</div>
+												</div>
+											</span>
+									</template>
+									<template if:false={attributeData.ShowMoreDetails}>
+										<span>
+											<div class="slds-grid slds-wrap slds-align_absolute-center" style="margin: 0 80px;">
+												<div class="slds-col slds-size_2-of-12">
+													<lightning-icon icon-name="utility:chevrondown" alternative-text="Approved"
+												title="Approved" size="x-small"></lightning-icon>
+												</div>
+												<div class="slds-col slds-size_10-of-12">
+													Show 
+												</div>
+											</div>
+										</span>
+									</template>
+								</div>
+								<div class="slds-col slds-size_3-of-12"></div>
+							</div>
+						</div>
+						<!-- showmore details section -->
+						<template if:true={attributeData.ShowMoreDetails}>
+							<template if:true={attributeData.RatingInformationDetailsVisible}>
+								<div class="slds-p-around_x-large">
+									<div class="slds-grid slds-wrap">
+										<div class="slds-col slds-size_6-of-12 slds-p-horizontal--small slds-m-bottom--small">
+											<lightning-combobox label='Stage' 
+																value={attributeData.quoteLineRec.Stage__c}
+																options={stagePickListValues} 
+																name={attributeData.UniqueValue}
+																onchange={onChangeQuoteType}> </lightning-combobox>
+										</div>
+									</div>
+									<!-- subsection[quotelineitem => product =>attributecategorywisename and attributecoderecord] -->
+									<template for:each={attributeData.subSections} for:item="subSectionWrp">
+										<div key={subSectionWrp.UniqueValue}>
+											<h3 class="infoTitle">{subSectionWrp.sectionName}</h3>
+										<div class="slds-grid slds-wrap">
+												<template for:each={subSectionWrp.attributeList} for:item="attributeRecWrp" >
+													<template if:false={attributeRecWrp.attributeRec.vlocity_ins__IsHidden__c}>
+														<div class="slds-col slds-size_6-of-12 slds-p-horizontal--small slds-m-bottom--small"
+														key={attributeRecWrp.attributeRec.Id}>
+															<template if:true={attributeRecWrp.attributeRec.vlocity_ins__IsConfigurable__c}> 
+																<template if:false={attributeRecWrp.isPicklist}>
+																	<template if:false={attributeRecWrp.isTextAreaField}>
+																		<lightning-input
+																			class="reqInpFld"
+																			type={attributeRecWrp.attributeRec.vlocity_ins__ValueDataType__c}
+																			label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}
+																			value={attributeRecWrp.value}
+																			checked={attributeRecWrp.value}
+																			name={attributeRecWrp.key}
+																			onkeypress={handleOnKeyPress}
+																			onblur={productAttributeUpdateRecord}
+																			></lightning-input>
+																	</template>
+																	<template if:true={attributeRecWrp.isTextAreaField}>
+																		
+																		<lightning-textarea
+																			class="reqInpFld"
+																			label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}
+																			value={attributeRecWrp.value}
+																			name={attributeRecWrp.key}
+																			onkeypress={handleOnKeyPress}
+																			onblur={productAttributeUpdateRecord}
+																			></lightning-textarea>
+																	</template>
+																</template>
+																<template if:true={attributeRecWrp.isPicklist}>
+																	<lightning-combobox
+																	label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c} 
+																	value={attributeRecWrp.value} 
+																	options={attributeRecWrp.pickValues} 
+																	name={attributeRecWrp.key}
+																	onchange={productAttributeUpdateRecord}> </lightning-combobox> 
+																</template>
+															</template>
+															<template if:false={attributeRecWrp.attributeRec.vlocity_ins__IsConfigurable__c}> 
+																<template if:false={attributeRecWrp.isPicklist}>
+																	<template if:false={attributeRecWrp.isTextAreaField}>
+																		<template if:false={attributeRecWrp.isPercent}>
+																			<lightning-input name={attributeRecWrp.key}
+																				class="reqInpFld"
+																				type={attributeRecWrp.attributeRec.vlocity_ins__ValueDataType__c}
+																				disabled
+																				label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}
+																				value={attributeRecWrp.value}
+																				checked={attributeRecWrp.value}></lightning-input>
+																		</template>
+																		<template if:true={attributeRecWrp.isPercent}>
+																			<lightning-input name={attributeRecWrp.key}
+																			class="reqInpFld"
+																			type="Number"
+																			formatter={attributeRecWrp.attributeRec.vlocity_ins__ValueDataType__c}
+																			disabled
+																			label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}
+																			value={attributeRecWrp.value}></lightning-input>
+																
+																		</template>
+																	</template>
+																	<template if:true={attributeRecWrp.isTextAreaField}>
+																		<lightning-textarea
+																			class="reqInpFld"
+																			label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}
+																			value={attributeRecWrp.value}
+																			name={attributeRecWrp.key}
+																			onkeypress={handleOnKeyPress}
+																			disabled
+																			></lightning-textarea>
+																	</template>
+																</template>
+																<template if:true={attributeRecWrp.isPicklist}>
+																	<lightning-combobox name={attributeRecWrp.key} 
+																	label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c} 
+																	value={attributeRecWrp.value} 
+																	options={attributeRecWrp.pickValues} 
+																	disabled > </lightning-combobox> 
+																</template>
+															</template>
+														</div>
+														<!--template if:true={attributeRecWrp.isTextAreaField}>
+															<div class="slds-col slds-size_6-of-12 slds-p-horizontal--small slds-m-bottom--small"
+																key={attributeRecWrp.attributeRec.Id}>
+																<label class="slds-form-element__label attLabel" for="select-01"><p class="slds-m-vertical_xx-small" style="color: #3e3e3c;font-size: 12px;text-transform: initial;letter-spacing: 0;">{attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}</p></label>
+															</div>
+															<div class="slds-col slds-size_6-of-12 slds-p-horizontal--small slds-m-bottom--small"
+																key={attributeRecWrp.attributeRec.Id}>
+																<div class="slds-m-top_xx-small">
+																<template if:true={attributeRecWrp.attributeRec.vlocity_ins__IsConfigurable__c}> 
+																	<template if:false={attributeRecWrp.isPicklist}>
+																		<lightning-input
+																			class="reqInpFld"
+																			type={attributeRecWrp.attributeRec.vlocity_ins__ValueDataType__c}
+																			label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}
+																			variant="label-hidden"
+																			value={attributeRecWrp.value}
+																			name={attributeRecWrp.key}
+																			onkeypress={handleOnKeyPress}
+																			onblur={productAttributeUpdateRecord}
+																			></lightning-input>
+																	</template>
+																	<template if:true={attributeRecWrp.isPicklist}>
+																		<lightning-combobox
+																		label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c} 
+																		value={attributeRecWrp.value} 
+																		variant="label-hidden"
+																		options={attributeRecWrp.pickValues} 
+																		name={attributeRecWrp.key}
+																		onchange={productAttributeUpdateRecord}> </lightning-combobox> 
+																	</template>
+																</template>
+																<template if:false={attributeRecWrp.attributeRec.vlocity_ins__IsConfigurable__c}> 
+																	<template if:false={attributeRecWrp.isPicklist}>
+																		<lightning-input name={attributeRecWrp.key}
+																			class="reqInpFld"
+																			type={attributeRecWrp.attributeRec.vlocity_ins__ValueDataType__c}
+																			disabled
+																			variant="label-hidden"
+																			label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}
+																			value={attributeRecWrp.value}></lightning-input>
+																		</template>
+																		<template if:true={attributeRecWrp.isPicklist}>
+																			<lightning-combobox name={attributeRecWrp.key} 
+																			label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c} 
+																			value={attributeRecWrp.value} 
+																			variant="label-hidden"
+																			options={attributeRecWrp.pickValues} 
+																			disabled > </lightning-combobox> 
+																		</template>
+																</template>
+																</div>
+															</div>
+															<!- -div class="slds-col slds-size_12-of-12 slds-p-horizontal--small slds-m-bottom- -small"
+																key={attributeRecWrp.attributeRec.Id}>
+																<template if:true={attributeRecWrp.attributeRec.vlocity_ins__IsConfigurable__c}> 
+																	<template if:false={attributeRecWrp.isPicklist}>
+																		<lightning-input
+																			class="reqInpFld"
+																			type={attributeRecWrp.attributeRec.vlocity_ins__ValueDataType__c}
+																			label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}
+																			value={attributeRecWrp.value}
+																			name={attributeRecWrp.key}
+																			onkeypress={handleOnKeyPress}
+																			onblur={productAttributeUpdateRecord}
+																			></lightning-input>
+																	</template>
+																	<template if:true={attributeRecWrp.isPicklist}>
+																		<lightning-combobox
+																		label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c} 
+																		value={attributeRecWrp.value} 
+																		options={attributeRecWrp.pickValues} 
+																		name={attributeRecWrp.key}
+																		onchange={productAttributeUpdateRecord}> </lightning-combobox> 
+																	</template>
+																</template>
+																<template if:false={attributeRecWrp.attributeRec.vlocity_ins__IsConfigurable__c}> 
+																	<template if:false={attributeRecWrp.isPicklist}>
+																		<lightning-input name={attributeRecWrp.key}
+																			class="reqInpFld"
+																			type={attributeRecWrp.attributeRec.vlocity_ins__ValueDataType__c}
+																			disabled
+																			label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}
+																			value={attributeRecWrp.value}></lightning-input>
+																		</template>
+																		<template if:true={attributeRecWrp.isPicklist}>
+																			<lightning-combobox name={attributeRecWrp.key} 
+																			label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c} 
+																			value={attributeRecWrp.value} 
+																			options={attributeRecWrp.pickValues} 
+																			disabled > </lightning-combobox> 
+																		</template>
+																</template>
+															</div- ->
+														</template-->
+													</template>
+												</template>
+											</div>
+										</div>
+									</template>
+								</div>
+							</template>
+							<!-- showcoverage label section -->
+							<div class="slds-clearfix coveragebox" data-prodwrpindex={attributeData.parentindex} onclick={coverageInfoSec}>
+								<div class="slds-grid slds-wrap">
+									<div class="slds-col slds-size_4-of-12"></div>
+									<div class="slds-col slds-size_5-of-12">
+										<template if:true={attributeData.showCoverage}>
+												<span>
+													<div class="slds-grid slds-wrap slds-align_absolute-center" style="margin: 0 80px;">
+														<div class="slds-col slds-size_2-of-12">
+															<lightning-icon icon-name="utility:chevronup" alternative-text="Approved"
+														title="Approved" size="x-small"></lightning-icon>
+														</div>
+														<div class="slds-col slds-size_10-of-12">
+															Hide Coverages
+														</div>
+													</div>
+												</span>
+										</template>
+										<template if:false={attributeData.showCoverage}>
+											<span>
+												<div class="slds-grid slds-wrap slds-align_absolute-center" style="margin: 0 80px;">
+													<div class="slds-col slds-size_2-of-12">
+														<lightning-icon icon-name="utility:chevrondown" alternative-text="Approved"
+													title="Approved" size="x-small"></lightning-icon>
+													</div>
+													<div class="slds-col slds-size_10-of-12">
+														Show Coverages
+													</div>
+												</div>
+											</span>
+										</template>
+									</div>
+									<div class="slds-col slds-size_3-of-12"></div>
+								</div>
+							</div>
+							<!-- showcoverage section quotelineitem => product => coverages[productchildlineitem] -->
+							<template if:true={attributeData.showCoverage}>
+								<div class="slds-p-around_x-large" style="cursor: pointer;" >
+									<template for:each={attributeData.coverageSections} for:item="coverageSectionWrp">
+										<div key={coverageSectionWrp.UniqueValue}>
+											<h3 class="infoTitle">{coverageSectionWrp.sectionName}</h3>
+											<div class="slds-grid slds-wrap slds-m-vertical_medium">
+												<template for:each={coverageSectionWrp.attributeList}
+													for:item="attributeRecWrp">
+													<template if:false={attributeRecWrp.attributeRec.vlocity_ins__IsHidden__c}>
+													<div class="slds-col slds-size_5-of-12 slds-p-horizontal--small slds-m-bottom--small"
+														key={attributeRecWrp.attributeRec.Id}>
+														<label class="slds-form-element__label attLabel" for="select-01">{attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}</label>
+													</div>
+													<div class="slds-col slds-size_7-of-12 slds-p-horizontal--small slds-m-bottom--small"
+														key={attributeRecWrp.attributeRec.Id}>
+														<template if:true={attributeRecWrp.attributeRec.vlocity_ins__IsConfigurable__c}> 
+															<template if:false={attributeRecWrp.isPicklist}>
+																<template if:true={attributeRecWrp.isNumber}>
+																	<lightning-input name={attributeRecWrp.key}
+																	class="removeLabel"
+																	type={attributeRecWrp.attributeRec.vlocity_ins__ValueDataType__c}
+																	value={attributeRecWrp.value}
+																	variant="label-hidden"
+																	step=".01"
+																	onkeypress={handleCoverageOnKeyPress}
+																	onblur={productCoverageAttributeUpdateRecord}
+																	></lightning-input>
+																</template>
+																<template if:false={attributeRecWrp.isNumber}>
+																	<template if:true={attributeRecWrp.isPercent}>
+																		<lightning-input name={attributeRecWrp.key}
+																		class="removeLabel"
+																		type="Number"
+																		formatter={attributeRecWrp.attributeRec.vlocity_ins__ValueDataType__c}
+																		value={attributeRecWrp.value}
+																		variant="label-hidden"
+																		step=".01"
+																		onkeypress={handleCoverageOnKeyPress}
+																		onblur={productCoverageAttributeUpdateRecord}
+																		></lightning-input>
+																	</template>
+																	<template if:false={attributeRecWrp.isPercent}>
+																		<lightning-input name={attributeRecWrp.key}
+																		class="removeLabel"
+																		type={attributeRecWrp.attributeRec.vlocity_ins__ValueDataType__c}
+																		value={attributeRecWrp.value}
+																		checked={attributeRecWrp.value}
+																		variant="label-hidden"
+																		onkeypress={handleCoverageOnKeyPress}
+																		onblur={productCoverageAttributeUpdateRecord}
+																		></lightning-input>
+																	</template>
+																</template>
+																
+															</template>
+															<template if:true={attributeRecWrp.isPicklist}>
+																<lightning-combobox name={attributeRecWrp.key} 
+																	value={attributeRecWrp.value} 
+																	options={attributeRecWrp.pickValues} 
+																	variant="label-hidden"
+																	onchange={productCoverageAttributeUpdateRecord}> </lightning-combobox> 
+															</template>
+
+														</template>
+														<template if:false={attributeRecWrp.attributeRec.vlocity_ins__IsConfigurable__c}> 
+															<template if:false={attributeRecWrp.attributeRec.isPicklist}> 
+																<lightning-input name={attributeRecWrp.key}
+																				variant="label-hidden"
+																				class="removeLabel"
+																				type={attributeRecWrp.attributeRec.vlocity_ins__ValueDataType__c}
+																				label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}
+																				value={attributeRecWrp.value}
+																				checked={attributeRecWrp.value}
+																				onkeypress={handleCoverageOnKeyPress}
+																				disabled
+																				></lightning-input>
+															</template>
+															<template if:true={attributeRecWrp.isPicklist}>
+																<lightning-combobox name={attributeRecWrp.attributeRec.Name}
+																 label={attributeRecWrp.attributeRec.vlocity_ins__AttributeName__c}
+																  value={attributeRecWrp.value} 
+																  options={attributeRecWrp.pickValues} 
+																  disabled> </lightning-combobox> 
+															</template>
+														</template>
+													</div>
+												</template>
+												</template>
+											</div>
+										</div>
+									</template>
+								</div>
+							</template>
+							<!--Dynamic-->
+							<template for:each={attributeData.subSectionDataList} for:item="subSectionData"
+								for:index="index">
+								<div key={subSectionData.UniqueValue}>
+									<div class="slds-clearfix coveragebox" data-index={subSectionData.UniqueValue}
+										data-prodwrpindex={attributeData.quoteLineindex} onclick={showHideSubSections}>
+										<div class="slds-grid slds-wrap" data-index={subSectionData.UniqueValue}
+										data-prodwrpindex={attributeData.quoteLineindex}>
+											<div class="slds-col slds-size_4-of-12"></div>
+											<div class="slds-col slds-size_5-of-12">
+												<template if:true={subSectionData.expandSubsection}>
+													<span>
+														<div class="slds-grid slds-wrap slds-align_absolute-center" style="margin: 0 80px;">
+															<div class="slds-col slds-size_2-of-12">
+																<lightning-icon icon-name="utility:chevronup" alternative-text="Approved"
+															title="Approved" size="x-small"></lightning-icon>
+															</div>
+															<div class="slds-col slds-size_10-of-12">
+																<p>Hide {subSectionData.sectionName}</p>
+															</div>
+														</div>
+													</span>
+												</template>
+												<template if:false={subSectionData.expandSubsection}>
+													<span>
+														<div class="slds-grid slds-wrap slds-align_absolute-center" style="margin: 0 80px;">
+															<div class="slds-col slds-size_2-of-12">
+																<lightning-icon icon-name="utility:chevrondown" alternative-text="Approved"
+															title="Approved" size="x-small"></lightning-icon>
+															</div>
+															<div class="slds-col slds-size_10-of-12">
+																<p>Show {subSectionData.sectionName}</p>
+															</div>
+														</div>
+													</span>
+												</template>
+											</div>
+											<div class="slds-col slds-size_3-of-12"></div>
+										</div>
+									</div>
+									<!-- insuredItemSpecChildItemMap [quotelineItem => jsonfield[AttributeSelectedValues] ] -->
+									<template if:true={subSectionData.expandSubsection}>
+										<!-- Tabel [Formdata display] -->
+										<div class="tableDiv slds-m-around_medium">
+											<div class="slds-scrollable_x">	
+											<table class="slds-table  slds-table_bordered ">
+												<thead class="tableth">
+													<tr class="slds-line-height_reset">
+														<template for:each={subSectionData.tableHeaders} for:item="headerInfo">
+															<th scope="col" key={headerInfo.UniqueValue}>
+																<div class="slds-truncate ">{headerInfo.header}</div>
+															</th>
+														</template>
+													</tr>
+												</thead>
+												<tbody>
+													<template for:each={subSectionData.dataList} for:item="rowWrp">
+														<tr class="slds-hint-parent" key={rowWrp.UniqueValue}>
+															<template for:each={rowWrp.rowData} for:item="cellData">
+																<td scope="row" key={cellData.UniqueValue}>
+																	<div style="white-space: pre-wrap;">
+																		{cellData.data}
+																	</div>
+																</td>
+															</template>
+														</tr>
+													</template>
+												</tbody>
+											</table>
+											</div>
+										</div>
+										<template if:false={subSectionData.hasData}>
+											<table>
+												<tbody>
+													<tr class="slds-align_absolute-center slds-m-horizontal_medium slds-hint-parent" style="border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218));">
+														<td colspan="9">
+															<h4 class="norecord">No Record Found</h4>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+											<br/>
+										</template>
+									</template>
+								</div>
+							</template>
+							<!--Dynamic-->
+						</template>
+					</section>
+				</lightning-card>
+			</div>
+		</template>
+	</template>
+	<template if:false={hasQuoteLineData}>
+		<table>
+			<tbody>
+				<tr class="slds-align_absolute-center slds-m-horizontal_medium slds-hint-parent" style="border-bottom: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218));">
+					<td colspan="9">
+						<h4 class="norecord">No Record Found</h4>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br/>
+	</template>
+</template>

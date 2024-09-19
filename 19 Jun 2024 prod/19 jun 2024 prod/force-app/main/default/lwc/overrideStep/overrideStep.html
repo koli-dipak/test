@@ -1,0 +1,52 @@
+<template>
+  <template if:true={jsonDef.bAccordionActive}>
+    <div>
+      <div class="vlvlocity_ins-slds-knowledge--container"
+           if:true={articleBodyResults.articleTitle}>
+        <h3 class='vlvlocity_ins-slds-knowledge--header'
+            visible={visible}
+            onclick={toggleArticle}>
+          <a href={articleBodyResults.articleLink}
+             target="_blank">{articleBodyResults.articleTitle}</a>
+
+          <vlocity_ins-icon class="vlvlocity_ins-slds-collapse slds-button__icon slds-button__icon--large"
+                  variant="default"
+                  size="small"
+                  icon-name="utility:chevrondown"
+                  theme={_theme}></vlocity_ins-icon>
+
+          <vlocity_ins-icon class="vlvlocity_ins-slds-expand slds-button__icon slds-button__icon--large"
+                  variant="default"
+                  size="small"
+                  icon-name="utility:chevronup"
+                  theme={_theme}></vlocity_ins-icon>
+
+        </h3>
+
+        <div class='vlvlocity_ins-slds-knowledge--body'
+             if:true={visible}>
+          <vlocity_ins-omniscript-formatted-rich-text value={articleBodyResults.articleBody}>
+          </vlocity_ins-omniscript-formatted-rich-text>
+        </div>
+
+        <div>
+          <vlocity_ins-icon class="slds-icon_container slds-button__icon slds-button__icon--large"
+                  variant="default"
+                  size="small"
+                  onclick={closeArticle}
+                  icon-name="action:remove"
+                  theme={_theme}></vlocity_ins-icon>
+        </div>
+      </div>
+    </div>
+    <h1 class="slds-page-header__title slds-p-horizontal_medium slds-text-heading--medium slds-m-top_medium os-step-label" style="text-align: center;font-size:20px;color:#005CA7;font-weight: 500;">
+      {_propSetMap.label}
+    </h1>
+    <div class="vlvlocity_ins-separator slds-border_top slds-m-top_x-small slds-m-bottom_xx-small slds-m-horizontal_medium" style="margin-left: 0px;margin: right 0px;">
+    </div>
+    <div class="slds-grid slds-wrap slds-p-vertical_small omniscript-step__body">
+      <slot class='slds-grid slds-wrap slds-size_1-of-1'>
+      </slot>
+    </div>
+  </template>
+</template>

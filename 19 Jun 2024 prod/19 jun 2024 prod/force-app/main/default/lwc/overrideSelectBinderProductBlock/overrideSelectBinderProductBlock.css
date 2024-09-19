@@ -1,0 +1,63 @@
+thead.tableth th {
+    background: #3c78d8;
+    color: #fff;
+    padding: 10px 10px;
+}
+.slds-border_bottom.slds-border_top.slds-border_left.slds-border_right.slds-grid.slds-p-vertical_xx-small {
+    border-bottom: 1px solid #dddbda;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+}
+.slds-p-around_small{
+    padding: 10px 0;
+}
+.slds-scope .slds-text-title_caps {
+    font-size: 14px;
+    line-height: var(--lwc-lineHeightHeading,1.25);
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .0625rem;
+}
+.slds-scope .slds-scope .slds-text-heading--label{
+    font-size: 14px;
+    line-height: var(--lwc-lineHeightHeading,1.25);
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .0625rem;
+}
+strong.slds-text-title_caps.slds-text-heading--label.slds-p-vertical_x-small {
+    font-size: 14px;
+    line-height: var(--lwc-lineHeightHeading,1.25);
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .0625rem;
+}
+.slds-scope{
+    color: #000 !important;
+    font-weight: 600;
+}
+/* width */
+::-webkit-scrollbar {
+width: 7px;
+height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background: linear-gradient(to top, #3c78d8 40%, #3c78d8 100%); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: -webkit-linear-gradient(left,#3c78d8 0,#3c78d8 100%);
+}

@@ -1,0 +1,92 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 07-28-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+
+    <lightning-card>
+        <div class="slds-p-around_small">
+
+            <div class="heading" style="color:rgb(0, 92, 167); font-size:large; text-align:center ">
+                <h1><strong>Help Text</strong> </h1>
+            </div>
+            <div class="vlvlocity_ins-separator slds-border_top slds-m-top_x-small slds-m-bottom_xx-small slds-m-horizontal_medium" style="margin-left: 0px;margin: right 0px;">
+            </div>
+
+            <p style="text-align:justify">* Complete rater (including premium
+                allocation and local EL) to calculate
+                Technical Premium (net of Commission),
+                leave commision blank.
+            </p><br/>
+            <p style="text-align:justify">* Complete this tool by entering
+                commision and determining actual
+                premium and actual local EL.
+            </p><br/>
+            <p style="text-align:justify">* Go back to GeR rater to update
+                commision, actual premium, and local EL
+                actual premium and re upload the file.
+            </p>
+
+
+        </div>
+        
+        <!-- <div class="slds-p-around_xx-small">
+            <button class="slds-button slds-button_brand slds-m-top_medium" style="width: 100%" onclick={showModal}>Clone</button>
+        </div>
+        <template if:true={openModal}>  
+            <div class="slds-modal slds-fade-in-open slds-backdrop">
+              <div class="slds-modal__container">  
+               
+          
+                <div class="slds-modal__content slds-var-p-around_medium">
+                    <c-clone-selection onmodalclose={handleEvent}></c-clone-selection>
+                </div>
+        
+              </div>  
+            </div>  
+          </template>   -->
+         
+        <!-- <template if:true={cloneLwcCall}> -->
+            <!-- <c-clone-selection ></c-clone-selection>  -->
+        <!-- </template> -->
+
+        <template if:true={showClone}>  
+            <template if:true={enableSaveForLater}>  
+            <div class="slds-p-around_xx-small">
+                <button class="slds-button slds-button_brand " style="width: 100%" onclick={saveAsDraftHandler}>Save for Later</button>
+            </div> 
+            </template>
+            <div class="slds-p-around_xx-small">
+                <button class="slds-button slds-button_brand" style="width: 100%" onclick={showModal}>Clone</button>
+            </div>
+        </template>
+        <template if:true={openModal}>  
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-65" class="slds-modal slds-fade-in-open">
+        
+            <div class="slds-modal__container" style="width: 80%;  max-width: 70rem;">  
+            
+                <!------Body Section-->  
+                <div class="slds-modal__content slds-var-p-around_medium">
+                    <c-clone-selection record-id={applicationId} record-api-data={recordApi} onmodalclose={handleEvent}></c-clone-selection>
+                </div>
+        
+            </div> 
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div> 
+        </template>  
+
+    </lightning-card>
+
+    <template if:true={loaded}>
+        <vlocity_ins-spinner variant="brand"
+                alternative-text="Loading..."
+                
+                size="medium">
+        </vlocity_ins-spinner>
+    </template>
+
+
+</template>

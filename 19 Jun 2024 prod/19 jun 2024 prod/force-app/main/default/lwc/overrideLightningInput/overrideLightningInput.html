@@ -1,0 +1,10 @@
+<template>
+    <template if:false={readOnly}>
+        <lightning-input  variant="label-hidden"  label={label} value={value}  onblur={handleRecordChange}></lightning-input>
+    </template>
+    <template if:true={readOnly}>
+        <lightning-input  variant="label-hidden"  label={label} value={value}  disabled></lightning-input>
+  
+    </template>
+    
+</template>

@@ -1,0 +1,24 @@
+.filePreview{
+    color: blue;
+}
+.filePreview:hover{
+    cursor: pointer;
+}
+.headerTextProperties {
+    /* position: absolute; */
+/* width: 293px; */
+height: 20px;
+/* left: 21px; */
+/* top: 852px; */
+
+/* font-family: 'Roboto'; */
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 20px;
+/* identical to box height, or 143% */
+
+
+color: #005CA7;
+
+}

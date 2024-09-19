@@ -1,0 +1,112 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 08-30-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <!-- //////////////////// -->
+
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_1-of-12">
+            <label class="slds-form-element__label slds-m-right_none" style="font-weight: 600;" >
+                ORDER NO.
+            </label>
+        </div>
+
+        <div class="slds-col slds-size_7-of-12">
+            <label class="slds-form-element__label slds-m-right_none" style="font-weight: 600;">
+                FORM NAME
+            </label>
+        </div>
+        
+        <div class="slds-col slds-size_2-of-12">
+            <label class="slds-form-element__label slds-m-right_none" style="font-weight: 600;" >
+                FORM NO.
+            </label>
+        </div>
+        <div class="slds-col slds-size_1-of-12"></div>
+        <div class="slds-col slds-size_1-of-12"></div>
+    </div>
+
+    <!-- //////////////////// -->
+    <template for:each={FromNameAndNo} for:item="Data" for:index="FromName">
+        <div class="slds-grid slds-wrap" key={Data.FromName}>
+            <div class="slds-col slds-size_1-of-12">
+                <label class="slds-form-element__label slds-m-right_none" >
+                    {Data.Order}
+                </label>
+            </div>
+
+            <div class="slds-col slds-size_7-of-12">
+                <label class="slds-form-element__label slds-m-right_none" for={tglValToF} >
+                    {Data.FromName}
+                </label>
+            </div>
+            
+            <div class="slds-col slds-size_2-of-12">
+                <label class="slds-form-element__label slds-m-right_none" for="default1">
+                    {Data.FromNo}
+                </label>
+            </div>
+            <div class="slds-col slds-size_1-of-12">
+                <span>
+                    <c-counter-of-select-req-form onincrement={quantityCtrl} ondecrement={quantityCtrl} data-counter={Data.FromId} qtyval={Data.NoOfCount}></c-counter-of-select-req-form>
+
+                    <!-- <div class="slds-form-element">
+            
+                        <div class="slds-form-element__control">
+                            <button class="slds-button slds-button_icon 
+                                    slds-button_icon-small slds-input__button_decrement"
+                                    title="Decrement counter">
+                                <lightning-icon icon-name="utility:ban" 
+                                                alternative-text="" 
+                                                size="xx-small" 
+                                                title="" 
+                                                onclick={setDecrementCounter}
+                                                data-dec={Data.FromId}>
+                                </lightning-icon>
+                              <span class="slds-assistive-text">Decrement counter</span>
+                            </button>
+                            <input type="number"  placeholder={plchldQty}
+                              class="slds-input slds-input_counter" onchange={selectedValue}/>
+                            <button class="slds-button slds-button_icon 
+                                           slds-button_icon-small 
+                                           slds-input__button_increment"
+                                    title="Increment counter">
+                                <lightning-icon icon-name="utility:new" 
+                                                alternative-text="" 
+                                                size="xx-small" 
+                                                title="" 
+                                                onclick={setIncrementCounter}
+                                                data-inc={Data.FromId}>
+                                </lightning-icon>
+                              <span class="slds-assistive-text">Increment counter</span>
+                            </button>
+                        </div>
+                        </div> -->
+                </span>
+            </div>
+            <div class="slds-col slds-size_1-of-12">
+                    <span>
+                    
+                        <div class="slds-form-element">
+                            <label class="slds-checkbox_toggle slds-grid">
+                            <!-- <input type="checkbox" name={Data.FromName} checked={Data.selected}  data-id={Data.FromId} aria-describedby="checkbox-toggle-17" onclick={tglVal}/> -->
+                            <template if:true={Data.Mandatory}>
+                                <input type="checkbox" name={Data.FromName} checked={Data.selected}  data-id={Data.FromId} aria-describedby="checkbox-toggle-17" disabled/>
+                            </template>
+                            <template if:false={Data.Mandatory}>
+                                <input type="checkbox" name={Data.FromName} checked={Data.selected}  data-id={Data.FromId} aria-describedby="checkbox-toggle-17" onclick={tglVal}/>
+                            </template>
+                            <span class="slds-checkbox_faux_container" aria-live="assertive">
+                            <span class="slds-checkbox_faux"></span>
+                            </span>
+                            </label>
+                            </div>
+                    </span>
+            </div>
+        </div>
+    </template>
+</template>

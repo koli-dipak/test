@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>  
+        <targetConfig targets="lightning__RecordPage,lightning__FlowScreen">
+            <property name="title" type="String" label="Title" /> 
+            <!-- + Engagement Programs SPCmp -->
+            <property name="iconNameOfTitle" type="String" label="Icon Name for the Title" default="custom:custom26" />
+            <!-- custom:custom26 -->
+            <property name="iconNameOfSearchResult" type="String" label="Icon Name for the Search Records" />
+            <!-- standard:account -->
+            <property name="sObjectApiNameToSearch" type="String" label="API Name of Object To Search Records"  />
+            <!-- Account -->
+            <property name="sObjectApiNameOfJunctionObject" type="String" label="API Name of Junction Object" />
+            <!-- Email;City;State -->
+            <property name="additionalFielddAPINamesToShow" type="String" label="API Name of additional fields to show in search result" placeholder="Email;City;State"/>
+            <!-- Engagement_Broker__c -->
+            <property name="apiNameOfFieldSetToSearch" type="String" label="API Name of Field Set To Search Records" />
+            <!-- Create_New_Record_Field_Set_SP -->
+            <property name="apiNameOfFieldSetForDataTable" type="String" label="API Name of Field Set For DataTable"  />
+            <!-- Broker__c -->
+            <property name="fieldAPINameOfCurrentObject" type="String" label="Field API Name of Current Object from Junction Object"  />
+            <!-- Broker_Account__c -->
+            <property name="fieldAPINameOfSelectedObject" type="String" label="Field API Name of Selected Object from Junction Object" />
+            <!-- 5 -->
+            <property name="limitForDropdownOptions" type="Integer" label="Number of options to show in dropdown" min="3" max="50" default="6" />
+            <!-- Insured -->
+            <property name="recordTypeNamesToFilter" type="String" label="Recordtypes dev names to filter" placeholder="Insured;Broker;Personal"/>
+            <!-- NameInsuredId=AccountId;OwnerId=OwnerId -->
+            <property name="fieldValuesToFilter" type="String" label="Field API names to filter" placeholder="SearchObjFieldName=CurrentObjFieldName;SearchObjFieldName1=CurrentObjFieldName2"/>
+            <!-- Record Created Successfully!! -->
+            <property name="successMessage" type="String" label="Success Toast Message" default="Record Created Successfully!!"/>
+
+            
+            <!-- Ahil Changes -->
+            <property name="recordId" label="Case Id" type="String" />
+            <property name="objectApiName" label="Object Api Name" type="String"/>
+            <property name="junctionData" label="junctionData" type="String"/>
+            <property name="FlowComponent" label="FlowComponent" type="Boolean"/>
+            <property name="ButtonComponent" label="ButtonComponent" type="Boolean"/> 
+            <property name="CaseFromOpportunity" label="CaseFromOpportunity" type="Boolean"/> 
+
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

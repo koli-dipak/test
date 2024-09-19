@@ -1,0 +1,86 @@
+.accordian{
+    display: flex;
+    justify-content: space-between;
+    margin:0px 0px;
+    padding: 8px 0px;
+    border-bottom: 0.5px solid rgb(155, 153, 153);
+    cursor: pointer;
+}
+
+.firstclass{
+    border-top: 0.5px solid rgb(155, 153, 153);
+}
+
+
+.drpDwnClrChng{
+    background-color: rgb(227, 242, 255);
+    display: flex;
+    justify-content: space-between;
+    margin:0px 0px;
+    padding: 8px 0px;
+    border-bottom: 0.5px solid rgb(0, 92, 167);
+    cursor: pointer;
+}
+
+.drpRghtClrChng{
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    margin:0px 0px;
+    padding: 8px 0px;
+    border-bottom: 0.5px solid rgb(155, 153, 153);
+    cursor: pointer;
+}
+
+/* .thClrShdBlue {
+    color:rgb(0, 92, 167);
+} */
+
+.thClrShdBlue {
+
+    /* position: absolute; */
+    /* width: 93px; */
+    /* height: 18px; */
+    /* left: 22px; */
+    /* top: 141px; */
+
+    /* font-family: 'Roboto'; */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    /* identical to box height, or 138% */
+
+
+    color: #005CA7;
+
+}
+.dropdownHeading{
+/* width: 469px;
+height: 20px;
+left: 20px;
+top: 287px; */
+
+/* font-family: 'Roboto'; */
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+/* identical to box height, or 125% */
+
+text-transform: capitalize;
+
+color: #005CA7;
+}
+.pageBorder {
+    width: 100%;
+    height: 0px;
+    left: 10px;
+    top: 62.42px;
+    margin-top: 12px;
+    border-bottom: 1px solid #D8D8D8;
+}
+
+/* .button{
+    padding-left: 1265px;
+} */

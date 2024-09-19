@@ -1,0 +1,7 @@
+<template>
+    <template if:true={isEmailNotMatched}>
+        <p style="color:red; margin-bottom: 10px;">
+            You are sending the email to a recipient that does not have a SLA associated. The due date for your request will not be populated appropriately. Please contact your admin to add the recipient to the SLA list of contacts.
+        </p>
+    </template>
+</template>

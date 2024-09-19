@@ -1,0 +1,53 @@
+<template>
+    <lightning-card title="Document Checklist Items">
+        <div style="overflow: auto;">
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                    <tr>
+                        <th>
+                            <label>
+                                <input type="checkbox" onchange={handleSelectAll} />
+                                <span class="slds-checkbox_faux"></span>
+                            </label>
+                        </th>
+                        <th>Name</th>
+                        <th>Line of Business</th>
+                        <th>Country/State</th>
+                        <th>Status</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={data} for:item="item">
+                        <template if:false={item.isDuplicate}>
+                        <tr key={item.Id}>
+                            <td>
+                                <input type="checkbox" value={item.Id} onchange={handleRowSelection} checked={item.selected} />
+
+                            </td>
+                            <!-- <template if:false={item.isDuplicate}> -->
+     
+                                <td> 
+                                    <label onclick={navigateToRecord} data-record-id={item.Id} style="color:rgb(11 92 170); cursor: pointer;">
+                                        {item.Name}
+                                    </label>
+                                </td>
+                                <td>{item.Line_of_Business__c}</td>
+                                <td>{item.Country_States__c}</td>
+                            <td>
+                                {item.Status}
+                            </td>
+                        
+                            <!-- </template> -->
+                
+                        </tr>
+                    </template>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+        <div class="slds-m-top_medium slds-float_right">
+            <lightning-button label="Next" onclick={handleNextClick} variant="brand"></lightning-button>
+        </div>
+    </lightning-card>
+</template>

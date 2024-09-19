@@ -1,0 +1,9 @@
+.slds-modal__container {
+    max-width: 99rem !important;
+    width: 99% !important;
+}
+.slds-spinner_container  {
+    background-color: rgba(164, 161, 161, 0.732);
+    /* margin-top: 200px; */
+    /* margin-bottom: 200px; */
+}

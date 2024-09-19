@@ -1,0 +1,64 @@
+<aura:component controller="RequestContactUpdateController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:lightningQuickActionWithoutHeader,force:hasRecordId" access="global" >
+    <!-- c:formfill recordId="{!v.recordId}"></c:formfill --> 
+  
+    <!--Custom Styles for Modal Header and Footer--> 
+    <aura:html tag="style">
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+        padding: 0rem !important;
+        }       
+        .slds-modal__content{
+        overflow-y:hidden !important;
+        height:unset !important;
+        max-height:unset !important;
+        }
+    </aura:html>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <!--Component Attribute--> 
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:attribute name="contactId" type="String"/>
+    <aura:attribute name="comment" type="String"/>
+    <aura:attribute name="contacts" type="List"/>
+
+    <!-- Spinner -->
+    <aura:if isTrue="{!v.Spinner}">
+        <div class="slds-spinner_container">
+            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    
+    <div class="modal-header slds-modal__header slds-size_1-of-1">
+        <h4 class="title slds-text-heading--medium">Send Email</h4>
+    </div>
+    
+    <div class="slds-modal__content slds-p-around--x-small slds-align_absolute-center slds-size_1-of-1 slds-is-relative">
+        <div class="slds-grid slds-grid_vertical" style="width: 100%;">
+            <div class="slds-col">
+                <!-- lightning:input style="margin:10px;margin-top:10px" type="text" name="email1" value="{!v.emailValue}" label="User Email :" / -->
+            </div> 
+            <div class="slds-col">
+                <lightning:select required="true" aura:id="selectContact" name="selectContact" label="Select Contact" onchange="{! c.onChange }">
+                    <option value="">-- None --</option>
+                    <aura:iteration items="{!v.contacts}" var="con">
+                        <option value="{!con.Id}">{!con.Name}</option>
+                    </aura:iteration>
+                </lightning:select>
+            </div> 
+             <div class="slds-col">
+                <lightning:textarea name="comments" aura:id="comment"  value="{!v.comment}" label="Comments :" />
+            </div> 
+        </div>
+    </div>
+    
+    <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+        <lightning:button variant="Neutral" class="slds-button" label="Cancel" onclick="{!c.handleClose}"/>
+        <lightning:button variant="Brand" class="slds-button" label="Send" onclick="{!c.handleSend}"/>
+    </div>
+</aura:component>

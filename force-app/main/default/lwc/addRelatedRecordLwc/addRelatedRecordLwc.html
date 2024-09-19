@@ -1,0 +1,91 @@
+<template>
+    <lightning-card title={title} icon-name={iconNameOfTitle}>
+        <div class="slds-p-horizontal_small">
+            <div class="slds-p-horizontal_small">
+                <c-multi-select-pick-list multi-select="true" onselectoption={handleSelectOptionList} search-string={searchKey} show-dropdown={showDropdown} onopendatatable={handlePicklistOpenDataTable}
+                icon-name-of-search-result={iconNameOfSearchResult} options={comboboxOptions} selected-value={selectedValue}
+                    onsearchkeychange={handlePicklistSearchKeyChange}></c-multi-select-pick-list>
+            </div>
+        </div>
+        <div class="slds-align_absolute-center slds-p-around_medium">
+            <lightning-button variant="brand" label="Add+" title="Add" onclick={handleCreateJunctionObjectRecords}>
+            </lightning-button>
+
+            <lightning-button if:true={ButtonComponent} class="slds-m-left_small" variant="brand" label="Create Location" title="createLocation" onclick={handleCreateLocationRecords}>
+            
+            </lightning-button>  <!--ahil changes-->
+            <template if:true={createLocationClick}>
+                <c-new-location-record-page create-location-click={createLocationClick} record-id={recordId} onclose={modalCloseHandler}></c-new-location-record-page>
+            </template>
+        </div>
+
+        <!-- Lightning Datatable modal start -->
+
+        <template if:true={showDataTable}>
+
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-align_absolute-center">
+                <div class="slds-modal__container slds-p-around_medium "
+                    style="max-width: 80%;width: 100%;max-height: 85%;height: 100%;">
+                    <!-- modal header start -->
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={hideModalBox}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                size="small"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Select Record</h2>
+                    </header>
+
+                    <!-- modal body start -->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+                        <div if:true={error} id='error-message' class="slds-required">Error :{error}</div>
+                        <lightning-card>
+
+                            <!-- Search -->
+                            <lightning-input type="search" onchange={handleSearchKeyChange} value={searchKey}
+                                variant="label-hidden" placeholder={placeholder}></lightning-input>
+                                <template if:false={searchKeyValid}>
+                                    <span class="slds-text-color_destructive">you must enter atleast 3 characters to search..</span>
+                                </template>
+                            <div id="slds-table-section" class="slds-p-around--x-small">
+                                <template if:true={isDataAvailable}>
+
+                                    <lightning-datatable data={allRecords} columns={dataTableFields} key-field="Id"
+                                        onrowselection={handleDataTableRowSelection} show-row-number-column="true" default-sort-direction={defaultSortDirection}
+                                        sorted-direction={sortDirection}
+                                        sorted-by={sortedBy}
+                                        onsort={onHandleSort}>
+                                    </lightning-datatable>
+                                </template>
+                                <template if:false={isDataAvailable}>
+                                    <div class="slds-align_absolute-center"> -- No Data Available -- </div>
+                                </template>
+                            </div>
+                        </lightning-card>
+                    </div>
+
+                    <!-- modal footer start-->
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral slds-p-horizontal_small"
+                            onclick={hideModalBox}>Cancel</button>
+                        <button class="slds-button slds-button_brand" onclick={handleCreateJunctionObjectRecords}>Add
+                            Records</button>
+                    </footer>
+                </div>
+
+                <template if:true={isLoading}>
+                    <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                </template>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+
+        <!-- Lightning Datatable modal end -->
+
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </template>
+    </lightning-card>
+</template>

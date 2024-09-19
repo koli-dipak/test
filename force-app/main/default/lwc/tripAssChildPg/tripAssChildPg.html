@@ -1,0 +1,116 @@
+<!--
+  @description       : 
+  @author            : mailto:changemein@usersettingsunder.sfdoc
+  @group             : 
+  @last modified on  : 07-19-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  <div class="slds-m-left_small ">
+  <c-fc-exposurebasis   is-read-only={isReadOnly} columns={exposurecolumn} coverage={recordApi} onchangedataupdate={handleExposure}></c-fc-exposurebasis>
+   
+  <div class="pageBorder"></div>
+
+  <!-- New style implement -->
+
+<label class="headerTextProperties ">COVERAGES</label>
+  
+<div class=" slds-m-bottom_medium slds-m-top_medium  ">
+    <fieldset class="slds-form-element slds-form-element_compound">
+        <div class="slds-form-element__control">
+            <div class="slds-form-element__row">
+                <div class="slds-size_1-of-3">
+                  <lightning-input onblur={handleChange} name="TripCancellation" value={recordApi.TripCancellation} label="Trip Cancellation" readonly={isReadOnly} type="text" formatter="currency" step="1"></lightning-input>
+                      
+                    <div class="slds-form-element ">
+                         <label class="slds-form-element__label slds-text-color_default">{recordApi.TripCancellationSuffix}</label>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-3">
+                  <lightning-input onblur={handleChange} name="TripInterruption" value={recordApi.TripInterruption} readonly={isReadOnly} label="Trip Interruption" type="text" formatter="currency" step="1"></lightning-input>
+                        
+                    <div class="slds-form-element ">
+                         <label class="slds-form-element__label slds-text-color_default">{recordApi.TripInterruptionSuffix}</label>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-3">
+                  <lightning-input onblur={handleChange} name="TripDelay" value={recordApi.TripDelay} readonly={isReadOnly} label="Trip Delay" type="text" formatter="currency" step="1" ></lightning-input>
+                    
+                    <div class="slds-form-element ">
+                         <label class="slds-form-element__label slds-text-color_default">{recordApi.TripDelaySuffix}</label>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+<div class=" slds-m-bottom_medium ">
+    <fieldset class="slds-form-element slds-form-element_compound">
+        <div class="slds-form-element__control">
+            <div class="slds-form-element__row">
+                <div class="slds-size_1-of-3">
+                  <lightning-input onblur={handleChange} name="BaggageDelay" value={recordApi.BaggageDelay} label="Baggage Delay" readonly={isReadOnly} type="text" formatter="currency" step="1"></lightning-input>
+                     
+                    <div class="slds-form-element ">
+                         <label class="slds-form-element__label slds-text-color_default">{recordApi.BaggageDelaySuffix}</label>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-3">
+                  <lightning-input onblur={handleChange} name="LostOrDamagedBaggage" value={recordApi.LostOrDamagedBaggage} label="Lost or Damaged Baggage" readonly={isReadOnly} type="text" formatter="currency" step="1"></lightning-input>
+                        
+                    <div class="slds-form-element ">
+                         <label class="slds-form-element__label slds-text-color_default">{recordApi.LostOrDamagedBaggageSuffix}</label>
+                    </div>
+                </div>
+                <div class="slds-size_1-of-3">
+                  <lightning-input onblur={handleChange} name="JewelryWatchesAndElectronics" label="Jewellery,Watches and Electronics" value={recordApi.JewelryWatchesAndElectronics} readonly={isReadOnly} type="text" formatter="currency" step="1"></lightning-input>
+                        
+                    <div class="slds-form-element ">
+                         <label class="slds-form-element__label slds-text-color_default">{recordApi.JewelryWatchesAndElectronicsSuffix}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    </div>
+
+  <div class=" slds-m-bottom_medium ">
+      <fieldset class="slds-form-element slds-form-element_compound">
+          <div class="slds-form-element__control">
+              <div class="slds-form-element__row">
+                  <div class="slds-size_1-of-3">
+                    <lightning-input onblur={handleChange} name="PreTripTravelAssistanceServices" value={recordApi.PreTripTravelAssistanceServices} label="Pre-trip Assistant Services/Travel Assistance services " readonly={isReadOnly} type="text" formatter="currency" step="1"></lightning-input>
+                        
+                      <div class="slds-form-element ">
+                           <label class="slds-form-element__label slds-text-color_default">{recordApi.PreTripTravelAssistanceSuffix}</label>
+                      </div>
+                  </div>
+                  <div class="slds-size_1-of-3">
+                    <lightning-input onblur={handleChange} name="PolicyPeriod" value={recordApi.PolicyPeriod} readonly={isReadOnly} label="Policy Period" type="text" formatter="currency" step="1"></lightning-input>
+                          
+                      <div class="slds-form-element ">
+                           <label class="slds-form-element__label slds-text-color_default">{recordApi.PolicyPeriodSuffix}</label>
+                       </div>
+                  </div>
+              </div>
+          </div>
+      </fieldset>
+      </div>
+
+  <!-- //////////////////// -->
+
+<div class="pageBorder"></div>
+
+  <div class="slds-grid slds-wrap">
+      <div class="slds-col slds-size_12-of-12">
+          <c-add-form get-current-lob ={currentLOB} all-coverages={recordTypeData} current-coverage-id={currentCoverageID} is-read-only={isReadOnly} onchangedataupdate={TripChangeData}></c-add-form>
+      </div>
+  </div>
+
+
+</div>
+
+
+  
+</template>

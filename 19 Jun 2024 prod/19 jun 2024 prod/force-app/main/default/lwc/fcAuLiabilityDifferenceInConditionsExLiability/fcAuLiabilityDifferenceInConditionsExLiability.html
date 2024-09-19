@@ -1,0 +1,547 @@
+<template>
+    <div class="slds-m-left_small ">
+   
+    <c-fc-exposurebasis is-read-only={isReadOnly} columns={exposurecolumn} coverage={recordApi}
+        onchangedataupdate={handleExposure}></c-fc-exposurebasis>
+    <div class="pageBorder"></div>
+
+    <label  class="headerTextProperties">COVERED AUTOS</label>
+   
+    <div class="slds-form-element slds-m-bottom_medium">
+
+        <div class="slds-form-element__control">
+            <div class="slds-checkbox">
+                <div class="first slds-grid slds-gutters">
+                    <div class="slds-col slds-size_4-of-12">
+                        <label class="slds-form-element__label"></label>
+                    </div>
+                    <div class=" slds-col slds-size_2-of-12">
+                        <label class=" slds-form-element__label slds-text-color_default ">Liability</label>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12">
+                        <label class=" slds-form-element__label slds-text-color_default">Comprehensive</label>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12">
+                        <label class="slds-form-element__label slds-text-color_default">Collision</label>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12">
+                        <label class="slds-form-element__label slds-text-color_default">Specified Causes of
+                            Loss</label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="slds-m-bottom_medium slds-form-element__control">
+            <div class="slds-checkbox">
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_4-of-12">
+                        <label class=" first slds-form-element__label slds-text-color_default"
+                            style="font-size: 12px; line-height: 18px;">OWNED PRIVATE PASSENGER AUTOS</label>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12">
+                        <template if:false={isReadOnly}>
+                            <input type="checkbox" name="OwnedPrivatePassengerAutosLiability"
+                                id="checkbox-unique-id-1" onchange={handleCheckValueChange}
+                                checked={recordApi.OwnedPrivatePassengerAutosLiability} />
+                        </template>
+                        <template if:true={isReadOnly}>
+                            <input type="checkbox" name="OwnedPrivatePassengerAutosLiability"
+                                value="checkbox-unique-id-1" disabled=""
+                                checked={recordApi.OwnedPrivatePassengerAutosLiability} />
+                        </template>
+
+                        <label class="slds-checkbox__label slds-m-left_small" for="checkbox-unique-id-1">
+                            <span class="slds-checkbox_faux"></span>
+                        </label>
+                    </div>
+
+                    <div class="slds-col slds-size_2-of-12">
+                        <template if:false={isReadOnly}>
+                            <input type="checkbox" name="OwnedPrivatePassengerAutosComprehens"
+                                id="checkbox-unique-id-2" onchange={handleCheckValueChange}
+                                checked={recordApi.OwnedPrivatePassengerAutosComprehens} />
+                        </template>
+                        <template if:true={isReadOnly}>
+                            <input type="checkbox" name="OwnedPrivatePassengerAutosComprehens"
+                                value="checkbox-unique-id-2" disabled
+                                checked={recordApi.OwnedPrivatePassengerAutosComprehens} />
+
+                        </template>
+                        <label class="slds-checkbox__label slds-m-left_x-large" for="checkbox-unique-id-2">
+                            <span class="slds-checkbox_faux"></span>
+                        </label>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12">
+                        <template if:false={isReadOnly}>
+                            <input type="checkbox" name="OwnedPrivatePassengerAutosCollision"
+                                id="checkbox-unique-id-3" onchange={handleCheckValueChange}
+                                checked={recordApi.OwnedPrivatePassengerAutosCollision} />
+                        </template>
+                        <template if:true={isReadOnly}>
+                            <input type="checkbox" name="OwnedPrivatePassengerAutosCollision"
+                                value="checkbox-unique-id-3" checked={recordApi.OwnedPrivatePassengerAutosCollision}
+                                disabled />
+                        </template>
+
+                        <label class="slds-checkbox__label slds-m-left_medium" for="checkbox-unique-id-3">
+                            <span class="slds-checkbox_faux"></span>
+                        </label>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12">
+                        <template if:false={isReadOnly}>
+                            <input type="checkbox" name="OwnedPrivatePassengerAutosSpecifed"
+                                id="checkbox-unique-id-4" onchange={handleCheckValueChange}
+                                checked={recordApi.OwnedPrivatePassengerAutosSpecifed} readonly={isReadOnly} />
+                        </template>
+                        <template if:true={isReadOnly}>
+                            <input type="checkbox" name="OwnedPrivatePassengerAutosSpecifed"
+                                value="checkbox-unique-id-4" checked={recordApi.OwnedPrivatePassengerAutosSpecifed}
+                                disabled readonly={isReadOnly} />
+                        </template>
+
+                        <label class="slds-checkbox__label check" for="checkbox-unique-id-4">
+                            <span class="slds-checkbox_faux"></span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class=" slds-m-bottom_medium slds-form-element__control">
+            <div class="slds-checkbox">
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_4-of-12">
+                        <label class="first slds-form-element__label slds-text-color_default"
+                            style="font-size: 12px; line-height: 18px;">OWNED AUTOS (OTHER THAN PRIVATE
+                            PASSENGER)</label>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12">
+                        <template if:false={isReadOnly}>
+                            <input type="checkbox" name="OwnedAutosotherthenPrivatePassenge"
+                                id="checkbox-unique-id-5" checked={recordApi.OwnedAutosotherthenPrivatePassenge}
+                                onchange={handleCheckValueChange} />
+                        </template>
+                        <template if:true={isReadOnly}>
+                            <input type="checkbox" name="OwnedAutosotherthenPrivatePassenge"
+                                value="checkbox-unique-id-5" checked={recordApi.OwnedAutosotherthenPrivatePassenge}
+                                disabled="" />
+                        </template>
+
+                        <label class="slds-checkbox__label slds-m-left_small" for="checkbox-unique-id-5">
+                            <span class="slds-checkbox_faux"></span>
+                        </label>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12">
+                        <template if:false={isReadOnly}>
+                            <input type="checkbox" name="OwnedAutosComprehensive" id="checkbox-unique-id-6"
+                                onchange={handleCheckValueChange} checked={recordApi.OwnedAutosComprehensive}
+                                readonly={isReadOnly} />
+                        </template>
+                        <template if:true={isReadOnly}>
+                            <input type="checkbox" name="OwnedAutosComprehensive" value="checkbox-unique-id-6"
+                                checked={recordApi.OwnedAutosComprehensive} disabled readonly={isReadOnly} />
+                        </template>
+
+                        <label class="slds-checkbox__label slds-m-left_x-large" for="checkbox-unique-id-6">
+                            <span class="slds-checkbox_faux"></span>
+                        </label>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12">
+                        <template if:false={isReadOnly}>
+                            <input type="checkbox" name="OwnedAutosCollision" id="checkbox-unique-id-7"
+                                onchange={handleCheckValueChange} checked={recordApi.OwnedAutosCollision}
+                                readonly={isReadOnly} />
+                        </template>
+                        <template if:true={isReadOnly}>
+                            <input type="checkbox" name="OwnedAutosCollision" value="checkbox-unique-id-7"
+                                checked={recordApi.OwnedAutosCollision} disabled readonly={isReadOnly} />
+                        </template>
+
+                        <label class="slds-checkbox__label slds-m-left_medium" for="checkbox-unique-id-7">
+                            <span class="slds-checkbox_faux"></span>
+                        </label>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12">
+                        <template if:false={isReadOnly}>
+                            <input type="checkbox" name="OwnedAutoSpecifiedcausesofLoss" id="checkbox-unique-id-8"
+                                onchange={handleCheckValueChange} checked={recordApi.OwnedAutoSpecifiedcausesofLoss}
+                                readonly={isReadOnly} />
+                        </template>
+                        <template if:true={isReadOnly}>
+                            <input type="checkbox" name="OwnedAutoSpecifiedcausesofLoss"
+                                value="checkbox-unique-id-8" checked={recordApi.OwnedAutoSpecifiedcausesofLoss}
+                                disabled readonly={isReadOnly} />
+                        </template>
+
+                        <label class="slds-checkbox__label check" for="checkbox-unique-id-8">
+                            <span class="slds-checkbox_faux"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-form-element__control">
+            <div class="slds-checkbox">
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_4-of-12">
+                        <label class="first slds-form-element__label slds-text-color_default"
+                            style="font-size: 12px; line-height: 18px;">NON OWNED AND HIRED AUTOS</label>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12">
+                        <template if:false={isReadOnly}>
+                            <input type="checkbox" name="NonOwnedAndHiredAutosLiability" id="checkbox-unique-id-9"
+                                checked={recordApi.NonOwnedAndHiredAutosLiability}
+                                onchange={handleCheckValueChange} />
+                        </template>
+                        <template if:true={isReadOnly}>
+                            <input type="checkbox" name="NonOwnedAndHiredAutosLiability"
+                                checked={recordApi.NonOwnedAndHiredAutosLiability} value="checkbox-unique-id-9"
+                                disabled="" />
+                        </template>
+
+                        <label class="slds-checkbox__label slds-m-left_small" for="checkbox-unique-id-9">
+                            <span class="slds-checkbox_faux"></span>
+                        </label>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12">
+                        <template if:false={isReadOnly}>
+                            <input type="checkbox" name="NonOwnedAndHiredAutosComprehensive"
+                                id="checkbox-unique-id-10" checked={recordApi.NonOwnedAndHiredAutosComprehensive}
+                                onchange={handleCheckValueChange} />
+                        </template>
+                        <template if:true={isReadOnly}>
+                            <input type="checkbox" name="NonOwnedAndHiredAutosComprehensive"
+                                checked={recordApi.NonOwnedAndHiredAutosComprehensive} value="checkbox-unique-id-10"
+                                disabled="" />
+                        </template>
+
+                        <label class="slds-checkbox__label slds-m-left_x-large" for="checkbox-unique-id-10">
+                            <span class="slds-checkbox_faux"></span>
+                        </label>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12">
+                        <template if:false={isReadOnly}>
+                            <input type="checkbox" name="NonOwnedAndHiredAutosCollision" id="checkbox-unique-id-11"
+                                checked={recordApi.NonOwnedAndHiredAutosCollision}
+                                onchange={handleCheckValueChange} />
+                        </template>
+                        <template if:true={isReadOnly}>
+                            <input type="checkbox" name="NonOwnedAndHiredAutosCollision"
+                                checked={recordApi.NonOwnedAndHiredAutosCollision} value="checkbox-unique-id-11"
+                                disabled="" />
+                        </template>
+
+                        <label class="slds-checkbox__label slds-m-left_medium" for="checkbox-unique-id-11">
+                            <span class="slds-checkbox_faux"></span>
+                        </label>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12">
+                        <template if:false={isReadOnly}>
+                            <input type="checkbox" name="NonOwnedAndHiredAutosSpecifedCaus"
+                                id="checkbox-unique-id-12" onchange={handleCheckValueChange}
+                                checked={recordApi.NonOwnedAndHiredAutosSpecifedCaus} readonly={isReadOnly} />
+                        </template>
+                        <template if:true={isReadOnly}>
+                            <input type="checkbox" name="NonOwnedAndHiredAutosSpecifedCaus"
+                                value="checkbox-unique-id-12" checked={recordApi.NonOwnedAndHiredAutosSpecifedCaus}
+                                disabled readonly={isReadOnly} />
+                        </template>
+                        <label class="slds-checkbox__label check" for="checkbox-unique-id-12">
+                            <span class="slds-checkbox_faux"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pageBorder"></div>
+
+    <label class="headerTextProperties">COVERAGES</label>
+    <div class=" slds-m-bottom_medium slds-m-top_medium ">
+            <fieldset class="slds-form-element slds-form-element_compound">
+                <div class="slds-form-element__control">
+                    <div class=" slds-form-element__row">
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                                <label  class="slds-form-element__label">Coverage A: Liability(Any One Accident)</label>
+                                <div class="slds-form-element__control">
+                                    <input type="text" id="input-001" class="slds-input" name="CoverageALiability"
+                                        value={recordApi.CoverageALiability} readonly={isReadOnly}
+                                        onblur={handleChange} />
+                                    <!-- <lightning-input type="text" class="slds-input" name="CoverageALiability" value={recordApi.CoverageALiability} readonly={isReadOnly} onblur={handleChange} label="Coverage A: Liability(Any One Accident)"></lightning-input> -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element">
+                                <label  class="slds-form-element__label">Coverage B: Medical Expense(Any One Accident)</label>
+                                <div class="slds-form-element__control">
+                                    <input type="text" id="input-002" class="slds-input" name="CoverageBMedicalExp"
+                                        value={recordApi.CoverageBMedicalExp} readonly={isReadOnly}
+                                        onblur={handleChange} />
+                                    <!-- <lightning-input type="text" class="slds-input" name="CoverageBMedicalExp" value={recordApi.CoverageBMedicalExp} readonly={isReadOnly} onblur={handleChange} label="Coverage B: Medical Expense(Any One Accident)"></lightning-input> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element">
+                                <label  class="slds-form-element__label">Coverage C: Hired and Non-owned Physical Damage</label>
+                                <div class="slds-form-element__control">
+                                    <input type="text" id="input-003" class="slds-input" name="CoverageCHiredNonOwned"
+                                        value={recordApi.CoverageCHiredNonOwned} readonly={isReadOnly}
+                                        onblur={handleChange} />
+                                    <!-- <lightning-input type="text"  class="slds-input" name="CoverageCHiredNonOwned" value={recordApi.CoverageCHiredNonOwned} readonly={isReadOnly} onblur={handleChange} label="Coverage C: Hired and Non-owned Physical Damage"></lightning-input> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    <div class="slds-m-bottom_medium ">
+            <fieldset class="slds-form-element slds-form-element_compound">
+                <div class="slds-form-element__control">
+                    <div class="slds-form-element__row">
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element">
+                                <label  class="slds-form-element__label">Towing(Each disablement)</label>
+                                <div class="slds-form-element__control">
+                                    <input type="text" id="input-004" class="slds-input" name="Towing"
+                                        value={recordApi.Towing} readonly={isReadOnly} onblur={handleChange} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </fieldset>
+    </div>
+
+    <div class="pageBorder"></div>
+
+    <label class="headerTextProperties">DEDUCTIBLES</label>
+    <div class="first slds-text-title_caps slds-m-bottom_medium  slds-m-top_medium  slds-text-color_default"
+            style="font-size: 12px; line-height: 18px; text-transform: capitalize;">OWNED PRIVATE PASSENGER AUTOS
+    </div>
+    <div class="slds-m-bottom_medium  ">
+        <fieldset class="slds-form-element slds-form-element_compound">
+            <div class="slds-form-element__control">
+                <div class="slds-form-element__row">
+                    <div class="slds-size_1-of-3">
+                        <div class="slds-form-element ">
+                            <label  class="slds-form-element__label">Comp:</label>
+                            <div class="slds-form-element__control">
+                                <template if:true={recordApi.OwnedPrivatePassengerAutosComprehens}>
+                                    <input type="text" id="input-01" class="slds-input"
+                                        name="OwnedPrivatePassengerAutosComp"
+                                        value={recordApi.OwnedPrivatePassengerAutosComp} readonly={isReadOnly}
+                                        onblur={handleChange} />
+                                </template>
+                                <template if:false={recordApi.OwnedPrivatePassengerAutosComprehens}>
+                                    <input type="text" class="slds-input" name="OwnedPrivatePassengerAutosComp"
+                                        value={recordApi.OwnedPrivatePassengerAutosComp} readonly={isReadOnly}
+                                        disabled />
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-size_1-of-3">
+                        <div class="slds-form-element">
+                            <label  class="slds-form-element__label">Collision:</label>
+                            <div class="slds-form-element__control">
+                                <template if:true={recordApi.OwnedPrivatePassengerAutosCollision}>
+                                    <input type="text" id="input-02" class="slds-input"
+                                        name="OwnedPrivatePasengerAutosCollision"
+                                        value={recordApi.OwnedPrivatePasengerAutosCollision} readonly={isReadOnly}
+                                        onblur={handleChange} />
+                                </template>
+                                <template if:false={recordApi.OwnedPrivatePassengerAutosCollision}>
+                                    <input type="text" class="slds-input" name="OwnedPrivatePasengerAutosCollision"
+                                        value={recordApi.OwnedPrivatePasengerAutosCollision} readonly={isReadOnly}
+                                        disabled />
+
+                                </template>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-size_1-of-3">
+                        <div class="slds-form-element">
+                            <label  class="slds-form-element__label">Specified Causes of Loss:</label>
+                            <div class="slds-form-element__control">
+                                <template if:true={recordApi.OwnedPrivatePassengerAutosSpecifed}>
+                                    <input type="text" id="input-03" class="slds-input"
+                                        name="OwnedPrivatePassengerAutosSpecifie"
+                                        value={recordApi.OwnedPrivatePassengerAutosSpecifie} readonly={isReadOnly}
+                                        onblur={handleChange} />
+
+                                </template>
+                                <template if:false={recordApi.OwnedPrivatePassengerAutosSpecifed}>
+                                    <input type="text" class="slds-input" name="OwnedPrivatePassengerAutosSpecifie"
+                                        value={recordApi.OwnedPrivatePassengerAutosSpecifie} readonly={isReadOnly}
+                                        disabled />
+
+                                </template>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="first slds-text-title_caps slds-m-bottom_medium  slds-text-color_default"
+            style="font-size: 12px; line-height: 18px; text-transform: capitalize;">OWNED AUTOS (OTHER THAN PRIVATE PASSENGER)</div>
+    <div class="slds-m-bottom_medium ">
+        <fieldset class="slds-form-element slds-form-element_compound">
+            <div class="slds-form-element__control">
+                <div class="slds-form-element__row">
+                    <div class="slds-size_1-of-3">
+                        <div class="slds-form-element ">
+                            <label  class="slds-form-element__label">Comp:</label>
+                            <div class="slds-form-element__control">
+                                <template if:true={recordApi.OwnedAutosComprehensive}>
+                                    <input type="text" id="input-04" class="slds-input" name="OwnedAutosComp"
+                                        value={recordApi.OwnedAutosComp} readonly={isReadOnly}
+                                        onblur={handleChange} />
+
+                                </template>
+                                <template if:false={recordApi.OwnedAutosComprehensive}>
+                                    <input type="text" class="slds-input" name="OwnedAutosComp"
+                                        value={recordApi.OwnedAutosComp} readonly={isReadOnly} disabled />
+
+                                </template>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-size_1-of-3">
+                        <div class="slds-form-element">
+                            <label  class="slds-form-element__label">Collision:</label>
+                            <div class="slds-form-element__control">
+                                <template if:true={recordApi.OwnedAutosCollision}>
+                                    <input type="text" id="input-05" class="slds-input"
+                                        name="OwnedAutosnonpvtpsngrCollision"
+                                        value={recordApi.OwnedAutosnonpvtpsngrCollision} readonly={isReadOnly}
+                                        onblur={handleChange} />
+
+                                </template>
+                                <template if:false={recordApi.OwnedAutosCollision}>
+                                    <input type="text" class="slds-input" name="OwnedAutosnonpvtpsngrCollision"
+                                        value={recordApi.OwnedAutosnonpvtpsngrCollision} readonly={isReadOnly}
+                                        disabled />
+
+                                </template>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-size_1-of-3">
+                        <div class="slds-form-element">
+                            <label  class="slds-form-element__label ">Specified Causes of Loss:</label>
+                            <div class="slds-form-element__control">
+                                <template if:true={recordApi.OwnedAutoSpecifiedcausesofLoss}>
+                                    <input type="text" id="input-06" class="slds-input"
+                                        name="OwnAtoNonpvtSpecifiedcausesofLoss"
+                                        value={recordApi.OwnAtoNonpvtSpecifiedcausesofLoss} readonly={isReadOnly}
+                                        onblur={handleChange} />
+
+                                </template>
+                                <template if:false={recordApi.OwnedAutoSpecifiedcausesofLoss}>
+                                    <input type="text" class="slds-input" name="OwnAtoNonpvtSpecifiedcausesofLoss"
+                                        value={recordApi.OwnAtoNonpvtSpecifiedcausesofLoss} readonly={isReadOnly}
+                                        disabled />
+
+                                </template>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="first slds-text-title_caps slds-m-bottom_medium  slds-text-color_default"
+            style="font-size: 12px; line-height: 18px; text-transform: capitalize;">NON-OWNED AND HIRED AUTOS</div>
+    <div class="slds-m-bottom_medium ">
+        <fieldset class="slds-form-element slds-form-element_compound">
+            <div class="slds-form-element__control">
+                <div class="slds-form-element__row">
+                    <div class="slds-size_1-of-3">
+                        <div class="slds-form-element ">
+                            <label  class="slds-form-element__label">Comp:</label>
+                            <div class="slds-form-element__control">
+                                <template if:true={recordApi.NonOwnedAndHiredAutosComprehensive}>
+                                    <input type="text" id="input-07" class="slds-input"
+                                        name="NonOwnedAndHiredAutosComp" value={recordApi.NonOwnedAndHiredAutosComp}
+                                        readonly={isReadOnly} onblur={handleChange} />
+
+                                </template>
+                                <template if:false={recordApi.NonOwnedAndHiredAutosComprehensive}>
+                                    <input type="text" class="slds-input" name="NonOwnedAndHiredAutosComp"
+                                        value={recordApi.NonOwnedAndHiredAutosComp} readonly={isReadOnly}
+                                        disabled />
+
+                                </template>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-size_1-of-3">
+                        <div class="slds-form-element">
+                            <label  class="slds-form-element__label">Collision:</label>
+                            <div class="slds-form-element__control">
+                                <template if:true={recordApi.NonOwnedAndHiredAutosCollision}>
+                                    <input type="text" id="input-08" class="slds-input"
+                                        name="NonOwnedHiredAutosCollision"
+                                        value={recordApi.NonOwnedHiredAutosCollision} readonly={isReadOnly}
+                                        onblur={handleChange} />
+
+                                </template>
+                                <template if:false={recordApi.NonOwnedAndHiredAutosCollision}>
+                                    <input type="text" class="slds-input" name="NonOwnedHiredAutosCollision"
+                                        value={recordApi.NonOwnedHiredAutosCollision} readonly={isReadOnly}
+                                        disabled />
+
+                                </template>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-size_1-of-3">
+                        <div class="slds-form-element">
+                            <label  class="slds-form-element__label">Specified Causes of Loss:</label>
+                            <div class="slds-form-element__control">
+                                <template if:true={recordApi.NonOwnedAndHiredAutosSpecifedCaus}>
+                                    <input type="text" class="slds-input" name="NonOwnedhiredautosSpecifiedCauses"
+                                        value={recordApi.NonOwnedhiredautosSpecifiedCauses} readonly={isReadOnly}
+                                        onblur={handleChange} />
+
+                                </template>
+                                <template if:false={recordApi.NonOwnedAndHiredAutosSpecifedCaus}>
+                                    <input type="text" class="slds-input" name="NonOwnedhiredautosSpecifiedCauses"
+                                        value={recordApi.NonOwnedhiredautosSpecifiedCauses} readonly={isReadOnly}
+                                        disabled />
+
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="pageBorder"></div>
+    <div class="slds-grid slds-wrap ">
+        <div class="slds-col slds-size_12-of-12">
+            <c-add-form is-read-only={isReadOnly} get-current-lob={currentLOB} all-coverages={recordTypeData}
+                current-coverage-id={currentCoverageID} onchangedataupdate={AUTOChangeData}></c-add-form>
+        </div>
+    </div>
+</div>
+</template>

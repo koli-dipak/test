@@ -1,0 +1,157 @@
+<template>
+  <template if:true={completed}>
+    <div data-index={jsonDef.indexInParent}
+        class="slds-progress__item slds-is-relative slds-is-completed omni-hz-stepchart-list-item omni-hz-stepchart-completed">
+      <button class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon slds-progress__marker_icon-success"
+              onclick={handleStepClick}
+              data-index={jsonDef.indexInParent}>
+      <div class="completedStep">
+        <lightning-icon icon-name="utility:check" alternative-text="completed" size="x-small" class="completedIcon"></lightning-icon>
+         <!-- <div class="completedStepItem" >
+          <svg class="slds-icon slds-icon slds-icon_xx-small"
+            data-index={jsonDef.indexInParent}
+            aria-hidden="true">
+            <use data-index={jsonDef.indexInParent}aa
+              xlink:href={stepChartIconUrl}>  
+            </use> 
+          </svg>
+        </div>  -->
+      </div>      
+        
+        <!-- <span class="slds-assistive-text">{_labelCompleted}</span> -->
+      </button>
+      <div class="slds-progress__item_content slds-grid slds-grid_align-spread omni-stepchart-content completedLabel"
+           data-index={jsonDef.indexInParent}
+           onclick={handleStepClick}>
+        {stepLabel}
+      </div>
+      <!-- <div id={jsonDef.name}
+      role="tooltip"
+      class="slds-is-absolute"
+      onclick={handleStepClick}
+      data-index={jsonDef.indexInParent}>
+      <span class="omni-hz-stepchart-popover-container">
+        <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom omni-hz-stepchart-popover"
+              aria-hidden="true">
+          <div class="slds-popover__body slds-truncate">
+            {stepLabel}
+          </div>
+        </div>
+      </span>
+      </div> -->
+    </div>
+  </template>
+  <template if:true={inProgress}>
+    <li data-index={jsonDef.indexInParent}
+        class="slds-progress__item slds-is-completed">
+      <button class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon slds-progress__marker_icon-success"
+              onclick={handleStepClick}
+              data-index={jsonDef.indexInParent}>
+            <div class="progressStep">
+              <span class="progressIcon">{stepNumber}</span>
+            <!-- <div class="completedStepItem" >
+                
+                <svg class="slds-icon slds-icon slds-icon_xx-small"
+                  data-index={jsonDef.indexInParent}
+                  aria-hidden="true">
+              <use data-index={jsonDef.indexInParent}
+                    xlink:href={stepChartIconUrl}>
+              </use> 
+            </svg>
+              </div> -->
+            </div>        
+        <span class="slds-assistive-text">{_labelInProgress}</span>
+      </button>
+      <div class="slds-progress__item_content slds-grid slds-grid_align-spread omni-stepchart-content progressLabel"
+           data-index={jsonDef.indexInParent}
+           onclick={handleStepClick}>
+        {stepLabel}
+      </div>
+    </li>
+  </template>
+  
+  <template if:true={nonpristine}>
+    <div data-index={jsonDef.indexInParent}
+        class="slds-progress__item slds-is-relative slds-is-completed omni-hz-stepchart-list-item omni-hz-stepchart-completed">
+      <button class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon slds-progress__marker_icon-success"
+              onclick={handleStepClick}
+              data-index={jsonDef.indexInParent}>
+      <div class="completedStep">
+        <lightning-icon icon-name="utility:check" alternative-text="completed" size="x-small" class="completedIcon"></lightning-icon>
+         <!-- <div class="completedStepItem" >
+          <svg class="slds-icon slds-icon slds-icon_xx-small"
+            data-index={jsonDef.indexInParent}
+            aria-hidden="true">
+            <use data-index={jsonDef.indexInParent}
+              xlink:href={stepChartIconUrl}>  
+            </use> 
+          </svg>
+        </div>  -->
+      </div>      
+         <!-- <svg class="slds-icon slds-icon slds-icon_xx-small"
+             data-index={jsonDef.indexInParent}
+             aria-hidden="true">
+          <use data-index={jsonDef.indexInParent}
+               xlink:href={stepChartIconUrl}>
+          </use>
+        </svg>  -->
+        <span class="slds-assistive-text">{_labelIncomplete}</span>
+      </button>
+      <div class="slds-progress__item_content slds-grid slds-grid_align-spread omni-stepchart-content completedLabel"
+           data-index={jsonDef.indexInParent}
+           onclick={handleStepClick}>
+        {stepLabel}
+      </div>
+      <!-- <div id={jsonDef.name}
+      role="tooltip"
+      class="slds-is-absolute"
+      onclick={handleStepClick}
+      data-index={jsonDef.indexInParent}>
+      <span class="omni-hz-stepchart-popover-container">
+        <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom omni-hz-stepchart-popover"
+              aria-hidden="true">
+          <div class="slds-popover__body slds-truncate">
+            {stepLabel}
+          </div>
+        </div>
+      </span>
+      </div> -->
+    </div>
+  </template>
+  <!-- <template if:true={nonpristine}>
+    <li class="slds-progress__item">
+     
+   
+    </li>
+  </template>  -->
+		<template if:true={pristine}>
+    <li data-index={jsonDef.indexInParent}
+        class="slds-progress__item slds-is-completed">
+      <button class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon slds-progress__marker_icon-success"
+              
+              onclick={handleStepClick}
+              data-index={jsonDef.indexInParent}
+              disabled>
+              <div class="nonpristineStep">
+                <span class="nonpristineIcon">{stepNumber}</span>
+                <!-- <div class="completedStepItem" >
+                  
+                  <svg class="slds-icon slds-icon slds-icon_xx-small"
+                    data-index={jsonDef.indexInParent}
+                    aria-hidden="true">
+                <use data-index={jsonDef.indexInParent}
+                      xlink:href={stepChartIconUrl}>
+                </use> 
+              </svg>
+                </div> -->
+              </div>        
+        <span class="slds-assistive-text">{_labelUntouched}</span>
+      </button>
+      <div class="slds-progress__item_content slds-grid slds-grid_align-spread omni-stepchart-content nonpristinelabel"
+           data-index={jsonDef.indexInParent}
+           onclick={handleStepClick}>
+        {stepLabel}
+      </div>
+    </li>
+  </template>
+</template>

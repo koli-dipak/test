@@ -1,0 +1,129 @@
+<template>
+	<template if:true={isModalOpen}>
+		<div if:true={isSpinnerLoad}>
+			<div class="demo-only demo-only_viewport demo--inverse"
+				style="height:6rem;background-color:#16325c;position:relative">
+				<div class="slds-spinner_container slds-is-fixed">
+					<div role="status" class="slds-spinner slds-spinner_medium">
+						<span class="slds-assistive-text">Loading</span>
+						<div class="slds-spinner__dot-a"></div>
+						<div class="slds-spinner__dot-b"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+			aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+					<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create Location</h2>
+				</header>
+				<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+					<div class="slds-p-around_small">
+						<!-- <template if:true={error}>
+                            <h3 class="error">The record you are about to create looks like a duplicate. Open an existing record instead</h3>
+                        </template> -->
+						<template if:false={isDuplicateRecordFound}>
+							<lightning-record-edit-form object-api-name={objectAPIName} onsuccess={handleSuccess}
+								onerror={handleError} onsubmit={handleSubmit}>
+
+								<lightning-input-field field-name="Case__c" value={recordId} disabled>
+								</lightning-input-field>
+								<!-- <lightning-input-field field-name="Currency_Code__c"></lightning-input-field> -->
+								<!-- <lightning-input-field field-name="Suite__c"></lightning-input-field> -->
+								<lightning-input-field field-name="Building_Property_Name__c"></lightning-input-field>
+								<!-- country={addressCountry}
+                                    street={addressStreet}
+                                    city={addressCity}
+                                    province={addressState}
+                                    postal-code={addressPostal} -->
+								<lightning-input-address address-label="Address"
+									country-label="Address (Country/Territory)" street-label="Address (Street)"
+									city-label="Address (City)" province-label="Address (State/Province)"
+									postal-code-label="Address (ZIP/Postal Code)" onchange={addressInputChange}
+									show-address-lookup="true"
+									field-level-help="Make use of the google search field below or manually capture your address details.">
+								</lightning-input-address>
+								<div class="slds-m-top_medium">
+									<lightning-button type="submit" label="Save" variant="brand"></lightning-button>
+								</div>
+							</lightning-record-edit-form>
+						</template>
+						<template if:true={isDuplicateRecordFound}>
+							<div class="slds-grid slds-wrap">
+								<div
+									class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_2-of-12">
+									<span class="custom-box"><img src={imgsrc} alt="N2G" width="100px" /></span>
+								</div>
+								<div
+									class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_8-of-12">
+									<span class="custom-box">The subsequent location record(s) have been identified. You may utilise these records or establish a new one.</span>
+								</div>
+							</div>
+							<div class="slds-grid slds-wrap">
+								<div
+									class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_2-of-12">
+									<span class="custom-box">
+                                            <div class="slds-m-top_large">
+										<template for:each={addressRecords} for:item="addressOption" for:index="index">
+											<div key={addressOption.value}>
+												<input align="right" type="radio" name='option' data-index={index} value={addressOption.value} style="margin-right: 5px;" onclick={optionSelect} >{addressOption.optionValue}
+												<div class="slds-m-bottom_medium"></div>
+											</div>
+										</template>
+									</div>
+                                        </span>
+								</div>
+								<div
+									class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_10-of-12">
+									<span class="custom-box">
+                                            <div class="slds-m-top_large">
+										<template for:each={addressRecords} for:item="addressOption">
+											<div key={addressOption.value}>
+												<!-- <input type="radio" name='option' value={addressOption.value} style="margin-right: 5px;" >{addressOption.optionValue} -->
+												<label>{addressOption.label}</label>
+												<div class="slds-m-bottom_medium"></div>
+											</div>
+										</template>
+									</div>
+                                        </span>
+								</div>
+							</div>
+							<div class="slds-grid slds-wrap">
+								<div
+									class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_2-of-12">
+									<span class="custom-box" if:true={anyExtisingDuplicateOptionSelected}>
+										<lightning-button variant="brand" label="Use Existing" title="add" onclick={addLocationsOption}></lightning-button>
+										<lightning-helptext content='Making use of an existing location record will reduce the number of duplicates in the system.'></lightning-helptext>
+									</span>
+									<span class="custom-box" if:false={anyExtisingDuplicateOptionSelected}>
+										<lightning-button variant="brand" label="Use Existing" title="add" disabled></lightning-button>
+										<lightning-helptext content='Making use of an existing location record will reduce the number of duplicates in the system.'></lightning-helptext>
+									</span>
+								</div>
+								<div
+									class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_10-of-12">
+									<span class="custom-box">
+										<lightning-button variant="brand" label="Create New" title="createNew" onclick={createNewLocationRecord}></lightning-button>
+										<lightning-helptext content='By clicking this button you will ignore the duplicate records, and create a new location based on the previous location information you captured.'></lightning-helptext>
+									</span>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+				<footer class="slds-modal__footer">
+					<button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+</template>

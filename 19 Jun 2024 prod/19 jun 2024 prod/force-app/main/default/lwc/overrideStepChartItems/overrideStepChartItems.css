@@ -1,0 +1,165 @@
+.omni-hz-stepchart-popover {
+  position: absolute;
+  top: -2.8rem;
+  left: calc(50% + 10px);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.omni-hz-stepchart-list-item:hover .omni-hz-stepchart-popover,
+.omni-hz-stepchart-list-item:focus .omni-hz-stepchart-popover {
+  visibility: visible;
+}
+
+.omni-hz-stepchart-popover-container .omni-hz-stepchart-popover {
+  visibility: visible;
+}
+
+.omni-hz-stepchart-label {
+  /* left: calc(-50% + 8px); */
+  top: 5px;
+  max-width: 30rem;
+  white-space: nowrap;  
+}
+
+.omni-hz-stepchart-completed-icon {
+  height: 0.875rem;
+  width: 0.875rem;
+}
+
+.slds-progress__item .omni-stepchart-button-pristine {
+  border-color: rgb(255, 255, 255);
+  background-color: var(--lwc-colorTextButtonDefaultDisabled, rgb(217, 219, 221));
+}
+.slds-scope .slds-progress_vertical .slds-progress__item {  
+  margin-bottom:0.313rem !important;
+}
+.slds-scope .slds-progress_vertical .slds-progress__list .omni-vert-stepchart-completed:after
+.slds-scope .slds-progress_vertical .slds-progress__list .omni-vert-stepchart-active:after
+.slds-scope .slds-progress_vertical .slds-progress__list .omni-vert-stepchart-completed:before
+.slds-scope .slds-progress_vertical .slds-progress__list .omni-vert-stepchart-active:after{
+  background-color: #005CA7 !important;
+  width: 1px !important;
+  margin-top: -0.25rem !important;
+  margin-left: 0.715rem !important;
+}
+.completedLabel{
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.progressLabel{
+  font-weight: 500;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.85);
+  letter-spacing: 0.5px;
+}
+
+.nonpristinelabel{
+  font-weight: 500;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.5px;
+}
+.completedStep{
+  height: 28px;
+  width: 28px;
+  left: 0px;
+  top: 0px;
+  border-radius: 28px;
+  background-color: #005CA7;
+  border: 1px solid #005CA7;
+  box-sizing: border-box;
+}
+
+.progressStep{
+  height: 28px;
+  width: 28px;
+  left: 0px;
+  top: 0px;
+  border-radius: 28px;
+
+  border: 1px solid #005CA7;
+  background-color: #005CA7;
+  box-sizing: border-box;
+}
+.nonpristineStep{
+  height: 28px;
+  width: 28px;
+  left: 0px;
+  top: 0px;
+  border-radius: 28px;
+
+  border: 1px solid rgba(0, 0, 0, 0.25);  
+  box-sizing: border-box;
+}
+.colours{
+  color: white;
+}
+
+.completedIcon{
+  color: #ffffff;
+  position: relative;
+  top: 0.35rem;
+}
+.progressIcon{
+  font-size: small;
+  color: white;
+  position: relative;
+  line-height: 2;
+  background-color: #005CA7;
+}
+
+.nonpristineIcon{
+  font-size: 13px;
+  position: relative;
+  line-height: 2.1;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.25);
+  
+}
+ .completedStepItem{
+   position: relative;
+  top: 0.313rem;
+  color: #005CA7;
+  
+} 
+
+
+
+
+.slds-progress_vertical .slds-progress__list .omni-vert-stepchart-completed:after{
+		background-color: rgb(94, 180, 255);
+    margin: 0px 0px 0px 12px;
+}
+.slds-progress_vertical .slds-progress__item:after{
+		background-color: rgb(94, 180, 255);
+    margin: 0px 0px 0px 12px;
+}
+ wizard Steps
+.slds-progress__item.slds-is-completed button{ 
+    border-color: #005CA7 !important;
+    background: #005CA7 !important;
+	}
+	.slds-progress__item.slds-is-completed button svg{ 
+    fill: white;
+    width: 25px;
+    height: 25px;
+	}
+.slds-progress__item.omni-vert-stepchart-last.omni-vert-stepchart-active .slds-progress__item.slds-is-completed button{ 
+    border-color: #005CA7 !important;
+    background: white !important;
+	}
+
+.slds-progress__item.slds-is-active button{ 
+   border-color: grey!important;
+    width: 35px;
+    height: 33px;
+	}
+	.slds-progress__item.slds-is-active button svg{ 
+    fill: white;
+    width: 25px;
+    height: 25px;
+	}

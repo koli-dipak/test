@@ -1,0 +1,128 @@
+<template>
+    <template if:true={hasRecords}>
+    <lightning-card title="Document Checklist Items">
+        <!-- <div class="slds-card__header slds-grid slds-wrap slds-grid_vertical-align-center">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate slds-grid">
+                <div class="slds-media__body slds-truncate">
+                    <h2>
+                        <lightning-formatted-text value="Document Checklist Items"></lightning-formatted-text>
+                    </h2>
+                </div>
+               
+            </header>
+        </div> -->
+        <template if:true={isbinderRecords}>
+            <div slot="actions">
+                <lightning-button style="text-align:right;" class="slds-m-left_large" label="Save" onclick={handleSave} variant="brand"></lightning-button>   
+            </div>
+        </template>
+        
+
+        <div class="slds-card__body slds-card__body_inner">
+            <div style="overflow: auto;">
+                <template if:true={isbinderRecords}>
+                    <div>
+                        <h2 class="bold-large-heading">Checklist for Binding</h2>
+                        <table class="sectiontable slds-table slds-table_bordered slds-table_cell-buffer" style="table-layout:fixed;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%;"></th>
+                                    <th style="width: 20%;">Name</th>
+                                    <th style="width: 15%;">Line of Business</th>
+                                    <th style="width: 12%;">Rating</th>
+                                    <th style="width: 18%;">Status</th>
+                                    <th style="width: 18%;">Instruction</th>
+                                    <th style="width: 12%;">Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={binderData} for:item="item">
+                                    <tr key={item.Id}>
+                                        <template if:false={item.isDuplicate}>
+                                            <td>{item.rowNumber}</td>
+                                            <td>
+                                                <label onclick={navigateToRecord} data-record-id={item.Id} style="color:rgb(11 92 170); cursor: pointer;">
+                                                    {item.Name}
+                                                </label>
+                                            </td>
+                                            <td>{item.Line_of_Business__c}</td>
+                                            <td>{item.Rating_ID__c}</td>
+                                            <td>
+                                                <lightning-combobox
+                                                    name={item.Id}
+                                                    value={item.Status}
+                                                    options={statusOptions}
+                                                    onchange={handleChange}>
+                                                </lightning-combobox>
+                                            </td>
+                                            <td>
+                                                {item.Instruction}
+                                                <!-- <div class="slds-truncate" title={item.Instruction}>
+                                                    {item.Instruction}
+                                                </div> -->
+                                            </td>
+                                            <td>{item.Type__c}</td>
+                                        </template>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </template>
+                
+                <template if:true={isQuotedRecords}>
+                    <div>
+                        <h2 class="bold-large-heading">Checklist for Quote</h2>
+                        <table class="sectiontable slds-table slds-table_bordered slds-table_cell-buffer" style="table-layout:fixed;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%;"></th>
+                                    <th style="width: 20%;">Name</th>
+                                    <th style="width: 15%;">Line of Business</th>
+                                    <th style="width: 12%;">Rating</th>
+                                    <th style="width: 18%;">Status</th>
+                                    <th style="width: 18%;">Instruction</th>
+                                    <th style="width: 12%;">Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={quotedData} for:item="item">
+                                    <tr key={item.Id}>
+                                        <template if:false={item.isDuplicate}>
+                                            <td>{item.rowNumber}</td>
+                                            <td>
+                                                <label onclick={navigateToRecord} data-record-id={item.Id} style="color:rgb(11 92 170); cursor: pointer;">
+                                                    {item.Name}
+                                                </label>
+                                            </td>
+                                            <td>{item.Line_of_Business__c}</td>
+                                            <td>{item.Rating_ID__c}</td>
+                                            <td>
+                                                <lightning-combobox
+                                                    name={item.Id}
+                                                    value={item.Status}
+                                                    options={statusOptions}
+                                                    onchange={handleChange}
+                                                    readonly="true">
+                                                </lightning-combobox>
+                                            </td>
+                                            <td>
+                                                {item.Instruction}
+                                                <!-- <div class="slds-truncate" title={item.Instruction}>
+                                                    {item.Instruction}
+                                                </div> -->
+                                            </td>
+                                            <td>{item.Type__c}</td>
+                                        </template>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </template>
+                
+            </div>
+        </div>
+    </lightning-card>
+</template>
+</template>

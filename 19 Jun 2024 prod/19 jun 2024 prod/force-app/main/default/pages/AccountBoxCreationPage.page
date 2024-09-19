@@ -1,0 +1,5 @@
+<apex:page standardController="Account" extensions="BoxCreation" action="{!createAccountBox}">
+    <apex:form >
+
+    </apex:form>
+</apex:page>

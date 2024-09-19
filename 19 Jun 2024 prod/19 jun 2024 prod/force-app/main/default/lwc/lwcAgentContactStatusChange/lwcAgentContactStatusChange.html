@@ -1,0 +1,24 @@
+<template>
+   
+  	<!-- spinner -->
+    <template if:true={spinnerStatus}>
+        <lightning-spinner style="background-color: rgba(0, 0, 0, 0.2);" alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+    </template>
+    <lightning-card>
+        
+        <lightning-record-edit-form
+        object-api-name={objectApiName}
+        record-id={recordId}
+        onsuccess={closeQuickAction}
+        onerror={closeQuickActionError}
+    >
+        <lightning-input-field required="true" field-name={nameField} ></lightning-input-field>
+        <lightning-input-field field-name={commentField} ></lightning-input-field>
+        <div align="center">
+            <lightning-button variant="brand" type="submit" label="Save" style="max-width: 350px;" onclick={onSave} >
+            </lightning-button>
+        </div>
+    </lightning-record-edit-form>
+    </lightning-card>
+    
+</template>

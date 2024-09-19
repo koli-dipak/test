@@ -1,0 +1,52 @@
+div[aria-label="Upload Application"].slds-modal__container {
+    width: 90% !important;
+    max-width: 90rem !important;
+    min-width: 40rem !important;
+} 
+
+div[aria-label="Continue Application"].slds-modal__container {
+    width: 90% !important;
+    max-width: 90rem !important;
+    min-width: 40rem !important;
+} 
+.fcFirstPage .slds-path__nav .slds-is-complete {
+    background: rgb(1, 68, 134) !important;
+}
+.fcFirstPage .slds-path__nav .slds-is-complete:before,.fcFirstPage  .slds-path__nav .slds-is-complete:after {
+     background: rgb(1, 68, 134) !important;
+}
+.slds-progress_vertical .slds-progress__item.slds-is-completed .slds-progress__marker_icon-success svg{
+    fill: white !important;
+}
+
+.dropDownCls .slds-icon {
+    border: 1px solid #DDDBDA !important;
+    border-radius: 4px !important;
+}
+
+.customeCheck .slds-checkbox_faux{
+    background: #0070D2;
+    border-radius: 4px;
+}
+
+
+.labelInsideInput label{
+    transition: background 0.2s, color 0.2s, top 0.2s, bottom 0.2s, right 0.2s, left 0.2s !important;
+    position: absolute;
+    color: #7B7B7B;
+    padding: 7px 6px !important;
+    z-index: 2;
+    /* float: right; */
+    /* width: 100%; */
+    /* text-align: right; */
+    margin-left: calc(100% - 130px);
+    width: 120px;
+    background-color: #F0F0F0;
+    border-top-right-radius: var(--slds-c-input-radius-border, var(--sds-c-input-radius-border, var(--lwc-borderRadiusMedium,0.25rem)));
+    border-bottom-right-radius: var(--slds-c-input-radius-border, var(--sds-c-input-radius-border, var(--lwc-borderRadiusMedium,0.25rem)));
+    margin-top: 1px;
+    /* margin-bottom: 8px; */
+    /* border: 0px; */
+    height: calc(100% - 2px);
+    text-align: center;
+}

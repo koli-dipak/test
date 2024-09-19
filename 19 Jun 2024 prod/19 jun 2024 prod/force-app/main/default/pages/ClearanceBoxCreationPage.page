@@ -1,0 +1,5 @@
+<apex:page standardController="Clearance__c" extensions="BoxCreation" action="{!createClearanceBox}">
+    <apex:form >
+
+    </apex:form>
+</apex:page>

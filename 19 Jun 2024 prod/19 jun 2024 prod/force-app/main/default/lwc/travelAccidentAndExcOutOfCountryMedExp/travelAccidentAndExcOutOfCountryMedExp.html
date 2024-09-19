@@ -1,0 +1,354 @@
+<template>
+    <div class="slds-m-left_small "> 
+     <c-fc-exposurebasis   is-read-only={isReadOnly} columns={exposurecolumn} coverage={recordApi} onchangedataupdate={handleExposure}></c-fc-exposurebasis>
+   
+     <div class="pageBorder"></div>
+        <label class="headerTextProperties ">COVERAGE A</label>
+  
+        <div class=" slds-m-bottom_medium slds-m-top_medium ">
+            <fieldset class="slds-form-element slds-form-element_compound">
+                <div class="slds-form-element__control">
+                    <div class="slds-form-element__row">
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                             <label class=" slds-form-element__label slds-text-color_default">Accidental Death, Dismemberment & Paralysis</label>
+                                <div class="slds-form-element__control">
+                                 <input onblur={handleChange} name="AccidentalDeathDismembermentParalysis" readonly={isReadOnly} type="text" id="input-01" value={recordApi.AccidentalDeathDismembermentParalysis} class="slds-input" />
+                                 <!-- <label class=" slds-form-element__label slds-text-color_default">{recordApi.AccidentalDeathDismembermentParalysisSuffix}</label> change bcz not working in continue-->
+                                 <label class=" slds-form-element__label slds-text-color_default">{recordApi.CarjackingSuffix}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <label class="headerTextProperties ">COVERAGE B</label>
+  
+        <div class=" slds-m-bottom_medium slds-m-top_medium ">
+            <fieldset class="slds-form-element slds-form-element_compound">
+                <div class="slds-form-element__control">
+                    <div class="slds-form-element__row">
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                                <label class=" slds-form-element__label slds-text-color_default">Disappearance and Exposure</label>
+                                <div class="slds-form-element__control">
+                                    <input onblur={handleChange} name="DisappearanceAndExposure" readonly={isReadOnly} type="text" id="input-02" value={recordApi.DisappearanceAndExposure} class="slds-input" />
+                                    <!-- <label class=" slds-form-element__label slds-text-color_default">{recordApi.AccidentalDeathDismembermentParalysisSuffix}</label> -->
+                                 <label class=" slds-form-element__label slds-text-color_default">{recordApi.CarjackingSuffix}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <label class="headerTextProperties ">COVERAGE C</label>
+  
+        <div class=" slds-m-bottom_medium slds-m-top_medium ">
+            <fieldset class="slds-form-element slds-form-element_compound">
+                <div class="slds-form-element__control">
+                    <div class="slds-form-element__row">
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                                <label class=" slds-form-element__label slds-text-color_default">Carjacking</label>
+                                <div class="slds-form-element__control">
+                                    <input onblur={handleChange} name="Carjacking" readonly={isReadOnly} type="text" id="input-03" value={recordApi.Carjacking} class="slds-input" />
+                                    <label class="slds-form-element__label slds-text-color_default">{recordApi.CarjackingSuffix}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                                <label class="slds-form-element__label slds-text-color_default">Child Care Facility</label>
+                                <div class="slds-form-element__control">
+                                    <input onblur={handleChange} name="ChildCareFacility" readonly={isReadOnly} type="text" id="input-04" value={recordApi.ChildCareFacility} class="slds-input" />
+                                    <label class="slds-form-element__label slds-text-color_default">{recordApi.ChildCareFacilitySuffix}</label>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                                <label class="slds-form-element__label slds-text-color_default">Child Education Grant</label>
+                                <div class="slds-form-element__control">
+                                    <input onblur={handleChange} name="ChildEducatiOnGrant" readonly={isReadOnly} type="text" id="input-05" value={recordApi.ChildEducatiOnGrant} class="slds-input" />
+                                    <label class="slds-form-element__label slds-text-color_default">{recordApi.ChildEducationGrantSuffix}</label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class=" slds-m-bottom_medium ">
+            <fieldset class="slds-form-element slds-form-element_compound">
+                <div class="slds-form-element__control">
+                    <div class="slds-form-element__row">
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                                <label class=" slds-form-element__label slds-text-color_default">Common Carrier</label>
+                                <div class="slds-form-element__control">
+                                    <input onblur={handleChange} name="CommonCarrier" readonly={isReadOnly} type="text" id="input-06" value={recordApi.CommonCarrier} class="slds-input" />
+                                    <label class="slds-form-element__label slds-text-color_default">{recordApi.CommonCarrierSuffix}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                                <label class="slds-form-element__label slds-text-color_default">Compassionate Visit</label>
+                                <div class="slds-form-element__control">
+                                    <input onblur={handleChange} name="CompassionateVisit" readonly={isReadOnly} type="text" id="input-07" value={recordApi.CompassionateVisit} class="slds-input" />
+                                    <label class="slds-form-element__label slds-text-color_default">{recordApi.CompassionateVisitSuffix}</label>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                                <label class="slds-form-element__label slds-text-color_default">Counselling</label>
+                                <div class="slds-form-element__control">
+                                    <input onblur={handleChange} name="Counseling" readonly={isReadOnly} type="text" id="input-08" value={recordApi.Counseling} class="slds-input" />
+                                    <label class="slds-form-element__label slds-text-color_default">{recordApi.CounselingSuffix}</label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class=" slds-m-bottom_medium ">
+            <fieldset class="slds-form-element slds-form-element_compound">
+                <div class="slds-form-element__control">
+                    <div class="slds-form-element__row">
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                             <label class=" slds-form-element__label slds-text-color_default">Felonious Assault</label>
+                                <div class="slds-form-element__control">
+                                 <input onblur={handleChange} name="FeloniousAssault" readonly={isReadOnly} type="text" id="input-09" value={recordApi.FeloniousAssault} class="slds-input" />
+                                 <label class="slds-form-element__label slds-text-color_default">{recordApi.FeloniousAssaultSuffix}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                             <label class="slds-form-element__label slds-text-color_default">Hearing Aid & Prosthetic Appliance</label>
+                                <div class="slds-form-element__control">
+                                 <input onblur={handleChange} name="HearingAidProstheticAppliance" readonly={isReadOnly} type="text" id="input-10" value={recordApi.HearingAidProstheticAppliance} class="slds-input" />
+                                 <label class="slds-form-element__label slds-text-color_default">{recordApi.HearingAidProstheticApplianceSuffix}</label>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                             <label class="slds-form-element__label slds-text-color_default">Home Alteration and Vehicle Modification</label>
+                                <div class="slds-form-element__control">
+                                 <input onblur={handleChange} name="HomeAlterationVehicleModification" readonly={isReadOnly} type="text" id="input-11" value={recordApi.HomeAlterationVehicleModification} class="slds-input" />
+                                 <label class="slds-form-element__label slds-text-color_default">{recordApi.HomeAlterationVehicleModificationSuffix}</label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class=" slds-m-bottom_medium ">
+            <fieldset class="slds-form-element slds-form-element_compound">
+                <div class="slds-form-element__control">
+                    <div class="slds-form-element__row">
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                                <label class=" slds-form-element__label slds-text-color_default">Rehabilitation</label>
+                                <div class="slds-form-element__control">
+                                    <input onblur={handleChange} name="Rehabilitation" readonly={isReadOnly} type="text" id="input-12" value={recordApi.Rehabilitation} class="slds-input" />
+                                    <label class="slds-form-element__label slds-text-color_default">{recordApi.RehabilitationSuffix}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                                <label class="slds-form-element__label slds-text-color_default">Spousal/Domestic Partner/Civil Union Partner Retraining
+                            </label>
+                                <div class="slds-form-element__control">
+                                    <input onblur={handleChange} name="SpousalDomesticPartnerCivialPartnerRetraining" readonly={isReadOnly} type="text" id="input-13" value={recordApi.SpousalDomesticPartnerCivialPartnerRetraining} class="slds-input" />
+                                    <label class="slds-form-element__label slds-text-color_default">{recordApi.SpousalCivialPartnerSuffix}</label>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                                <label class="slds-form-element__label slds-text-color_default">Vehicle Safety Credit</label>
+                                <div class="slds-form-element__control">
+                                    <input onblur={handleChange} name="VehicleSafetyCredit" readonly={isReadOnly} type="text" id="input-14" value={recordApi.VehicleSafetyCredit} class="slds-input" />
+                                    <label class="slds-form-element__label slds-text-color_default">{recordApi.VehicleSafetyCreditSuffix}</label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <label class="headerTextProperties ">COVERAGE D</label>
+  
+        <div class=" slds-m-bottom_medium slds-m-top_medium ">
+            <fieldset class="slds-form-element slds-form-element_compound">
+                <div class="slds-form-element__control">
+                    <div class="slds-form-element__row">
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                             <label class=" slds-form-element__label slds-text-color_default">Brain Damage</label>
+                                <div class="slds-form-element__control">
+                                 <input onblur={handleChange} name="BrainDamage" readonly={isReadOnly} type="text" id="input-15" value={recordApi.BrainDamage} class="slds-input" />
+                                 <label class="slds-form-element__label slds-text-color_default">{recordApi.BrainDamageSuffix}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                             <label class="slds-form-element__label slds-text-color_default">In-Hospital Indemnity</label>
+                                <div class="slds-form-element__control">
+                                 <input onblur={handleChange} name="InHospitalIndemnity" readonly={isReadOnly} type="text" id="input-16" value={recordApi.InHospitalIndemnity} class="slds-input" />
+                                 <label class="slds-form-element__label slds-text-color_default">{recordApi.InHospitalIndemnitySuffix}</label>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                             <label class="slds-form-element__label slds-text-color_default">Medical Expense Sickness or Accident</label>
+                                <div class="slds-form-element__control">
+                                 <input onblur={handleChange} name="MedicalExpenseSicknesOrAccident" readonly={isReadOnly} type="text" id="input-17" value={recordApi.MedicalExpenseSicknesOrAccident} class="slds-input" />
+                                 <label class="slds-form-element__label slds-text-color_default">{recordApi.MedicalExpenseSicknessSuffix}</label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class=" slds-m-bottom_medium ">
+            <fieldset class="slds-form-element slds-form-element_compound">
+                <div class="slds-form-element__control">
+                    <div class="slds-form-element__row">
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                             <label class=" slds-form-element__label slds-text-color_default">Medical Expense Sickness or Injury (due to pregnancy,dental or pre-existing condition)   </label>
+                                <div class="slds-form-element__control">
+                                 <input onblur={handleChange} name="MedicalExpenseSicknessOrInjury" readonly={isReadOnly} type="text" id="input-18" value={recordApi.MedicalExpenseSicknessOrInjury} class="slds-input" />
+                                 <label class="slds-form-element__label slds-text-color_default">{recordApi.MedicalExpenseSicknessSuffix}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                             <label class="slds-form-element__label slds-text-color_default">Deductible </label>
+                                <div class="slds-form-element__control">
+                                 <input onblur={handleChange} name="Deductible" readonly={isReadOnly} type="text" id="input-19" value={recordApi.Deductible} class="slds-input" />
+                                 <label class="slds-form-element__label slds-text-color_default">{recordApi.DeductibleSuffix}</label>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-size_1-of-3">
+                            <div class="slds-form-element ">
+                             <label class="slds-form-element__label slds-text-color_default"> Severe Burns</label>
+                                <div class="slds-form-element__control">
+                                 <input onblur={handleChange} name="SevereBurns" readonly={isReadOnly} type="text" id="input-20" value={recordApi.SevereBurns} class="slds-input" />
+                                 <label class="slds-form-element__label slds-text-color_default">{recordApi.SevereBurnsSuffix}</label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            </div>
+            <label class="headerTextProperties ">COVERAGE E</label>
+  
+            <div class=" slds-m-bottom_medium slds-m-top_medium ">
+                <fieldset class="slds-form-element slds-form-element_compound">
+                    <div class="slds-form-element__control">
+                        <div class="slds-form-element__row">
+                            <div class="slds-size_1-of-3">
+                                <div class="slds-form-element ">
+                                 <label class=" slds-form-element__label slds-text-color_default">Car Rental Late Return Costs  </label>
+                                    <div class="slds-form-element__control">
+                                     <input onblur={handleChange} name="CarRentalLateReturnCosts" readonly={isReadOnly} type="text" id="input-21" value={recordApi.CarRentalLateReturnCosts} class="slds-input" />
+                                     <label class="slds-form-element__label slds-text-color_default">{recordApi.CarRentalLateReturnCostsSuffix}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-size_1-of-3">
+                                <div class="slds-form-element ">
+                                 <label class="slds-form-element__label slds-text-color_default">Home Guard</label>
+                                    <div class="slds-form-element__control">
+                                     <input onblur={handleChange} name="HomeGuard" readonly={isReadOnly} type="text" id="input-22" value={recordApi.HomeGuard} class="slds-input" />
+                                     <label class="slds-form-element__label slds-text-color_default">{recordApi.HomeGuardSuffix}</label>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-size_1-of-3">
+                                <div class="slds-form-element ">
+                                 <label class="slds-form-element__label slds-text-color_default">Pet Care</label>
+                                    <div class="slds-form-element__control">
+                                     <input onblur={handleChange} name="PetCare" readonly={isReadOnly} type="text" id="input-23" value={recordApi.PetCare} class="slds-input" />
+                                     <label class="slds-form-element__label slds-text-color_default">{recordApi.PetCareSuffix}</label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                </div>
+
+            <div class=" slds-m-bottom_medium">
+                
+                <fieldset class="slds-form-element slds-form-element_compound">
+                    <div class="slds-form-element__control">
+                        <div class=" slds-form-element__row">
+    
+                            <div class="slds-size_1-of-3">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label slds-text-color_default">Aggregate Limit of Insurance</label>
+                                    <div class="slds-form-element__control">
+                                        <input onblur={handleChange} name="AggregateLimitOfInsurance"  readonly={isReadOnly}  type="text" id="input-002" value={recordApi.AggregateLimitOfInsurance} class="slds-input" />
+                                    <label class="slds-form-element__label slds-text-color_default">{recordApi.AggregateLimitOfInsuranceSuffix}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-size_1-of-3">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label slds-text-color_default">Maximum Period of Coverage</label>
+                                    <div class="slds-form-element__control">
+                                        <input onblur={handleChange} name="MaximumPeriodOfCoverage"  readonly={isReadOnly}  type="text" id="input-003" value={recordApi.MaximumPeriodOfCoverage} class="slds-input" />
+                                    <label class="slds-form-element__label slds-text-color_default">{recordApi.MaximumperiodcoverageSuffix}</label>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_12-of-12">
+                        <c-add-form get-current-lob ={currentLOB} all-coverages={recordTypeData} current-coverage-id={currentCoverageID} is-read-only={isReadOnly} onchangedataupdate={BTAChangeData}></c-add-form>
+                    </div>
+                </div>
+    </div>  
+</template>

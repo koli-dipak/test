@@ -1,0 +1,480 @@
+<template>
+    <div align="center" class="slds-p-bottom_small" style="position: fixed;
+    top: 0;
+    width: 100%;
+    padding-top: 5px;
+    z-index: 3000;
+    background: white;
+    border-bottom: 1px solid lightgray;">
+        <div class="nw-header__top">
+            <a href="https://www.n2g.com/" class="nw-header__logo"><img alt="N2G Logo" src={N2GLogo} style="height: 40px;"></a>
+        </div>
+    </div>
+<div align="center" style="margin-top: 40px;">
+
+    <div align="left" style="max-width:1170px">
+            <!-- spinner -->
+        <template if:true={spinnerStatus}>
+                    <lightning-spinner style="background-color: rgba(0, 0, 0, 0.2);" alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+        </template>
+        <template if:true={isLinkExpired}>
+                <div align="center" style="margin-top: 60px;">
+                    <p><b><span style="color:red">Sorry This Link is Expired</span></b></p>
+                </div>
+            </template>
+            <template if:true={isSuccess}>
+                <div  align="center" style="margin-top: 60px;">
+                    <p><b><span style="color:green">Thank you for submiting details</span></b></p>
+                </div>
+            </template>
+            <lightning-card class={showRecordFormClass}>
+            
+                    <lightning-card title="Broker Details:" class="section">
+                        <div class="slds-grid slds-wrap slds-border_bottom slds-p-bottom_small">   
+                            <div class="slds-col slds-size_11-of-12"> 
+                                <div class="slds-grid slds-wrap slds-p-bottom_small" >      
+                            <div class="slds-col slds-size_6-of-12">
+                                <div class="slds-form-element slds-p-horizontal_medium"> 
+                                    <lightning-input type="text" label="Agency Name" readonly="true"   class="slds-m-left_medium"  value={data.Agency_Name__c}  ></lightning-input></b>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12">
+                                <div class="slds-form-element slds-p-horizontal_medium">
+                                    <lightning-input type="text" label="Broker Lookup-Code" readonly="true"    class="slds-m-left_medium"  value={data.Broker_Code__c} ></lightning-input></b>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12">
+                                <div class="slds-form-element slds-p-horizontal_medium">
+                                    <lightning-input type="url"   label="Website "   placeholder="Website"  class="slds-m-left_medium"  value={data.Website__c} name="Website__c" onchange={handlechange} field-level-help={Website_HelpText}></lightning-input></b>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12">
+                                <div class="slds-form-element slds-p-horizontal_medium">
+                                <lightning-input type="text" read-only="true"  label="Distribution Leader" value={data.Distribution_Leader__c}   class=" slds-m-left_medium"  ></lightning-input></b> 
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12">
+                                <div class="slds-form-element slds-p-horizontal_medium">
+                                    <lightning-input type="number"   min="0" label="No. of Employees" placeholder="No. of Employees"  class="slds-m-left_medium"  value={data.No_of_Employees__c} name="No_of_Employees__c" onchange={handlechange} field-level-help={NoOfEmployee_HelpText}></lightning-input></b>
+                                </div>
+                            </div>
+                            
+                            <div class="slds-col slds-size_6-of-12">
+                                <div class="slds-form-element slds-p-horizontal_medium">
+                                    <div class="slds-m-left_medium slds-form-element">
+                                        <!-- c-multi-select-combobox-cmp  options={HeadOfficeOptions}  selectedvalue={data.HeadOffice} minchar="0" label="Head of Office" onselect={handleHeadOfficeChange}></c-multi-select-combobox-cmp -->
+                                        <c-custom-lookup-lwc icon-name="standard:contact"
+                                        s-object-api-name="contact"
+                                        label="Head Of Office"
+                                        onlookupupdate={handleHeadOfficeChange}
+                                        default-record-id={data.Head_of_Office__c}
+                                        extra-field="FirstName,LastName,Email,Phone"
+                                        display-field-seprator=",()"
+                                        display-field="Name,Email"
+                                        create-new-record-text="Create New Contact"
+                                        remove-selected-record={refreshChild}
+                                        name="Head_of_Office__c" 
+                                        where-clause-field="AccountId"
+                                        where-clause-value={data.Account__c}
+                                        additional-contact-records={headOfficeAdditionalContact}
+                                        additional-data='headOffice'
+                                        placeholder="Search..."></c-custom-lookup-lwc>
+            
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="slds-col slds-size_6-of-12">
+                                <div class="slds-form-element slds-p-horizontal_medium">
+                                    <div class="slds-m-right_medium slds-form-element">
+                                    <lightning-input-address
+                                    address-label="Agency Address"
+                                    street-label="Street"
+                                    city-label="City"
+                                    country-label="Country"
+                                    province-label="State"
+                                    postal-code-label="PostalCode"
+                                    street={data.Street__c}
+                                    city={data.City__c}
+                                    province={data.State__c}
+                                    country={data.Country__c}
+                                    postal-code={data.PostalCode__c}
+                                    onchange={handleAddressChange}
+                                    class="slds-m-left_medium" ></lightning-input-address>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="slds-col slds-size_6-of-12">
+                                <div class="slds-form-element slds-p-horizontal_medium">
+                                <lightning-input type="number" formatter="currency" field-level-help={AnnualPremium_HelpText} label="Annual Premium Volume" placeholder="Annual Premium Volume"  class=" slds-m-left_medium"  value={data.Annual_Premium_Volumne__c} name="Annual_Premium_Volumne__c" onchange={handlechange}></lightning-input></b> 
+                                </div>
+                            </div>
+                            
+                        </div>
+                        </div>
+                        </div>
+                    </lightning-card>
+                    <lightning-card >
+                        <div slot="title">Events: <lightning-helptext content={EventSection_HelpText} style="position: relative;
+                            top: -4px;"></lightning-helptext></div>
+                        <div align="right" class="slds-m-right_large slds-m-bottom_small">
+                            <lightning-button icon-name="utility:add" variant="brand"  onclick={addEvents} label="Add"></lightning-button>
+                
+                        </div>
+                        <template for:each={events} for:item="event" for:index="index">
+                            <div class="slds-grid slds-wrap slds-border_bottom slds-p-bottom_small" key={event}>   
+                                <div class="slds-col slds-size_11-of-12"> 
+                                    <div class="slds-grid slds-wrap slds-p-bottom_small" >    
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                            <lightning-input type="text"    data-index={index}  label="Event Name" placeholder="Event Name"  class=" slds-m-left_medium" value={event.Event_Name__c} name="Event_Name__c" onchange={handleEventChange}></lightning-input></b> 
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                                <!-- <lightning-input type="text"    data-index={index}  label="Location" placeholder="Location"  class=" slds-m-left_medium"  value={event.Location__c} name="Location__c" onchange={handleEventChange}></lightning-input></b>  -->
+                                                <lightning-input-address
+                                                    data-index={index}
+                                                    address-label="Event Address"
+                                                    street-label="Street"
+                                                    city-label="City"
+                                                    country-label="Country"
+                                                    province-label="State"
+                                                    postal-code-label="PostalCode"
+                                                    street={event.Event_Street__c}
+                                                    city={event.Event_City__c}
+                                                    province={event.Event_State__c}
+                                                    country={event.Event_Country__c}
+                                                    postal-code={event.Event_PostalCode__c}
+                                                    onchange={handleEventAddressChange}
+                                                    class="slds-m-left_medium" ></lightning-input-address>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                                <lightning-input type="date"   data-index={index}  label="Event Start Date" placeholder="Event Start Date"  class=" slds-m-left_medium" value={event.Event_Start_Date__c} name="Event_Start_Date__c" onchange={handleEventChange} ></lightning-input></b> 
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                            <lightning-input type="date"    data-index={index}  label="Event End Date" placeholder="Event End Date"  class=" slds-m-left_medium" value={event.Event_End_Date__c} name="Event_End_Date__c" onchange={handleEventChange} ></lightning-input></b> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-12"> 
+                                    <div align="right" class="slds-m-right_large slds-m-top_small">
+                                        <template if:true={eventDeleteEnable}>
+                                            <lightning-button-icon icon-name="utility:delete"  alternative-text="Delete"  title="Delete"  data-index={index}  onclick={deleteEvent}></lightning-button-icon>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </template>
+                        
+                    </lightning-card>
+                    <lightning-card >
+                        <div slot="title">Top Carriers: <lightning-helptext content={TopCarrierSection_HelpText} style="position: relative;
+                            top: -4px;"></lightning-helptext></div>
+                        <div align="right" class="slds-m-right_large slds-m-bottom_small">
+                            <lightning-button icon-name="utility:add" variant="brand"  onclick={addTopCarrier} label="Add"></lightning-button>
+                
+                        </div>
+                        <template for:each={topCarriers} for:item="topCarrier" for:index="index">
+                            <div class="slds-grid slds-wrap slds-border_bottom slds-p-bottom_small" key={topCarrier}>   
+                                <div class="slds-col slds-size_11-of-12"> 
+                                    <div class="slds-grid slds-wrap slds-p-bottom_small" >    
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                            <lightning-combobox options={CompetitorNameOption} data-index={index}     label="Carrier Name" placeholder="Carrier Name"  class=" slds-m-left_medium" value={topCarrier.Competitor_Name__c} name="Competitor_Name__c" onchange={handleTopCarrierChange}></lightning-combobox></b> 
+                                        </div>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                            <lightning-input type="number" data-index={index}   formatter="currency" label="Premium " placeholder="Premium"  class=" slds-m-left_medium"  value={topCarrier.Premium__c} name="Premium__c" onchange={handleTopCarrierChange}></lightning-input></b> 
+                                        </div>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                            <lightning-textarea type="text" data-index={index} max-length="3000"     label="Comment" placeholder="Comment"  class=" slds-m-left_medium" value={topCarrier.Comment__c} name="Comment__c" onchange={handleTopCarrierChange}></lightning-textarea></b> 
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-12"> 
+                                    <div align="right" class="slds-m-right_large slds-m-top_small">
+                                        <template if:true={topCarrierDeleteEnable}>
+                                            <lightning-button-icon icon-name="utility:delete"  alternative-text="Delete" title="Delete"  data-index={index}  onclick={deleteTopCarrier}></lightning-button-icon>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </template>
+                        
+                    </lightning-card>
+                    <lightning-card >
+                        <div slot="title">Specialty Info: <lightning-helptext content={SpecialityInfoSection_HelpText} style="position: relative;
+                            top: -4px;"></lightning-helptext></div>
+                        <div align="right" class="slds-m-right_large slds-m-bottom_small">
+                            <lightning-button icon-name="utility:add" variant="brand"  onclick={addSpecialtyInfo} label="Add"></lightning-button>
+                
+                        </div>
+                        <template for:each={specialtyInfos} for:item="specialtyInfo" for:index="index">
+                            <div class="slds-grid slds-wrap slds-border_bottom slds-p-bottom_small" key={specialtyInfo}>   
+                                <div class="slds-col slds-size_11-of-12"> 
+                                    <div class="slds-grid slds-wrap slds-p-bottom_small" >    
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                            <lightning-input type="text" data-index={index}      label="Product" placeholder="Product"  class=" slds-m-left_medium" value={specialtyInfo.Product__c} name="Product__c" onchange={handleSpecialtyInfoChange}></lightning-input></b> 
+                                        </div>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                                <div class="slds-m-left_medium slds-form-element">
+                                                    <!-- c-multi-select-combobox-cmp  options={ManagerOptions}  selectedvalue={data.Manager} minchar="0" label="Manager" onselect={handleManagerChange}></c-multi-select-combobox-cmp -->
+                                                    <c-custom-lookup-lwc icon-name="standard:contact"
+                                                    s-object-api-name="contact"
+                                                    label="Manager"
+                                                    
+                                                    onlookupupdate={handleManagerChange}
+                                                    default-record-id={specialtyInfo.Manager__c}
+                                                    extra-field="FirstName,LastName,Email,Phone"
+                                                    display-field-seprator=",()"
+                                                    display-field="Name,Email"
+                                                    create-new-record-text="Create New Contact"
+                                                    remove-selected-record={refreshManagerChild}
+                                                    data-index={index}  
+                                                    name="Manager__c" 
+                                                    additional-contact-records={additionalContactRecords}
+                                                    where-clause-field="AccountId"
+                                                    where-clause-value={data.Account__c}
+                                                    additional-data={index}
+                                                    check-required={validateRequired}
+                                                    placeholder="Search..."></c-custom-lookup-lwc>
+                        
+                                                </div> 
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                            <lightning-input type="number" formatter="currency" data-index={index}   label="Premium " placeholder="Premium"  class=" slds-m-left_medium"  value={specialtyInfo.Premium__c} name="Premium__c" onchange={handleSpecialtyInfoChange}></lightning-input></b> 
+                                        </div>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                            <lightning-input type="number"  label="Wholesale % " data-index={index}   placeholder="Wholesale %"  class=" slds-m-left_medium"  value={specialtyInfo.Wholesale__c} name="Wholesale__c" onchange={handleSpecialtyInfoChange}></lightning-input></b> 
+                                        </div>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12"> 
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                            <lightning-combobox options={Competitor1Option} data-index={index}   label="Competitor 1" placeholder="Competitor 1"  class=" slds-m-left_medium" value={specialtyInfo.Competitor_1__c} name="Competitor_1__c" onchange={handleSpecialtyInfoChange}></lightning-combobox></b> 
+                                        </div>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                            <lightning-combobox options={Competitor2Option} data-index={index}   label="Competitor 2" placeholder="Competitor 2"  class=" slds-m-left_medium" value={specialtyInfo.Competitor_2__c} name="Competitor_2__c" onchange={handleSpecialtyInfoChange}></lightning-combobox></b> 
+                                        </div>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                            <lightning-combobox  options={Competitor3Option} data-index={index}   label="Competitor 3" placeholder="Competitor 3"  class=" slds-m-left_medium" value={specialtyInfo.Competitor_3__c} name="Competitor_3__c" onchange={handleSpecialtyInfoChange}></lightning-combobox></b> 
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-12"> 
+                                    <div align="right" class="slds-m-right_large slds-m-top_small">
+                                        <template if:true={specialtyDeleteEnable}>
+                                            <lightning-button-icon icon-name="utility:delete"  alternative-text="Delete" title="Delete"  data-index={index}  onclick={deleteSpecialtyInfo}></lightning-button-icon>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </template>
+            
+                    </lightning-card>
+
+                    
+                    <!-- Broker Line of Business part start added on 12-11-2022 -->
+
+                    <lightning-card >
+                        <div slot="title">Line of Business: <lightning-helptext content={lineOfBusinessSection_HelpText} style="position: relative;
+                            top: -4px;"></lightning-helptext></div>
+                        <div align="right" class="slds-m-right_large slds-m-bottom_small">
+                            <lightning-button icon-name="utility:add" variant="brand"  onclick={addLineOfBusiness} label="Add"></lightning-button>
+                
+                        </div>
+                        <template for:each={lineOfBusinessData} for:item="LOB" for:index="index">
+                            <div class="slds-grid slds-wrap slds-border_bottom slds-p-bottom_small" key={LOB}>   
+                                <div class="slds-col slds-size_11-of-12"> 
+                                    <div class="slds-grid slds-wrap slds-p-bottom_small" >    
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                            <!-- <lightning-input type="text" data-index={index}      label="Product" placeholder="Product"  class=" slds-m-left_medium" value={LOB.Product__c} name="Product__c" onchange={handleLOBChange}></lightning-input></b>  -->
+                                            <lightning-combobox options={LOBProductOptions} data-index={index}   label="Product" placeholder="Product"  class=" slds-m-left_medium" value={LOB.Product__c} name="Product__c" onchange={handleLOBChange}></lightning-combobox></b>
+                                        </div>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                                <div class="slds-m-left_medium slds-form-element">
+                                                    <!-- c-multi-select-combobox-cmp  options={ManagerOptions}  selectedvalue={data.Manager} minchar="0" label="Manager" onselect={handleManagerChange}></c-multi-select-combobox-cmp -->
+                                                    <c-custom-lookup-lwc icon-name="standard:contact"
+                                                    s-object-api-name="contact"
+                                                    label="Manager"
+                                                    
+                                                    onlookupupdate={handleLOBManagerChange}
+                                                    default-record-id={LOB.Manager__c}
+                                                    extra-field="FirstName,LastName,Email,Phone"
+                                                    display-field-seprator=",()"
+                                                    display-field="Name,Email"
+                                                    create-new-record-text="Create New Contact"
+                                                    remove-selected-record={refreshManagerChild}
+                                                    data-index={index}  
+                                                    name="Manager__c" 
+                                                    additional-contact-records={additionalLOBContactRecords}
+                                                    where-clause-field="AccountId"
+                                                    where-clause-value={data.Account__c}
+                                                    additional-data={index}
+                                                    check-required={validateRequired}
+                                                    placeholder="Search..."></c-custom-lookup-lwc>
+                        
+                                                </div> 
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                            <lightning-input type="number" formatter="currency" data-index={index}   label="Premium " placeholder="Premium"  class=" slds-m-left_medium"  value={LOB.Premium__c} name="Premium__c" onchange={handleLOBChange}></lightning-input></b> 
+                                        </div>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                            <lightning-input type="number"  label="Wholesale % " data-index={index}   placeholder="Wholesale %"  class=" slds-m-left_medium"  value={LOB.Wholesale__c} name="Wholesale__c" onchange={handleLOBChange}></lightning-input></b> 
+                                        </div>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12"> 
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                            <lightning-combobox options={LOBCompetitor1Option} data-index={index}   label="Competitor 1" placeholder="Competitor 1"  class=" slds-m-left_medium" value={LOB.Competitor_1__c} name="Competitor_1__c" onchange={handleLOBChange}></lightning-combobox></b> 
+                                        </div>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                            <lightning-combobox options={LOBCompetitor2Option} data-index={index}   label="Competitor 2" placeholder="Competitor 2"  class=" slds-m-left_medium" value={LOB.Competitor_2__c} name="Competitor_2__c" onchange={handleLOBChange}></lightning-combobox></b> 
+                                        </div>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element slds-p-horizontal_medium">
+                                            <lightning-combobox  options={LOBCompetitor3Option} data-index={index}   label="Competitor 3" placeholder="Competitor 3"  class=" slds-m-left_medium" value={LOB.Competitor_3__c} name="Competitor_3__c" onchange={handleLOBChange}></lightning-combobox></b> 
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-12"> 
+                                    <div align="right" class="slds-m-right_large slds-m-top_small">
+                                        <template if:true={lineOfBusinessDeleteEnable}>
+                                            <lightning-button-icon icon-name="utility:delete"  alternative-text="Delete" title="Delete"  data-index={index}  onclick={deleteLineOfBusiness}></lightning-button-icon>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </template>
+            
+                    </lightning-card>
+
+                    <!-- Broker Line of Business part end added on 12-11-2022 -->
+            
+            
+                    <div class="slds-p-around_medium slds-align_absolute-center">
+                            <lightning-button label="Submit" variant="brand" class="slds-m-right_small"  onclick={handleSaveClick}></lightning-button>
+                            <!-- lightning-button label="Cancel" variant="neutral" class="slds-m-right_small"  ></lightning-button -->
+                    </div>
+            </lightning-card>
+            <template if:true={showCreateContact}>
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                <!-- modal header start -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModalBox}>
+                        <lightning-icon icon-name="utility:close"
+                        alternative-text="close"
+                        variant="inverse"
+                        size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+                    <template if:false={newContact.existing}>Create New Record</template> 
+                    <template if:true={newContact.existing}>Confirm/Update Record</template> 
+                    </h2>
+                </header>
+
+                <!-- modal body start -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_6-of-12">
+                            <div class="slds-form-element slds-p-horizontal_medium">
+                                <lightning-combobox options={salutationOptions} label="Salutation" placeholder="Salutation"  class=" slds-m-left_medium" value={newContact.Salutation} name="Salutation" onchange={handlecontactchange}></lightning-combobox></b> 
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                            <div class="slds-form-element slds-p-horizontal_medium">
+                                <!-- <lightning-input type="text"   label="Last Name"     placeholder="Last Name"  class="slds-m-left_medium"  value={newContact.LastName} name="LastName"  onchange={handlecontactchange}></lightning-input></b> -->
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                            <div class="slds-form-element slds-p-horizontal_medium">
+                                <lightning-input type="text"  label="First Name"  placeholder="First Name"  class="slds-m-left_medium"  value={newContact.FirstName} name="FirstName"  onchange={handlecontactchange}></lightning-input></b>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                            <div class="slds-form-element slds-p-horizontal_medium">
+                                <lightning-input type="text"   label="Last Name"     placeholder="Last Name"  class="slds-m-left_medium"  value={newContact.LastName} name="LastName"  onchange={handlecontactchange}></lightning-input></b>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                                <div class="slds-form-element slds-p-horizontal_medium">
+                                <lightning-input type="email"   label="E-mail"  disabled={newContact.existing}  placeholder="E-mail"  class="slds-m-left_medium" value={newContact.Email} name="Email" onchange={handlecontactchange}></lightning-input></b>
+                            </div>  
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                            <div class="slds-form-element slds-p-horizontal_medium">
+                                <lightning-input type="tel"    label="Contact Number"     placeholder="Contact Number"  class="slds-m-left_medium" value={newContact.Phone} name="Phone" onchange={handlecontactchange}></lightning-input></b>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+
+                <!-- modal footer start-->
+                <footer class="slds-modal__footer">
+                        <lightning-button label="Save" variant="brand" class=" slds-m-right_small" onclick={saveContact}></lightning-button>
+                        <lightning-button label="Cancel" variant="neutral" class="slds-m-right_small" onclick={hideModalBox}></lightning-button>
+                </footer>
+
+                </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+    </div>
+</div>
+<div align="center" style="border-top:1px solid lightgray;margin-top:5px;background-color:rgba(102, 114, 127,0.8);color:white" >
+    <div align="left" style="max-width:1170px;padding-top:15px">
+        <footer id="mu-footer" role="contentinfo">
+            <div class="nw-container">
+                <div class="footer-logo slds-p-bottom_large">
+                    <img src={N2GFooterLogo} alt="logo" width="150px" height="auto">
+                </div>
+                
+                <div class="mu-footer-area">
+                    <p>N2G Worldwide Insurance Services, LLC is a managing general agent, offering a variety of insurance products around the world. N2G offers insurance products provided by Nationwide Mutual Insurance Company and its subsidiaries and affiliates (Home office: Columbus, Ohio, USA) and Assicurazioni Generali S.p.A.’s subsidiaries, affiliates and partner companies. N2G and the N2G logo are service marks of N2G Worldwide Insurance Services, LLC. Nationwide and the Nationwide N and Eagle are service marks of Nationwide Mutual Insurance Company. Generali and the Generali logo are trademark of Assicurazioni Generali S.p.A. ©2020 N2G Worldwide Insurance Services, LLC.</p>
+                </div>
+                <div id="post-copy" class="footer-nav">
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+</template>

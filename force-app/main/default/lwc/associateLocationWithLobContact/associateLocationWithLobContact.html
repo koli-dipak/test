@@ -1,0 +1,61 @@
+<template>
+    
+    <lightning-card>
+    <img src={imgsrc} alt="N2G" width="85px" class="slds-m-bottom_small slds-m-left_medium"/>
+    <div class="slds-m-left_medium" style="font-weight: 500;">{mainHelpTextTitle}</div>
+    <!-- <div class="slds-m-left_medium" style="font-weight: 500;">Click the arrow in front of the location ID to add a contact for the location.</div> //Remove due to N2G-618 --> 
+    <template for:each={locRecords} for:item="record" for:index="currentindex">
+        <div key={record.Name}>
+            <lightning-accordion
+                onsectiontoggle={handleAccordionToggle}
+                active-section-name="section1"
+                allow-multiple-sections-open
+            >
+            <!-- allow-multiple-sections-open -->
+                <!-- <lightning-accordion-section  label={record.LocationAddressAndName}> -->
+                <lightning-accordion-section name="section1"  label={record.LocationAddressAndName}>
+
+                    <!-- <template if:true={lob}>
+                        <lightning-datatable
+                        key-field="Id"
+                        data={lob}
+                        columns={lobcolumns}
+                        checkbox-column=true
+                        onrowselection={lobRowSelection}
+                        selected-rows={record.defaultselected}
+                        data-index={currentindex}
+                        data-location={record.Id}
+                    ></lightning-datatable>
+                    </template> -->
+                        <!-- above datatable requirement is remove due to N2G-526 new requirement (useful for future work)-->
+                    <!-- <div>
+                        <br>
+                    </div> -->
+                    <!-- <template if:true={contact}> -->
+                        <!-- <lightning-datatable
+                        key-field="Id"
+                        data={contact}
+                        columns={columns}
+                        checkbox-column=true 
+                        onrowselection={contactRowSelection}
+                        selected-rows={record.defaultContactSelected}
+                        data-location={record.Id}
+                    ></lightning-datatable> -->
+                    
+                    <label class="">You can lookup existing contacts here to associate to your survey location record.</label>
+                    <c-all-contacts onselectedcontact={contactRowSelection} onremoveselectedcontact={removeContactIdFromRecord} location-record-id={record.Id} loction-index={currentindex} selected-contacts={record.defaultContactSelected} account-id={AccountId} contact-record-type-id={ContactRecordTypeId}></c-all-contacts>
+                </lightning-accordion-section>
+            </lightning-accordion>
+        </div>
+    </template>
+    
+    <div align="right" class="slds-border_right">
+        <template lwc:if={PreviousActionButtonHide}>
+        </template>
+        <template lwc:else>
+            <lightning-button label="Previous" title="Previous" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+        </template>
+        <lightning-button variant="brand" label="Request Survey" title="Next" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+    </div>
+    </lightning-card>
+</template>

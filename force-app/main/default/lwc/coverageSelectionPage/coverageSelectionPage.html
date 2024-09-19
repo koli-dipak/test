@@ -1,0 +1,311 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 09-08-2022
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+
+<template>
+<!-- <div style="display: none;"> -->
+  <!-- <c-page16-fin item={coverages}></c-page16-fin> -->
+<!-- </div> -->
+    
+<!--      
+<lightning-card>
+  <div class="heading tglBtnClrChng" style="font-size:large; text-align:center">
+      <h1><strong>Premium Calculation</strong> </h1>
+  </div>
+</lightning-card> -->
+<!-- <lightning-card>
+  <table class="slds-m-left_small">
+      <tr>
+          <th class="tglBtnClrChng">Account Name</th>
+          <th style="color:green;"><span style="margin-left:50%">Effective Date</span></th>
+          <th style="color:red;">Expiry Date</th>
+      </tr>
+      <tr>
+          <td>{recordApi.AccountName}</td>
+          <td><span style="margin-left:50%">{recordApi.EffectiveDate}</span></td>
+          <td>{recordApi.ExpiryDate}</td>
+      </tr>
+  </table><br />
+
+  <table class="slds-m-left_small">
+      <tr>
+          <th class="tglBtnClrChng">Actual Premium </th>
+          <th class="tglBtnClrChng">Exposure Base</th>
+          <th class="tglBtnClrChng">GL Occurence Limit</th>
+          <th class="tglBtnClrChng">GL Deductible</th>
+      </tr>
+ 
+      <tr>
+          <td>{ActualPremium}</td>
+          <td>{recordApi.ExposureBase}</td>
+          <td>{GLOccurenceLimit}</td>
+          <td>{GLDeductible}</td>
+           <td>{recordApi.CommissiontoEnterinGeRRater}</td> 
+      </tr>
+  </table>
+</lightning-card> -->
+
+<lightning-card>
+  <div class="slds-m-left_small">
+    <table >
+        <tr>
+            <th colspan="2" class="thClrShdBlue">Account Name</th>
+            <th class="thClrShdBlue" style="color:green; text-align:right"><span>Effective Date</span></th>
+            <th class="thClrShdBlue" style="color:red; text-align:right ">Expiry Date</th>
+        </tr>
+        <tr>
+            <td colspan="2">{recordApi.AccountName}</td>
+            <td style="text-align:right"><span >{recordApi.EffectiveDate}</span></td>
+            <td  style="text-align:right">{recordApi.ExpiryDate}</td>
+        </tr>
+        <tr >
+            <td colspan="100"><div style="border-bottom: 1px solid rgba(192, 192, 192, 0.41); width: 100%; margin-bottom: 10px;"></div></td>
+        </tr>
+        <tr>
+            <th class="thClrShdBlue">Actual Premium </th>
+            <th class="thClrShdBlue">Exposure Base</th>
+            <th class="thClrShdBlue"  style="text-align:right">GL Occurence Limit</th>
+            <th class="thClrShdBlue"  style="text-align:right">GL Deductible</th>
+        </tr>
+
+        <tr>
+            <td>{ActualPremium}</td>
+            <td>{recordApi.ExposureBase}</td>
+            <td  style="text-align:right">{GLOccurenceLimit}</td>
+            <td  style="text-align:right">{GLDeductible}</td>
+            <!-- <td>{recordApi.CommissiontoEnterinGeRRater}</td> -->
+        </tr>
+    </table> 
+</div>
+  <div class="pageBorder"></div>
+</lightning-card>
+  
+
+<!-- <lightning-card>
+<div class="slds-p-around_small">
+    <table>
+        <tr>
+            <th style="color:rgb(0, 92, 167);">Account Name</th>
+            <th style="color:green;">Effective Date</th>
+            <th style="color:red;">Expiry Date</th>
+        </tr>
+        <tr>
+            <td>{recordApi.AccountName}</td>
+            <td>{recordApi.EffectiveDate}</td>
+            <td>{recordApi.ExpiryDate}</td>
+        </tr>
+    </table> <br />
+
+
+
+    <table>
+        <tr>
+            <th style="color:rgb(0, 92, 167);">Actual Premium </th>
+            <th style="color:rgb(0, 92, 167);">Total Exposure Amount</th>
+            <th style="color:rgb(0, 92, 167);">GL Occurence Limit</th>
+            <th style="color:rgb(0, 92, 167);">GL Deductible</th>
+            <th style="color:rgb(0, 92, 167);">Commission to Enter in GeR Rater</th>
+        </tr>
+        <tr>
+            <td>{recordApi.ActualPremium}</td>
+            <td>{recordApi.TotalExposureAmount}</td>
+            <td>{recordApi.GLOccurenceLimit}</td>
+            <td>{recordApi.GLDeductible}</td>
+            <td>{recordApi.CommissiontoEnterinGeRRater}</td>
+
+        </tr>
+    </table>
+</div>
+</lightning-card> -->
+
+<lightning-card>
+      <div class="slds-p-around_small">
+      <br />
+      <div class="slds-grid slds-grid_vertical">
+        <div class="slds-col">
+          <span style="color:rgb(0, 92, 167);font-size:20px">Add Coverage </span>
+        </div>
+      </div><br />
+
+      <template for:each={recordApi.cov} for:item="chcklabl">
+        
+          <div class="slds-form-element slds-grid slds-m-bottom_small" key={chcklabl.label}>
+            <div class="slds-col slds-size_6-of-12">
+              <!-- <span class="slds-form-element__label slds-m-bottom_none" data-id={chcklabl.label}> {chcklabl.label}</span> -->
+              <span class="slds-form-element__label slds-m-bottom_none" data-id="div1" style={chcklabl.txtcolor} > {chcklabl.label}</span>
+            </div>
+            <div class="slds-col slds-size_5-of-12"></div>
+            <div class="slds-col slds-size_1-of-12">
+              <template if:true={chcklabl.isDisabled}>
+                <label class="slds-checkbox_toggle slds-grid"><span></span>
+                  <input type="checkbox" name={chcklabl.code} value={chcklabl.label}
+                    aria-describedby={chcklabl.label} disabled checked={chcklabl.show}/>
+                  <span style="text-align:right"
+                    class="slds-checkbox_faux_container" aria-live="assertive">
+                    <span class="slds-checkbox_faux"></span>
+                  </span>
+              </label>
+              </template>
+              <template if:false={chcklabl.isDisabled}>
+                <label class="slds-checkbox_toggle slds-grid"><span></span>
+                  <input type="checkbox" name={chcklabl.code} value={chcklabl.label}
+                    aria-describedby={chcklabl.label} onblur={tglBtn} checked={chcklabl.show}/>
+                  <span style="text-align:right"
+                    class="slds-checkbox_faux_container" aria-live="assertive">
+                    <span class="slds-checkbox_faux"></span>
+                  </span>
+              </label>
+              </template>
+             
+            </div>  
+          </div>
+      </template>
+
+      <!-- <div class="slds-form-element slds-grid">
+        <div class="slds-col slds-size_6-of-12">
+          <span class="slds-form-element__label slds-m-bottom_none" data-id="divblock">Foreign Commercial General Liability And Employee Benefits Liability</span>
+        </div>
+        <div class="slds-col slds-size_5-of-12"></div>
+        <div class="slds-col slds-size_1-of-12">
+          <label class="slds-checkbox_toggle slds-grid"><span></span>
+            <input type="checkbox" name="checkbox-toggle-15" value="checkbox-toggle-15"
+              aria-describedby="checkbox-toggle-15" onclick={tglBtn}/>
+            <span id="checkbox-toggle-15" style="text-align:right"
+              class="slds-checkbox_faux_container" aria-live="assertive">
+              <span class="slds-checkbox_faux"></span>
+            </span>
+        </label>
+        </div>  
+      </div><br /> -->
+
+      <!-- <div class="slds-form-element slds-grid">
+        <div class="slds-col slds-size_6-of-12">
+          <span class="slds-form-element__label slds-m-bottom_none" data-id="divblock1">Foreign Auto Liability Difference In Conditions/Excess Liability</span>
+        </div>
+        <div class="slds-col slds-size_5-of-12"></div>
+        <div class="slds-col slds-size_1-of-12">
+          <label class="slds-checkbox_toggle slds-grid"><span></span>
+            <input type="checkbox" name="checkbox-toggle-15" value="checkbox-toggle-15"
+              aria-describedby="checkbox-toggle-15" onclick={tglBtn1}/>
+            <span id="checkbox-toggle-16" class="slds-checkbox_faux_container" aria-live="ass ertive">
+              <span class="slds-checkbox_faux"></span>
+            </span>
+        </label>
+        </div>  
+      </div><br /> -->
+
+      <!-- <div class="slds-form-element slds-grid">
+        <div class="slds-col slds-size_6-of-12">
+          <span class="slds-form-element__label slds-m-bottom_none" data-id="divblock2">Foreign Voluntary Workers Compensation And Employers Liability</span>
+        </div>
+        <div class="slds-col slds-size_5-of-12"></div>
+        <div class="slds-col slds-size_1-of-12">
+          <label class="slds-checkbox_toggle slds-grid"><span></span>
+            <input type="checkbox" name="checkbox-toggle-15" value="checkbox-toggle-15"
+              aria-describedby="checkbox-toggle-15" onclick={tglBtn2}/>
+            <span id="checkbox-toggle-14" class="slds-checkbox_faux_container" aria-live="assertive">
+              <span class="slds-checkbox_faux"></span>
+            </span>
+        </label>
+        </div>  
+      </div><br /> -->
+    
+      <!-- <div class="slds-form-element slds-grid">
+        <div class="slds-col slds-size_6-of-12">
+          <span class="slds-form-element__label slds-m-bottom_none" data-id="divblock3">Emergency Assistance</span>
+        </div>
+        <div class="slds-col slds-size_5-of-12"></div>
+        <div class="slds-col slds-size_1-of-12">
+          <label class="slds-checkbox_toggle slds-grid"><span></span>
+            <input type="checkbox" name="checkbox-toggle-15" value="checkbox-toggle-13"
+              aria-describedby="checkbox-toggle-15" onclick={tglBtn3}/>
+            <span id="checkbox-toggle-13" class="slds-checkbox_faux_container" aria-live="assertive">
+              <span class="slds-checkbox_faux"></span>
+            </span>
+        </label>
+        </div>  
+      </div><br /> -->
+
+      <!-- <div class="slds-form-element slds-grid">
+        <div class="slds-col slds-size_6-of-12">
+          <span class="slds-form-element__label slds-m-bottom_none" data-id="divblock4">Travel Accident And Excess Out Of Country Medical Expense</span>
+        </div>
+        <div class="slds-col slds-size_5-of-12"></div>
+        <div class="slds-col slds-size_1-of-12">
+          <label class="slds-checkbox_toggle slds-grid"><span></span>
+            <input type="checkbox" name="checkbox-toggle-15" value="checkbox-toggle-13"
+              aria-describedby="checkbox-toggle-15" onclick={tglBtn4}/>
+            <span id="checkbox-toggle-17" class="slds-checkbox_faux_container" aria-live="assertive">
+              <span class="slds-checkbox_faux"></span>
+            </span>
+        </label>
+        </div>  
+      </div><br /> -->
+      
+      <!-- <div class="slds-form-element slds-grid">
+        <div class="slds-col slds-size_6-of-12">
+          <span class="slds-form-element__label slds-m-bottom_none" data-id="divblock5">Trip Assistance</span>
+        </div>
+        <div class="slds-col slds-size_5-of-12"></div>
+        <div class="slds-col slds-size_1-of-12">
+          <label class="slds-checkbox_toggle slds-grid"><span></span>
+            <input type="checkbox" name="checkbox-toggle-15" value="checkbox-toggle-19"
+              aria-describedby="checkbox-toggle-15" onclick={tglBtn5}/>
+            <span id="checkbox-toggle-19" class="slds-checkbox_faux_container" aria-live="assertive">
+              <span class="slds-checkbox_faux"></span>
+            </span>
+        </label>
+        </div>  
+      </div><br /> -->
+    
+        <!-- <div class="slds-col slds-form-element">
+  
+          <div class="slds-form-element">
+            <label class="slds-checkbox_toggle slds-grid"><span></span>
+              <div class="slds-col slds-size_6-of-12">
+                <span class="slds-form-element__label slds-m-bottom_none" data-id="divblock5">  <table></table>Trip Assistance</span>
+              </div>
+              <div class="slds-col slds-size_6-of-12">
+                <input type="checkbox" name="checkbox-toggle-18 " value="checkbox-toggle-18"
+                  aria-describedby="checkbox-toggle-18" onclick={tglBtn5} />
+                <span id="checkbox-toggle-19" style="text-align:right"
+                  class="slds-checkbox_faux_container slds-float_right" aria-live="assertive">
+                  <span class="slds-checkbox_faux"></span>
+                </span>
+              </div>
+  
+              
+            </label>
+
+        </div>
+    
+    
+  </div> -->
+  </div>
+  <div class="slds-m-right_medium slds-m-left_medium" >
+    <div class="slds-grid slds-wrap">
+
+       
+          <div class="slds-col slds-size_7-of-12">
+              <!-- <lightning-button label="calculate" variant="brand" onclick={calculate}></lightning-button> -->
+          </div>
+    
+        <div class="slds-col slds-size_5-of-12">
+            
+                <div class="slds-float_right">
+                  <lightning-button  variant="Neutral" label="Previous" class="slds-m-right_small" icon-name="utility:chevronleft" onclick={PreviousPage} icon-position="left">
+                  </lightning-button>
+                  <lightning-button variant="brand" label="Next" onclick={NextPageHandle} icon-name="utility:chevronright" class="slds-m-right_small" icon-position="right"></lightning-button>
+                   
+                </div>
+            
+        </div>
+  
+    </div>
+    </div>
+  </lightning-card>
+</template>

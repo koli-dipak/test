@@ -1,0 +1,30 @@
+<template>
+  <slot>
+		<div class={_styleClasses.container} style="width:100%">
+			<div class="slds-form-element">
+					<label class="slds-checkbox_toggle">
+						<div class="slds-grid" style="display: grid;">
+							<div class="slds-col slds-size_9-of-12 togglecheck">
+								<label style="white-space: nowrap;text-transform: capitalize;margin: 0 0 0 9px;">{_propSetMap.checkLabel}</label>
+								<div class="slds-m-top_x-small">
+									<vlocity_ins-input type="toggle"
+																			class='omni-toggle'
+												theme={_theme}
+												onchange={handleChange}
+												icon-name="utility:info"
+												checked={elementValue}
+												tab-index={tabIndex}
+												field-level-help={_handleHelpText}
+												required-label={allCustomLabelsUtil.OmniRequired}
+												data-omni-input>
+									</vlocity_ins-input>
+								</div> 
+							</div>
+						</div>
+					</label>
+			</div>
+    	</div>
+		<div class="vlc-separator">
+    	</div>
+  </slot>
+</template>

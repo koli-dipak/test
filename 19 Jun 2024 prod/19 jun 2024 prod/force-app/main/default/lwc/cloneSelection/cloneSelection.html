@@ -1,0 +1,108 @@
+<template>
+  <!-- modal -->
+  
+  <lightning-card>
+<div class="heading tglBtnClrChng" style="font-size:large; text-align:center">
+    <h1><strong>Clone Selection</strong> </h1>
+</div>
+</lightning-card>
+  <lightning-card>
+
+    <div class="slds-m-left_small">
+      <table >
+          <tr>
+              <th colspan="2" class="thClrShdBlue">Account Name</th>
+              <th class="thClrShdBlue" style="color:green; text-align:right"><span>Effective Date</span></th>
+              <th class="thClrShdBlue" style="color:red; text-align:right ">Expiry Date</th>
+          </tr>
+          <tr>
+              <td colspan="2">{recordApiData.AccountName}</td>
+              <td style="text-align:right"><span >{recordApiData.EffectiveDate}</span></td>
+              <td  style="text-align:right">{recordApiData.ExpiryDate}</td>
+          </tr>
+          <tr >
+              <td colspan="100"><div style="border-bottom: 1px solid rgba(192, 192, 192, 0.41); width: 100%; margin-bottom: 10px;"></div></td>
+          </tr>
+          <tr>
+              <th class="thClrShdBlue">Actual Premium </th>
+              <th class="thClrShdBlue">Exposure Base</th>
+              <th class="thClrShdBlue"  style="text-align:right">GL Occurence Limit</th>
+              <th class="thClrShdBlue"  style="text-align:right">GL Deductible</th>
+          </tr>
+  
+          <tr>
+              <td>{ActualPremium}</td>
+              <td>{recordApiData.ExposureBase}</td>
+              <td  style="text-align:right">{GLOccurenceLimit}</td>
+              <td  style="text-align:right">{GLDeductible}</td>
+              <!-- <td>{recordApi.CommissiontoEnterinGeRRater}</td> -->
+          </tr>
+      </table> 
+  </div>
+    </lightning-card>
+     <!-- lightning-card>
+
+      <div class="slds-p-around_small">
+          
+      
+            <div class="slds-col">
+              <span style="color:rgb(0, 92, 167);font-size:20px">Select the sections you would like to clone to a new version of this rating </span>
+            </div>
+          
+      </div>
+     </lightning-card -->
+
+     <!-- lightning-card>
+      
+      <div class="slds-m-around_medium">
+    <template 
+     for:each={recordApi.cov} for:item="chcklabl">
+     <template if:true={chcklabl.enable}>
+      <div class="slds-form-element slds-grid slds-m-bottom_small" key={chcklabl.label}>
+          <div class="slds-col slds-size_6-of-12">
+            <span class="slds-form-element__label slds-m-bottom_none" data-id="div1" style={chcklabl.txtcolor} > {chcklabl.label}</span>
+          </div>
+          <div class="slds-col slds-size_5-of-12"></div>
+          <div class="slds-col slds-size_1-of-12">
+            <label class="slds-checkbox_toggle slds-grid"><span></span>
+              <input type="checkbox" name={chcklabl.code} value={chcklabl.label} disabled={chcklabl.disabled}
+                  aria-describedby={chcklabl.label} onclick={handleDataChange} checked={chcklabl.show} />
+              <span style="text-align:right"
+                class="slds-checkbox_faux_container" aria-live="assertive">
+                <span class="slds-checkbox_faux"></span>
+              </span>
+          </label>
+          </div>  
+        </div>
+      </template>
+      </template>
+      
+      
+   
+  </div>
+ 
+  </lightning-card -->
+  <lightning-card>  
+      <div align="right">
+          
+        <lightning-button  variant="Neutral" label="Cancel" class="slds-m-right_small" icon-name="utility:chevronleft" onclick={CancelPage} icon-position="left">
+        </lightning-button>
+        <lightning-button variant="brand" label="Clone" onclick={CloneHandle} icon-name="utility:chevronright" class="slds-m-right_small" icon-position="right"></lightning-button>
+         
+      </div>
+
+
+
+      <div class="slds-align_absolute-center" >
+        <template if:true={loaded}>
+            <lightning-spinner alternative-text="Loading" variant="brand" size="medium"></lightning-spinner>
+        </template>
+        <template if:false={loaded}>
+            
+        </template>
+    </div> 
+  </lightning-card>
+      
+
+  
+</template>

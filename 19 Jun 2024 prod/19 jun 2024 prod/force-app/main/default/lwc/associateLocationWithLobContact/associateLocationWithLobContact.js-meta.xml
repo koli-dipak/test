@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>57.0</apiVersion>
+    <isExposed>true</isExposed>
+    <!-- <runtimeNamespace>vlocity_ins</runtimeNamespace> -->
+    	<targets>
+		<target>lightning__HomePage</target>
+		<target>lightning__RecordPage</target>
+		<target>lightning__AppPage</target>
+		<target>lightning__UtilityBar</target>
+		<target>lightning__Tab</target>
+		<target>lightning__FlowScreen</target>
+		<target>lightning__Inbox</target>
+		<target>lightningCommunity__Page</target>
+		<target>lightningCommunity__Default</target>
+	</targets>
+	<targetConfigs>
+		<targetConfig targets="lightning__FlowScreen">
+
+		<propertyType name="T" extends="SObject" label="Input Type" description="Generic sObject data type used for input sObject properties" />
+			<!-- <property name="recordId" label="Case Id" type="String" role="inputOnly" /> -->
+			<property name="cjr" label="cjrs" type="{T[]}" role="inputOnly" />
+		<propertyType name="Y" extends="SObject" label="Input Type" description="Generic sObject data type used for input sObject properties" />
+            <property name="contact" label="contacts" type="{Y[]}" role="inputOnly" /> 
+        <propertyType name="Z" extends="SObject" label="Input Type" description="Generic sObject data type used for input sObject properties" />
+            <property name="lob" label="lobs" type="{Z[]}" role="inputOnly" /> 
+			<property name="CaseId" label="Case" type="String" role="inputOnly" />
+			<property name="locaRecordTemp" label="Location List" type="String" />
+			<property name="contactRecordTemp" label="Location Contact List" type="String" />
+			<property name="AccountId" label="Account" type="String" role="inputOnly" />
+			<property name="ContactRecordTypeId" label="ContactRecordTypeId" type="String" role="inputOnly" />
+			<property name="PreviousActionButtonHide" label="Previous Action Button Hide" type="Boolean"/>
+			<property name="removeListOfLocationAndContact" label="Remove List Of LocationAndContact" type="String[]" />
+		</targetConfig>
+			 
+	</targetConfigs>
+</LightningComponentBundle>

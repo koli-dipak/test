@@ -1,0 +1,112 @@
+<template>
+    <div class="OverrideCSS" style="display: none;" ></div>
+  
+    <template if:true={spinnerStatus}>
+        <lightning-spinner style="background-color: rgba(0, 0, 0, 0.2);" alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+    </template>
+    <div class="slds-modal__header">
+        <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Email Messages</h1>
+    </div>
+    <div class="slds-modal__content slds-p-around_medium" style="overflow: auto;max-height:calc(100vh - 250px)" id="modal-content-id-1">
+       <template if:false={showEmailMessageList}>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_12-of-12">
+                    <div class="slds-form">
+                        <div class="slds-form-element slds-form-element_horizontal">
+                            <label class="slds-form-element__label thClrShdBlue" >Box Folder Name</label>
+                            <div class="slds-form-element__control" style="padding-right: 8px;">
+                                <select class="slds-select "  name = "Box Folder Name" onchange={changeHandler}>
+                                    <template for:each={folderOptions} for:item="Opt">
+                                       <option key={Opt} value={Opt.value} selected={Opt.isSelected}>{Opt.label}</option>
+                                   </template>
+                               </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+           
+       </template>
+       <template if:true={showEmailMessageList}>
+
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout" aria-label="Example default base table of Opportunities">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col" style="width: 50px; padding-left: 10px;">
+                            <div class="slds-th__action slds-th__action_form">
+                                <label class="slds-checkbox">
+                                    <input type="checkbox" name="options" onchange={handleSelectAll} />
+                                    <span class="slds-checkbox_faux"></span>
+                                    <span class="slds-assistive-text">Select All</span>
+                                </label>
+                            </div>
+                        </th>
+                        <th class="" scope="col" colspan="4" >
+                            <div class="slds-truncate" title="Subject">Subject</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="From">From</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="To">To</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Message Date">Message Date</div>
+                        </th>
+                
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <template for:each={emailMessages} for:item="email">
+                        
+                        <tr class="slds-hint-parent" key={email.Id}>
+                            <th data-label="Opportunity Name" scope="row" style="width: 50px; padding-left: 10px;">
+                                <div class="slds-th__action slds-th__action_form">
+                                    <label class="slds-checkbox">
+                                        <input type="checkbox" class="selectCheckbox" name="options" value={email.Id} onchange={handleSelect} />
+                                        <span class="slds-checkbox_faux"></span>
+                                    </label>
+                                </div>
+                            </th>
+                            <td data-label="Subject" colspan="4">
+                                <div class="slds-truncate" title={email.Subject}>{email.Subject}</div>
+                            </td>
+                            <td data-label="From">
+                                <div class="slds-truncate" title={email.FromAddress}>{email.FromAddress}</div>
+                            </td>
+                            <td data-label="To">
+                                <div class="slds-truncate" title={email.ToAddress}>{email.ToAddress}</div>
+                            </td>
+                            <td data-label="Message Date">
+                                <div class="slds-truncate" title={email.MessageDate}>
+                                    <lightning-formatted-date-time value={email.MessageDate}  ></lightning-formatted-date-time>
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                    <template if:true={noRecordFound}>
+                        <tr>
+                            <td colspan="8" style="text-align: center;">No Record Found</td>
+                        </tr>
+                    </template>
+                    
+                </tbody>
+            </table>
+        </template>
+        
+    </div>
+    <div class="slds-modal__footer">
+        <template if:false={showEmailMessageList}>
+            <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={closeQuickAction}>Cancel</button>
+            <button class="slds-button slds-button_brand" onclick={handleNext}>Next</button>
+        </template>
+        <template if:true={showEmailMessageList}>
+            <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={closeQuickAction}>Cancel</button>
+            <button class="slds-button slds-button_brand" onclick={handlePrevious} lwc:if={showPrev} >Previous</button>
+            <button class="slds-button slds-button_brand" onclick={handleUpdate}>Update</button>
+        </template>
+    </div>
+    <div style="display: none;">{recordId}</div>
+</template>

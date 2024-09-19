@@ -1,0 +1,16 @@
+.slds-modal__container {
+    max-width: 99rem !important;
+    width: 99% !important;
+}
+.error {
+    color: red;
+    align-items: center;
+}
+.slds-spinner_container  {
+    background-color: rgba(164, 161, 161, 0.732);
+    /* margin-top: 200px; */
+    /* margin-bottom: 200px; */
+}
+.radio-button-label {
+    margin-right: 20px; /* Adjust the margin as needed */
+}

@@ -1,0 +1,18 @@
+.dummyClass{color:black;}
+.slds-accordion__content{
+    display: flex;
+}
+section.slds-accordion__section.slds-p-horizontal_none.slds-is-open {
+    padding: 0 !important;
+}
+.slds-accordion__summary {
+    margin: 0;
+    padding: 0px;
+}
+button.slds-button.slds-button_reset.slds-accordion__summary-action {
+    padding: 5px 0;
+}
+
+section.slds-accordion__section {
+    padding: 0;
+}
